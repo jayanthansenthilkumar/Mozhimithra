@@ -16,6 +16,11 @@ export default function ProfileScreen() {
     <View style={styles.mainContainer}>
       <SafeAreaView edges={['top']} />
       
+      {/* MASSIVE BACKGROUND NAME WATERMARK */}
+      <View style={styles.bgNameWrap} pointerEvents="none">
+         <Text style={styles.bgNameText} numberOfLines={1}>JUNNIYA L.</Text>
+      </View>
+
       <ScrollView contentContainerStyle={styles.scrollContainer} showsVerticalScrollIndicator={false}>
         
         {/* HUGE PAGE TITLE */}
@@ -50,7 +55,7 @@ export default function ProfileScreen() {
 
               <View style={styles.idDetails}>
                  <Text style={styles.idLabel}>LEGAL ALIAS</Text>
-                 <Text style={styles.idName}>PRIYA R.</Text>
+                 <Text style={styles.idName}>JUNNIYA L.</Text>
                  
                  <View style={styles.badgeRow}>
                     <View style={styles.classBadge}>
@@ -144,6 +149,21 @@ export default function ProfileScreen() {
 
 const styles = StyleSheet.create({
   mainContainer: { flex: 1, backgroundColor: BG },
+  
+  bgNameWrap: { position: 'absolute', top: 0, bottom: 0, left: -40, width: 220, justifyContent: 'center', alignItems: 'center', zIndex: 0 },
+  bgNameText: { 
+    fontSize: 220, 
+    fontWeight: '900', 
+    color: '#D8D4C0', 
+    textShadowColor: '#BDB9A6', 
+    textShadowOffset: { width: 12, height: 12 }, 
+    textShadowRadius: 0, 
+    transform: [{rotate: '-90deg'}], 
+    width: 1600, 
+    textAlign: 'center', 
+    letterSpacing: -6 
+  },
+
   scrollContainer: { paddingHorizontal: 20, paddingTop: 20 },
   
   pageHeader: { position: 'relative', height: 80, marginBottom: 20 },
@@ -156,7 +176,7 @@ const styles = StyleSheet.create({
   idShadow: { position: 'absolute', top: 12, left: 12, right: -12, bottom: -12, backgroundColor: BLACK },
   idCard: { backgroundColor: PAPER_WHITE, borderWidth: 4, borderColor: BLACK, padding: 24, paddingLeft: 48, minHeight: 180 },
   
-  sidewaysWrap: { position: 'absolute', left: -50, top: 100, transform: [{rotate: '-90deg'}], width: 200, alignItems: 'center' },
+  sidewaysWrap: { position: 'absolute', left: -75, top: 100, transform: [{rotate: '-90deg'}], width: 200, alignItems: 'center', zIndex: 10 },
   sidewaysText: { fontSize: 14, fontWeight: '900', color: '#CCC', letterSpacing: 4, fontFamily: 'monospace' },
   
   photoSection: { position: 'absolute', top: -30, right: 20, width: 110, height: 130, zIndex: 10 },
