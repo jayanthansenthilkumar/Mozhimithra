@@ -83,15 +83,16 @@ export default function HomeScreen() {
           </View>
         </View>
 
-        {/* PREMIUM BRUTALIST TICKET DESIGN - V3 */}
+        {/* ULTRA-PREMIUM BRUTALIST TICKET DESIGN - V4 */}
         <View style={styles.newTicketWrap}>
            
            {/* Side Label Tab */}
            <View style={styles.ticketSideTab}>
-              <Text style={styles.sideTabText}>SYS_ID: 9942</Text>
+              <Text style={styles.sideTabText}>SYS_ID: 9942 // OVERRIDE</Text>
            </View>
 
-           {/* Triple Layer Shadow */}
+           {/* INSANE STAIR-STEP 3D SHADOW */}
+           <View style={[styles.newTicketShadow, { backgroundColor: HYPER_RED, top: 24, left: 24 }]} />
            <View style={[styles.newTicketShadow, { backgroundColor: SKY_BLUE, top: 16, left: 16 }]} />
            <View style={[styles.newTicketShadow, { backgroundColor: BLACK, top: 8, left: 8 }]} />
            
@@ -99,61 +100,93 @@ export default function HomeScreen() {
               
               {/* TORN PERFORATION TOP */}
               <View style={styles.ticketTearRow}>
-                 {[...Array(22)].map((_, i) => <View key={i} style={styles.tearDot} />)}
+                 {[...Array(24)].map((_, i) => <View key={i} style={styles.tearDot} />)}
               </View>
 
               {/* HAZARD TAPE TOP RIGHT */}
               <View style={styles.ticketHazard}>
-                 {[...Array(4)].map((_, i) => <View key={i} style={styles.ticketHazardStripe} />)}
+                 {[...Array(6)].map((_, i) => <View key={i} style={styles.ticketHazardStripe} />)}
               </View>
 
               {/* MASSIVE FAKE STAMP OVERLAY */}
-              <View style={styles.authStamp}>
-                 <Text style={styles.authStampText}>CLEARED</Text>
+              <View style={[styles.authStamp, { transform: [{rotate: '-10deg'}] }]}>
+                 <Text style={styles.authStampText}>AUTHORISED</Text>
+              </View>
+              
+              {/* SECONDARY FAKE STAMP OVERLAY */}
+              <View style={styles.secondaryStamp}>
+                  <Ionicons name="finger-print" size={60} color={BLACK} style={{opacity: 0.1}} />
               </View>
 
-              {/* TICKET HEADER ZONE WITH INTERNAL WATERMARK */}
+              {/* TICKET HEADER ZONE WITH INTERNAL WATERMARK & GRID */}
               <View style={styles.ticketHeaderZone}>
-                 <Text style={styles.ticketInternalWatermark}>04</Text>
-                 <View style={styles.moduleBadge}>
-                    <Text style={styles.moduleBadgeText}>[ SEC // 04 ]</Text>
+                 {/* Background Grid Pattern */}
+                 <View style={styles.bgGridWrap}>
+                    {[...Array(60)].map((_, i) => <View key={i} style={styles.gridDot} />)}
                  </View>
-                 <Text style={styles.ticketMainTitle}>FOOD{'\n'}& DINING{'\n'}RATIONS.</Text>
-                 <View style={styles.ticketDecoLine} />
-                 <Text style={styles.ticketSubTitle}>MANDATORY INSTRUCTION PROTOCOL - ZERO FAIL RATE</Text>
+                 
+                 <Text style={styles.ticketInternalWatermark}>04</Text>
+                 
+                 <View style={styles.moduleBadgeWrap}>
+                    <View style={styles.moduleBadge}>
+                       <Text style={styles.moduleBadgeText}>[ SEC // 04 ]</Text>
+                    </View>
+                    <View style={styles.liveIndicator}>
+                        <View style={styles.liveIndicatorDot} />
+                        <Text style={styles.liveIndicatorText}>LIVE</Text>
+                    </View>
+                 </View>
+
+                 <Text style={styles.ticketMainTitle}>FOOD{'\n'}& DINING{'\n'}RATIONS</Text>
+                 
+                 <View style={styles.ticketHeaderBottomDeco}>
+                    <View style={styles.ticketDecoLine} />
+                    <Text style={styles.ticketSubTitle}>MANDATORY INSTRUCTION PROTOCOL - ZERO FAIL RATE</Text>
+                 </View>
               </View>
 
               {/* ANGLED CABLE */}
-              <View style={styles.ticketAngledCable} />
+              <View style={styles.ticketAngledCable}>
+                 <View style={styles.cableStripeLight} />
+                 <View style={styles.cableStripeLight} />
+                 <View style={styles.cableStripeLight} />
+              </View>
 
               {/* GRID ZONE */}
               <View style={styles.ticketGridZone}>
-                 <View style={[styles.tBox, { backgroundColor: CYBER_YELLOW, transform: [{rotate: '-2deg'}], zIndex: 2 }]}>
+                 <View style={[styles.tBox, { backgroundColor: CYBER_YELLOW, transform: [{rotate: '-3deg'}], zIndex: 2 }]}>
                     <View style={styles.tBoxPin} />
-                    <Ionicons name="timer" size={24} color={BLACK} style={{marginBottom: 4}} />
+                    <View style={styles.tBoxPinBottom} />
+                    <Ionicons name="timer" size={28} color={BLACK} style={{marginBottom: 8}} />
                     <Text style={styles.tBoxVal}>24.5 M</Text>
-                    <Text style={styles.tBoxLbl}>DURATION</Text>
+                    <View style={styles.tBoxLblWrap}><Text style={styles.tBoxLbl}>EST. DURATION</Text></View>
                  </View>
-                 <View style={[styles.tBox, { backgroundColor: BLACK, transform: [{rotate: '2deg'}], marginLeft: -4, marginTop: 12 }]}>
-                    <Ionicons name="star" size={24} color={NEON_GREEN} style={{marginBottom: 4}} />
-                    <Text style={[styles.tBoxVal, { color: NEON_GREEN }]}>+80</Text>
-                    <Text style={[styles.tBoxLbl, { color: PAPER_WHITE }]}>XP YIELD</Text>
+                 <View style={[styles.tBox, { backgroundColor: BLACK, transform: [{rotate: '2deg'}], marginLeft: -8, marginTop: 16 }]}>
+                    <View style={[styles.tBoxPin, {backgroundColor: HYPER_RED}]} />
+                    <Ionicons name="star" size={28} color={NEON_GREEN} style={{marginBottom: 8}} />
+                    <Text style={[styles.tBoxVal, { color: NEON_GREEN }]}>+80 XP</Text>
+                    <View style={[styles.tBoxLblWrap, {backgroundColor: '#333'}]}><Text style={[styles.tBoxLbl, { color: PAPER_WHITE }]}>NET YIELD</Text></View>
                  </View>
               </View>
 
               {/* BARCODE STICKER ZONE */}
               <View style={styles.ticketFooterZone}>
                  <View style={styles.physicalBarcodeSticker}>
-                    <MaterialCommunityIcons name="barcode" size={50} color={BLACK} />
-                    <Text style={styles.barcodeSubText}>4029-XX-90A</Text>
+                    <MaterialCommunityIcons name="barcode" size={60} color={BLACK} />
+                    <View style={styles.barcodeSubWrap}>
+                        <Text style={styles.barcodeSubText}>4029</Text>
+                        <View style={styles.barcodeSubSep} />
+                        <Text style={styles.barcodeSubText}>XX-90A</Text>
+                    </View>
                  </View>
                  
                  {/* FLOATING ACTION BUTTON CAUSING CHAOS */}
                  <TouchableOpacity activeOpacity={0.9} style={styles.commenceBtnWrap} onPress={() => router.push('/course/1' as any)}>
+                    <View style={styles.commenceBtnShadowLayer2} />
                     <View style={styles.commenceBtnShadow} />
                     <View style={styles.commenceBtn}>
                        <Text style={styles.commenceBtnText}>ENGAGE</Text>
-                       <Ionicons name="flash" size={20} color={PAPER_WHITE} />
+                       <Ionicons name="flash" size={24} color={BLACK} />
                     </View>
                  </TouchableOpacity>
               </View>
@@ -497,46 +530,63 @@ const styles = StyleSheet.create({
   qaPillText: { fontSize: 16, fontWeight: '900', color: BLACK },
 
   // PREMIUM TICKET DESIGN
-  newTicketWrap: { position: 'relative', marginHorizontal: 20, marginBottom: 70, marginTop: 30 },
-  ticketSideTab: { position: 'absolute', left: -40, top: 100, backgroundColor: BLACK, paddingHorizontal: 12, paddingVertical: 4, transform: [{rotate: '-90deg'}], zIndex: -1 },
-  sideTabText: { color: PAPER_WHITE, fontSize: 10, fontWeight: '900', letterSpacing: 2 },
+  newTicketWrap: { position: 'relative', marginHorizontal: 20, marginBottom: 80, marginTop: 40, transform: [{rotate: '-1deg'}] },
+  ticketSideTab: { position: 'absolute', left: -50, top: 120, backgroundColor: BLACK, paddingHorizontal: 16, paddingVertical: 6, transform: [{rotate: '-90deg'}], zIndex: -1, borderWidth: 2, borderColor: PAPER_WHITE },
+  sideTabText: { color: PAPER_WHITE, fontSize: 10, fontWeight: '900', letterSpacing: 4, fontFamily: 'monospace' },
   
   newTicketShadow: { position: 'absolute', right: -16, bottom: -16, left: 16, top: 16, backgroundColor: BLACK, borderWidth: 4, borderColor: BLACK },
-  newTicketBody: { backgroundColor: PAPER_WHITE, borderWidth: 4, borderColor: BLACK, overflow: 'visible', position: 'relative' },
+  newTicketBody: { backgroundColor: PAPER_WHITE, borderWidth: 5, borderColor: BLACK, overflow: 'visible', position: 'relative' },
   
-  ticketTearRow: { flexDirection: 'row', justifyContent: 'space-between', backgroundColor: BG, borderBottomWidth: 4, borderColor: BLACK, paddingBottom: 6, paddingTop: 6, marginHorizontal: -4, marginTop: -4 },
-  tearDot: { width: 10, height: 10, borderRadius: 5, backgroundColor: BLACK, marginLeft: 4 },
+  ticketTearRow: { flexDirection: 'row', justifyContent: 'space-between', backgroundColor: BG, borderBottomWidth: 5, borderColor: BLACK, paddingBottom: 6, paddingTop: 6, marginHorizontal: -5, marginTop: -5 },
+  tearDot: { width: 8, height: 8, borderRadius: 4, backgroundColor: BLACK, marginLeft: 6 },
   
-  ticketHazard: { position: 'absolute', top: 10, right: -40, width: 120, height: 30, backgroundColor: CYBER_YELLOW, transform: [{rotate: '45deg'}], flexDirection: 'row', zIndex: 10, borderWidth: 3, borderColor: BLACK },
-  ticketHazardStripe: { width: 10, height: 40, backgroundColor: BLACK, transform: [{rotate: '20deg'}], marginLeft: 15, marginTop: -5 },
+  ticketHazard: { position: 'absolute', top: 14, right: -44, width: 140, height: 35, backgroundColor: CYBER_YELLOW, transform: [{rotate: '45deg'}], flexDirection: 'row', zIndex: 10, borderWidth: 4, borderColor: BLACK },
+  ticketHazardStripe: { width: 12, height: 45, backgroundColor: BLACK, transform: [{rotate: '20deg'}], marginLeft: 15, marginTop: -5 },
   
-  authStamp: { position: 'absolute', top: 120, right: 20, width: 160, height: 60, borderWidth: 6, borderColor: HYPER_RED, justifyContent: 'center', alignItems: 'center', transform: [{rotate: '-15deg'}], zIndex: 5, borderRadius: 8, opacity: 0.85 },
-  authStampText: { color: HYPER_RED, fontSize: 26, fontWeight: '900', letterSpacing: 6 },
+  authStamp: { position: 'absolute', top: 100, right: 10, width: 180, height: 70, borderWidth: 8, borderColor: HYPER_RED, justifyContent: 'center', alignItems: 'center', zIndex: 5, opacity: 0.9, backgroundColor: 'rgba(255,255,255,0.4)' },
+  authStampText: { color: HYPER_RED, fontSize: 24, fontWeight: '900', letterSpacing: 8 },
+  secondaryStamp: { position: 'absolute', top: 180, right: 30, zIndex: 1 },
 
-  ticketHeaderZone: { padding: 24, paddingBottom: 20, backgroundColor: '#F8F6F0', position: 'relative', overflow: 'hidden' },
-  ticketInternalWatermark: { position: 'absolute', right: -20, bottom: -40, fontSize: 160, fontWeight: '900', color: '#EBE8DF', zIndex: 0, letterSpacing: -10 },
-  moduleBadge: { alignSelf: 'flex-start', backgroundColor: BLACK, paddingHorizontal: 12, paddingVertical: 4, marginBottom: 12, zIndex: 2 },
-  moduleBadgeText: { fontSize: 14, fontWeight: '900', color: PAPER_WHITE, letterSpacing: 2, fontFamily: 'monospace' },
-  ticketMainTitle: { fontSize: 48, fontWeight: '900', color: BLACK, letterSpacing: -2, lineHeight: 46, textShadowColor: '#CCC', textShadowOffset: {width: 2, height: 2}, textShadowRadius: 0, zIndex: 2 },
-  ticketDecoLine: { height: 4, width: 60, backgroundColor: HYPER_RED, marginTop: 12, marginBottom: 8, zIndex: 2 },
-  ticketSubTitle: { fontSize: 10, fontWeight: '900', color: BLACK, letterSpacing: 1, fontFamily: 'monospace', zIndex: 2, lineHeight: 14 },
+  ticketHeaderZone: { padding: 30, paddingBottom: 24, backgroundColor: '#F8F6F0', position: 'relative', overflow: 'hidden' },
+  bgGridWrap: { position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, flexDirection: 'row', flexWrap: 'wrap', opacity: 0.05, zIndex: 0 },
+  gridDot: { width: 4, height: 4, backgroundColor: BLACK, margin: 8 },
   
-  ticketAngledCable: { height: 16, backgroundColor: BLACK, transform: [{rotate: '-1.5deg'}], marginHorizontal: -10, marginVertical: 8, borderTopWidth: 2, borderBottomWidth: 2, borderColor: PAPER_WHITE },
+  ticketInternalWatermark: { position: 'absolute', right: -30, bottom: -50, fontSize: 180, fontWeight: '900', color: '#EBE8DF', zIndex: 0, letterSpacing: -15, lineHeight: 180 },
   
-  ticketGridZone: { flexDirection: 'row', padding: 24, paddingBottom: 32, gap: 12, paddingTop: 16 },
-  tBox: { flex: 1, padding: 16, borderWidth: 4, borderColor: BLACK, alignItems: 'center', justifyContent: 'center', shadowColor: BLACK, shadowOffset: {width: 6, height: 6}, shadowOpacity: 1, shadowRadius: 0, position: 'relative' },
-  tBoxPin: { position: 'absolute', top: 4, right: 4, width: 8, height: 8, backgroundColor: PAPER_WHITE, borderRadius: 4, borderWidth: 2, borderColor: BLACK },
-  tBoxVal: { fontSize: 24, fontWeight: '900', color: BLACK, marginBottom: 0 },
-  tBoxLbl: { fontSize: 10, fontWeight: '900', color: '#555', letterSpacing: 1, marginTop: 4 },
+  moduleBadgeWrap: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', marginBottom: 16, zIndex: 2 },
+  moduleBadge: { backgroundColor: BLACK, paddingHorizontal: 12, paddingVertical: 6, borderWidth: 2, borderColor: BLACK, transform: [{rotate: '-2deg'}] },
+  moduleBadgeText: { fontSize: 14, fontWeight: '900', color: PAPER_WHITE, letterSpacing: 3, fontFamily: 'monospace' },
+  liveIndicator: { flexDirection: 'row', alignItems: 'center', backgroundColor: PAPER_WHITE, borderWidth: 2, borderColor: BLACK, paddingHorizontal: 8, paddingVertical: 4 },
+  liveIndicatorDot: { width: 8, height: 8, backgroundColor: HYPER_RED, borderRadius: 4, marginRight: 6 },
+  liveIndicatorText: { fontSize: 10, fontWeight: '900', color: BLACK, letterSpacing: 2 },
 
-  ticketFooterZone: { flexDirection: 'row', alignItems: 'center', backgroundColor: '#E4DFCA', borderTopWidth: 4, borderColor: BLACK, padding: 16, paddingRight: 40, height: 120 },
-  physicalBarcodeSticker: { backgroundColor: PAPER_WHITE, padding: 8, borderWidth: 2, borderColor: '#CCC', transform: [{rotate: '1deg'}], shadowColor: BLACK, shadowOffset: {width: 2, height: 2}, shadowOpacity: 0.2, shadowRadius: 0 },
-  barcodeSubText: { fontSize: 10, fontWeight: '900', color: BLACK, fontFamily: 'monospace', letterSpacing: 2, textAlign: 'center', marginTop: -4 },
+  ticketMainTitle: { fontSize: 54, fontWeight: '900', color: BLACK, letterSpacing: -3, lineHeight: 50, zIndex: 2 },
+  ticketHeaderBottomDeco: { marginTop: 20, zIndex: 2, borderLeftWidth: 4, borderColor: HYPER_RED, paddingLeft: 12 },
+  ticketDecoLine: { height: 4, width: '100%', backgroundColor: BLACK, marginBottom: 8 },
+  ticketSubTitle: { fontSize: 9, fontWeight: '900', color: BLACK, letterSpacing: 2, fontFamily: 'monospace', lineHeight: 14, opacity: 0.6 },
   
-  commenceBtnWrap: { position: 'absolute', right: -20, bottom: -20, width: 140, height: 70, zIndex: 20, transform: [{rotate: '-4deg'}] },
+  ticketAngledCable: { flexDirection: 'row', alignItems: 'center', gap: 20, height: 20, backgroundColor: BLACK, transform: [{rotate: '1.5deg'}], marginHorizontal: -12, marginVertical: 12, borderTopWidth: 3, borderBottomWidth: 3, borderColor: PAPER_WHITE, paddingHorizontal: 10 },
+  cableStripeLight: { width: 40, height: 4, backgroundColor: PAPER_WHITE, opacity: 0.3, transform: [{rotate: '-30deg'}] },
+
+  ticketGridZone: { flexDirection: 'row', padding: 30, paddingBottom: 40, gap: 16, paddingTop: 20, backgroundColor: '#F8F6F0' },
+  tBox: { flex: 1, padding: 20, borderWidth: 5, borderColor: BLACK, alignItems: 'center', justifyContent: 'center', shadowColor: BLACK, shadowOffset: {width: 8, height: 8}, shadowOpacity: 1, shadowRadius: 0, position: 'relative' },
+  tBoxPin: { position: 'absolute', top: 6, right: 6, width: 8, height: 8, backgroundColor: PAPER_WHITE, borderRadius: 4, borderWidth: 2, borderColor: BLACK },
+  tBoxPinBottom: { position: 'absolute', bottom: 6, left: 6, width: 8, height: 8, backgroundColor: PAPER_WHITE, borderRadius: 4, borderWidth: 2, borderColor: BLACK },
+  tBoxVal: { fontSize: 26, fontWeight: '900', color: BLACK, marginBottom: 8, letterSpacing: -1 },
+  tBoxLblWrap: { backgroundColor: PAPER_WHITE, paddingHorizontal: 8, paddingVertical: 4, borderWidth: 2, borderColor: BLACK },
+  tBoxLbl: { fontSize: 9, fontWeight: '900', color: BLACK, letterSpacing: 2 },
+
+  ticketFooterZone: { flexDirection: 'row', alignItems: 'center', backgroundColor: '#E4DFCA', borderTopWidth: 5, borderColor: BLACK, padding: 20, paddingRight: 40, height: 130 },
+  physicalBarcodeSticker: { backgroundColor: PAPER_WHITE, padding: 12, borderWidth: 2, borderColor: '#CCC', transform: [{rotate: '-2deg'}], shadowColor: BLACK, shadowOffset: {width: 4, height: 4}, shadowOpacity: 0.15, shadowRadius: 0 },
+  barcodeSubWrap: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginTop: 4 },
+  barcodeSubText: { fontSize: 11, fontWeight: '900', color: BLACK, fontFamily: 'monospace', letterSpacing: 2 },
+  barcodeSubSep: { width: 4, height: 4, backgroundColor: HYPER_RED, marginHorizontal: 6 },
+  
+  commenceBtnWrap: { position: 'absolute', right: -30, bottom: -30, width: 160, height: 80, zIndex: 20, transform: [{rotate: '-6deg'}] },
+  commenceBtnShadowLayer2: { position: 'absolute', top: 12, left: 12, right: -12, bottom: -12, backgroundColor: HYPER_RED, borderWidth: 4, borderColor: BLACK },
   commenceBtnShadow: { position: 'absolute', top: 6, left: 6, right: -6, bottom: -6, backgroundColor: NEON_GREEN, borderWidth: 4, borderColor: BLACK },
-  commenceBtn: { flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', backgroundColor: HYPER_RED, borderWidth: 4, borderColor: BLACK },
-  commenceBtnText: { color: PAPER_WHITE, fontSize: 18, fontWeight: '900', letterSpacing: 2, marginRight: 8 },
+  commenceBtn: { flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', backgroundColor: CYBER_YELLOW, borderWidth: 5, borderColor: BLACK },
+  commenceBtnText: { color: BLACK, fontSize: 20, fontWeight: '900', letterSpacing: 3, marginRight: 12 },
 
   // GRAPHIC POLAROID
   polaroidContainer: { marginHorizontal: 24, height: 300, position: 'relative', marginBottom: 40 },
