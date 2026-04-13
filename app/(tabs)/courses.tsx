@@ -38,26 +38,40 @@ export default function CoursesScreen() {
         <View style={styles.heroSyllabusBox}>
            <View style={styles.heroShadow} />
            <View style={styles.heroMain}>
+              
+              {/* Fake Paperclip */}
+              <View style={styles.paperClipOuter}>
+                 <View style={styles.paperClipInner} />
+              </View>
+
               <View style={styles.tapeLeft} />
-              <Text style={styles.heroSub}>CLASSIFIED LOG</Text>
-              <Text style={styles.heroTitle}>CURRENT OPERATIONS</Text>
+              
+              <Text style={styles.heroSub}>[ SECURITY LEVEL: MAX ]</Text>
+              <Text style={styles.heroTitle}>ENCRYPTED{'\n'}OPERATIONS</Text>
+              
+              <View style={styles.statusBox}>
+                 <Text style={styles.statusText}>STATUS: DISPATCHED</Text>
+              </View>
+
               <Text style={styles.heroDesc}>
-                 Execute linguistic decryptions across mapped territories.
+                 Execute linguistic decryptions across mapped territories. Zero failure tolerated.
               </Text>
            </View>
         </View>
 
+        {/* HORIZONTAL DOSSIERS */}
         {/* HORIZONTAL DOSSIERS */}
         <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.dossierScroll}>
            {/* FILE 1 */}
            <TouchableOpacity activeOpacity={0.9} style={styles.dossierWrap} onPress={() => router.push('/course/1' as any)}>
               <View style={[styles.dossierShadow, { backgroundColor: SKY_BLUE }]} />
               <View style={styles.dossierFolder}>
-                 <View style={styles.dossierTab}><Text style={styles.tabText}>TOP SEC</Text></View>
+                 <View style={styles.dossierTab}><Text style={styles.tabText}>MISSION 01</Text></View>
                  <View style={styles.dossierBody}>
+                    <View style={styles.fileTape} />
                     <Ionicons name="folder-open" size={48} color={BLACK} />
-                    <Text style={styles.dossierCode}>TML-01</Text>
-                    <Text style={styles.dossierName}>CORE PHONETICS</Text>
+                    <Text style={styles.dossierCode}>TML-01 // ACTIVE</Text>
+                    <Text style={styles.dossierName}>CORE{'\n'}PHONETICS</Text>
                  </View>
               </View>
            </TouchableOpacity>
@@ -66,36 +80,38 @@ export default function CoursesScreen() {
            <TouchableOpacity activeOpacity={0.9} style={styles.dossierWrap}>
               <View style={[styles.dossierShadow, { backgroundColor: HYPER_RED }]} />
               <View style={styles.dossierFolder}>
-                 <View style={styles.dossierTab}><Text style={styles.tabText}>LOCKED</Text></View>
-                 <View style={[styles.dossierBody, { backgroundColor: '#E0E0E0' }]}>
-                    <Ionicons name="lock-closed" size={48} color={BLACK} />
-                    <Text style={styles.dossierCode}>TML-02</Text>
-                    <Text style={styles.dossierName}>GRAMMAR OVERRIDE</Text>
+                 <View style={styles.dossierTab}><Text style={styles.tabText}>MISSION 02</Text></View>
+                 <View style={[styles.dossierBody, { backgroundColor: BLACK }]}>
+                    <Ionicons name="lock-closed" size={48} color={HYPER_RED} />
+                    <Text style={[styles.dossierCode, {color: '#888'}]}>TML-02 // LOCKED</Text>
+                    <Text style={[styles.dossierName, {color: PAPER_WHITE}]}>GRAMMAR{'\n'}OVERRIDE</Text>
                  </View>
               </View>
            </TouchableOpacity>
         </ScrollView>
 
-        {/* LISTING ARCHIVES */}
+        {/* LISTING ARCHIVES - DARK TERMINAL READOUT */}
         <View style={styles.archiveSection}>
-           <Text style={styles.archiveHeader}>COMPLETED INTEL</Text>
+           <Text style={styles.archiveHeader}>COMPLETED INTEL [ TERMINAL LOG ]</Text>
            
-           <View style={styles.archiveRow}>
-              <View style={styles.archiveIcon}><Ionicons name="checkmark" size={24} color={PAPER_WHITE} /></View>
-              <View style={styles.archiveTextWrap}>
-                 <Text style={styles.archiveTitle}>Basic Greetings</Text>
-                 <Text style={styles.archiveDate}>2 DAYS AGO</Text>
+           <View style={styles.terminalBox}>
+              <View style={styles.terminalRow}>
+                 <View style={styles.terminalIcon}><Ionicons name="git-commit" size={24} color={NEON_GREEN} /></View>
+                 <View style={styles.terminalTextWrap}>
+                    <Text style={styles.terminalTitle}>Basic Greetings Bypass</Text>
+                    <Text style={styles.terminalDate}>LOG: -48:00 HOURS</Text>
+                 </View>
+                 <Text style={styles.terminalScore}>100%</Text>
               </View>
-              <Text style={styles.archiveScore}>100%</Text>
-           </View>
 
-           <View style={styles.archiveRow}>
-              <View style={styles.archiveIcon}><Ionicons name="checkmark" size={24} color={PAPER_WHITE} /></View>
-              <View style={styles.archiveTextWrap}>
-                 <Text style={styles.archiveTitle}>Numbers 1-10</Text>
-                 <Text style={styles.archiveDate}>4 DAYS AGO</Text>
+              <View style={styles.terminalRow}>
+                 <View style={styles.terminalIcon}><Ionicons name="git-commit" size={24} color={NEON_GREEN} /></View>
+                 <View style={styles.terminalTextWrap}>
+                    <Text style={styles.terminalTitle}>Numbers Array Hack</Text>
+                    <Text style={styles.terminalDate}>LOG: -96:00 HOURS</Text>
+                 </View>
+                 <Text style={styles.terminalScore}>98%</Text>
               </View>
-              <Text style={styles.archiveScore}>98%</Text>
            </View>
         </View>
 
@@ -143,32 +159,39 @@ const styles = StyleSheet.create({
   radarInner: { width: 10, height: 10, borderRadius: 5, backgroundColor: BLACK },
   radarSpin: { position: 'absolute', top: '50%', left: '50%', width: 20, height: 2, backgroundColor: BLACK, transform: [{translateX: -10}, {translateY: -1}] },
 
-  heroSyllabusBox: { marginHorizontal: 24, position: 'relative', marginBottom: 40 },
-  heroShadow: { position: 'absolute', top: 8, left: 8, right: -8, bottom: -8, backgroundColor: BLACK },
-  heroMain: { backgroundColor: CYBER_YELLOW, padding: 24, borderWidth: 3, borderColor: BLACK, overflow: 'hidden' },
-  tapeLeft: { position: 'absolute', left: -20, top: -10, width: 60, height: 140, backgroundColor: 'rgba(255,255,255,0.4)', transform: [{rotate: '15deg'}] },
-  heroSub: { fontSize: 12, fontWeight: '900', color: '#555', letterSpacing: 2, marginBottom: 8 },
-  heroTitle: { fontSize: 40, fontWeight: '900', color: BLACK, lineHeight: 40, marginBottom: 16 },
-  heroDesc: { fontSize: 16, fontWeight: '800', color: BLACK, lineHeight: 22 },
+  heroSyllabusBox: { marginHorizontal: 24, position: 'relative', marginBottom: 40, marginTop: 10 },
+  heroShadow: { position: 'absolute', top: 12, left: 12, right: -12, bottom: -12, backgroundColor: BLACK },
+  heroMain: { backgroundColor: CYBER_YELLOW, padding: 24, paddingVertical: 32, borderWidth: 4, borderColor: BLACK, overflow: 'visible', position: 'relative' },
+  tapeLeft: { position: 'absolute', left: -20, top: 40, width: 80, height: 30, backgroundColor: 'rgba(255,255,255,0.7)', transform: [{rotate: '-15deg'}], borderWidth: 1, borderColor: BLACK, zIndex: 10 },
+  paperClipOuter: { position: 'absolute', top: -30, right: 30, width: 24, height: 80, borderWidth: 5, borderColor: '#888', borderRadius: 12, borderBottomWidth: 0, zIndex: 20 },
+  paperClipInner: { position: 'absolute', top: 10, right: 0, width: 14, height: 50, borderWidth: 5, borderColor: '#888', borderRadius: 7, borderTopWidth: 0 },
+  
+  heroSub: { fontSize: 12, fontWeight: '900', color: HYPER_RED, letterSpacing: 2, marginBottom: 8, fontFamily: 'monospace' },
+  heroTitle: { fontSize: 44, fontWeight: '900', color: BLACK, lineHeight: 44, marginBottom: 16, letterSpacing: -2 },
+  statusBox: { alignSelf: 'flex-start', backgroundColor: BLACK, paddingHorizontal: 12, paddingVertical: 6, marginBottom: 16, transform: [{rotate: '2deg'}] },
+  statusText: { color: PAPER_WHITE, fontSize: 12, fontWeight: '900', letterSpacing: 1 },
+  heroDesc: { fontSize: 16, fontWeight: '800', color: BLACK, lineHeight: 24 },
 
-  dossierScroll: { paddingHorizontal: 24, paddingRight: 40, gap: 24, paddingBottom: 20 },
-  dossierWrap: { position: 'relative', width: 220, height: 260 },
-  dossierShadow: { position: 'absolute', top: 8, left: 8, right: -8, bottom: -8, borderWidth: 3, borderColor: BLACK },
+  dossierScroll: { paddingHorizontal: 24, paddingRight: 40, gap: 24, paddingBottom: 30 },
+  dossierWrap: { position: 'relative', width: 240, height: 280 },
+  dossierShadow: { position: 'absolute', top: 8, left: 8, right: -8, bottom: -8, borderWidth: 4, borderColor: BLACK },
   dossierFolder: { flex: 1, backgroundColor: 'transparent' },
   dossierTab: { alignSelf: 'flex-start', paddingHorizontal: 16, paddingVertical: 8, backgroundColor: BLACK, borderTopLeftRadius: 10, borderTopRightRadius: 10 },
   tabText: { color: PAPER_WHITE, fontSize: 12, fontWeight: '900', letterSpacing: 1 },
-  dossierBody: { flex: 1, backgroundColor: PAPER_WHITE, borderWidth: 3, borderColor: BLACK, padding: 20, justifyContent: 'center' },
-  dossierCode: { fontSize: 14, fontWeight: '900', color: HYPER_RED, marginTop: 24, marginBottom: 4 },
-  dossierName: { fontSize: 24, fontWeight: '900', color: BLACK },
+  dossierBody: { flex: 1, backgroundColor: PAPER_WHITE, borderWidth: 4, borderColor: BLACK, padding: 24, justifyContent: 'center', position: 'relative' },
+  fileTape: { position: 'absolute', top: 10, right: 10, width: 40, height: 16, backgroundColor: HYPER_RED, transform: [{rotate: '10deg'}] },
+  dossierCode: { fontSize: 13, fontWeight: '900', color: HYPER_RED, marginTop: 24, marginBottom: 4, letterSpacing: 1 },
+  dossierName: { fontSize: 32, fontWeight: '900', color: BLACK, lineHeight: 32, letterSpacing: -1 },
 
   archiveSection: { marginHorizontal: 24, marginTop: 40 },
-  archiveHeader: { fontSize: 16, fontWeight: '900', color: BLACK, letterSpacing: 2, marginBottom: 16 },
-  archiveRow: { flexDirection: 'row', alignItems: 'center', backgroundColor: PAPER_WHITE, borderWidth: 3, borderColor: BLACK, padding: 16, marginBottom: 12, shadowColor: BLACK, shadowOffset: { width: 4, height: 4 }, shadowOpacity: 1, shadowRadius: 0 },
-  archiveIcon: { width: 40, height: 40, backgroundColor: BLACK, justifyContent: 'center', alignItems: 'center' },
-  archiveTextWrap: { flex: 1, paddingHorizontal: 16 },
-  archiveTitle: { fontSize: 16, fontWeight: '900', color: BLACK },
-  archiveDate: { fontSize: 10, fontWeight: '900', color: '#666', marginTop: 4 },
-  archiveScore: { fontSize: 20, fontWeight: '900', color: HYPER_RED },
+  archiveHeader: { fontSize: 14, fontWeight: '900', color: BLACK, letterSpacing: 1, marginBottom: 16 },
+  terminalBox: { backgroundColor: BLACK, borderWidth: 4, borderColor: BLACK, padding: 20 },
+  terminalRow: { flexDirection: 'row', alignItems: 'center', backgroundColor: BLACK, borderBottomWidth: 2, borderColor: '#333', paddingVertical: 16 },
+  terminalIcon: { width: 40, height: 40, backgroundColor: 'transparent', justifyContent: 'center', alignItems: 'center' },
+  terminalTextWrap: { flex: 1, paddingHorizontal: 16 },
+  terminalTitle: { fontSize: 16, fontWeight: '900', color: PAPER_WHITE },
+  terminalDate: { fontSize: 10, fontWeight: '900', color: NEON_GREEN, marginTop: 4, fontFamily: 'monospace' },
+  terminalScore: { fontSize: 20, fontWeight: '900', color: NEON_GREEN },
 
   bountyWrap: { marginHorizontal: 24, marginTop: 40 },
   bountyCard: { backgroundColor: CYBER_YELLOW, borderWidth: 3, borderColor: BLACK, padding: 24, shadowColor: BLACK, shadowOffset: {width: 6, height: 6}, shadowOpacity: 1, shadowRadius: 0, position: 'relative' },

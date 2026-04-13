@@ -497,7 +497,7 @@ const styles = StyleSheet.create({
   ticketHazard: { position: 'absolute', top: 10, right: -40, width: 120, height: 30, backgroundColor: CYBER_YELLOW, transform: [{rotate: '45deg'}], flexDirection: 'row', zIndex: 10, borderWidth: 3, borderColor: BLACK },
   ticketHazardStripe: { width: 10, height: 40, backgroundColor: BLACK, transform: [{rotate: '20deg'}], marginLeft: 15, marginTop: -5 },
   
-  authStamp: { position: 'absolute', top: 100, right: 10, width: 140, height: 60, borderWidth: 6, borderColor: HYPER_RED, justifyContent: 'center', alignItems: 'center', transform: [{rotate: '-15deg'}], zIndex: 5, borderRadius: 8, opacity: 0.8 },
+  authStamp: { position: 'absolute', top: 120, right: 20, width: 160, height: 60, borderWidth: 6, borderColor: HYPER_RED, justifyContent: 'center', alignItems: 'center', transform: [{rotate: '-15deg'}], zIndex: 5, borderRadius: 8, opacity: 0.85 },
   authStampText: { color: HYPER_RED, fontSize: 26, fontWeight: '900', letterSpacing: 6 },
 
   ticketHeaderZone: { padding: 24, paddingBottom: 20, backgroundColor: '#F8F6F0' },
