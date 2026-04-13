@@ -62,22 +62,50 @@ export default function HomeScreen() {
 
             {/* ULTIMATE UNIQUE HERO: THE "TAPE REVELATION" & 3D FOLDER */}
             <View style={styles.heroFolder}>
-               {/* Mock Tape on top left */}
+               {/* Multiple Mock Tapes */}
                <View style={styles.tapeMock} />
+               <View style={[styles.tapeMock, { top: '80%', left: '-5%', width: 60, transform: [{ rotate: '80deg' }], backgroundColor: 'rgba(255,214,10,0.8)' }]} />
 
+               <View style={[styles.folderTab, { backgroundColor: HYPER_RED, position: 'absolute', top: -14, left: 10 }]} >
+                  <Text style={[styles.folderTabText, { color: HYPER_RED }]}>H</Text>
+               </View>
                <View style={styles.folderTab}>
-                  <Text style={styles.folderTabText}>ID: 4099-X</Text>
+                  <Text style={styles.folderTabText}>USER_LINK // J-99A</Text>
                </View>
 
                <View style={styles.folderBody}>
-                  <View style={styles.folderShadow} />
+                  {/* Ultra Layered Shadows */}
+                  <View style={[styles.folderShadow, { backgroundColor: HYPER_RED, top: 16, left: 16 }]} />
+                  <View style={[styles.folderShadow, { backgroundColor: BLACK, top: 8, left: 8 }]} />
+                  
                   <View style={styles.folderFront}>
-                     <Text style={styles.massiveText}>NAMASTE,</Text>
-                     <Text style={[styles.massiveText, { color: HYPER_RED }]}>JUNNIYA.</Text>
+                     {/* Brutalist Grid Background overlay */}
+                     <View style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, overflow: 'hidden', opacity: 0.05 }} pointerEvents="none">
+                        {[...Array(6)].map((_, i) => <View key={i} style={{ width: '100%', height: 20, borderBottomWidth: 2, borderColor: BLACK, marginBottom: 20 }} />)}
+                     </View>
+
+                     {/* Translation sub-text */}
+                     <View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: CYBER_YELLOW, paddingHorizontal: 8, paddingVertical: 4, alignSelf: 'flex-start', borderWidth: 2, borderColor: BLACK, marginBottom: 12, transform: [{ rotate: '-2deg' }] }}>
+                        <Ionicons name="language" size={14} color={BLACK} />
+                        <Text style={{ fontSize: 10, fontWeight: '900', color: BLACK, letterSpacing: 1, marginLeft: 6 }}>AUTO-DETECT: EN</Text>
+                     </View>
+
+                     <Text style={styles.massiveText}>VANAKKAM,</Text>
+                     <Text style={[styles.massiveText, { color: HYPER_RED, marginTop: -10 }]}>JUNNIYA.</Text>
                      <View style={styles.scribbleUnderline} />
+                     
+                     {/* Added Metrics Block */}
+                     <View style={{ flexDirection: 'row', marginTop: 24, padding: 12, backgroundColor: BG, borderWidth: 3, borderColor: BLACK, alignItems: 'center' }}>
+                        <View style={{ width: 12, height: 12, backgroundColor: NEON_GREEN, borderRadius: 0, marginRight: 12, borderWidth: 2, borderColor: BLACK }} />
+                        <View>
+                           <Text style={{ fontSize: 10, fontWeight: '900', color: '#666', letterSpacing: 1 }}>GLOBAL FLUENCY RANK</Text>
+                           <Text style={{ fontSize: 18, fontWeight: '900', color: BLACK, letterSpacing: -0.5 }}>TOP 4.2%</Text>
+                        </View>
+                        <MaterialCommunityIcons name="arrow-top-right-thick" size={24} color={BLACK} style={{ marginLeft: 'auto' }} />
+                     </View>
 
                      <View style={styles.floatingStarDeco}>
-                        <Ionicons name="flower" size={40} color={BLACK} />
+                        <MaterialCommunityIcons name="star-four-points" size={60} color={BLACK} />
                      </View>
                   </View>
                </View>
