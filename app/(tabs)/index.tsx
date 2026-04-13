@@ -45,6 +45,13 @@ export default function HomeScreen() {
             />
             {/* Hard shadow under avatar */}
             <View style={styles.avatarShadow} />
+            
+            {/* INJECTED ARROW GRAPHIC INDICATING FOLDER */}
+            <Image 
+               source={{ uri: 'https://cdn-icons-png.flaticon.com/512/861/861012.png' }}
+               style={styles.heroGraphicArrow}
+               tintColor={BLACK}
+            />
           </View>
         </View>
 
@@ -164,6 +171,74 @@ export default function HomeScreen() {
            <View style={styles.warningStripeLeft} />
            <Ionicons name="warning" size={28} color={BLACK} style={{ marginRight: 12 }} />
            <Text style={styles.warningText}>PRONOUNCIATION DECAY: -15% FLUENCY OVER 3 DAYS.</Text>
+        </View>
+
+        {/* INDIAN LANGUAGES HORIZONTAL LIST */}
+        <View style={styles.langGridContainer}>
+           <Text style={styles.langGridHeader}>AVAILABLE LINGUISTICS //</Text>
+           <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.langScroll}>
+
+              {/* TAMIL */}
+              <TouchableOpacity activeOpacity={0.9} style={styles.langCardWrap}>
+                 <View style={styles.langCardShadow} />
+                 <View style={[styles.langCard, { backgroundColor: NEON_GREEN }]}>
+                    <Text style={[styles.langScript, { color: BLACK }]}>தமிழ்</Text>
+                    <View style={styles.langBottom}>
+                       <Text style={styles.langTitle}>TAMIL</Text>
+                       <Ionicons name="arrow-forward" size={16} color={BLACK} />
+                    </View>
+                 </View>
+              </TouchableOpacity>
+
+              {/* HINDI */}
+              <TouchableOpacity activeOpacity={0.9} style={styles.langCardWrap}>
+                 <View style={styles.langCardShadow} />
+                 <View style={[styles.langCard, { backgroundColor: PAPER_WHITE }]}>
+                    <Text style={styles.langScript}>हिंदी</Text>
+                    <View style={styles.langBottom}>
+                       <Text style={styles.langTitle}>HINDI</Text>
+                       <Ionicons name="arrow-forward" size={16} color={BLACK} />
+                    </View>
+                 </View>
+              </TouchableOpacity>
+
+              {/* KANNADA */}
+              <TouchableOpacity activeOpacity={0.9} style={styles.langCardWrap}>
+                 <View style={styles.langCardShadow} />
+                 <View style={[styles.langCard, { backgroundColor: CYBER_YELLOW }]}>
+                    <Text style={styles.langScript}>ಕನ್ನಡ</Text>
+                    <View style={styles.langBottom}>
+                       <Text style={styles.langTitle}>KANNADA</Text>
+                       <Ionicons name="arrow-forward" size={16} color={BLACK} />
+                    </View>
+                 </View>
+              </TouchableOpacity>
+
+              {/* TELUGU */}
+              <TouchableOpacity activeOpacity={0.9} style={styles.langCardWrap}>
+                 <View style={styles.langCardShadow} />
+                 <View style={[styles.langCard, { backgroundColor: SKY_BLUE }]}>
+                    <Text style={styles.langScript}>తెలుగు</Text>
+                    <View style={styles.langBottom}>
+                       <Text style={styles.langTitle}>TELUGU</Text>
+                       <Ionicons name="arrow-forward" size={16} color={BLACK} />
+                    </View>
+                 </View>
+              </TouchableOpacity>
+
+              {/* MALAYALAM */}
+              <TouchableOpacity activeOpacity={0.9} style={styles.langCardWrap}>
+                 <View style={styles.langCardShadow} />
+                 <View style={[styles.langCard, { backgroundColor: HYPER_RED }]}>
+                    <Text style={[styles.langScript, { color: PAPER_WHITE }]}>മലയാളം</Text>
+                    <View style={[styles.langBottom, { borderColor: PAPER_WHITE }]}>
+                       <Text style={[styles.langTitle, { color: PAPER_WHITE }]}>MALAYALAM</Text>
+                       <Ionicons name="arrow-forward" size={16} color={PAPER_WHITE} />
+                    </View>
+                 </View>
+              </TouchableOpacity>
+
+           </ScrollView>
         </View>
 
         {/* QUICK ACTIONS SCROLL */}
@@ -305,6 +380,29 @@ export default function HomeScreen() {
            </View>
         </View>
 
+        {/* DAILY MISSION PROTOCOL GRID */}
+        <View style={styles.protoContainer}>
+           <Text style={styles.protoHeader}>PROTOCOL // ALPHA SEC-09</Text>
+           <View style={styles.protoBox}>
+              
+              <View style={styles.protoRow}>
+                 <View style={[styles.protoCheckSquare, { backgroundColor: CYBER_YELLOW }]}><View style={styles.protoCheckInner} /></View>
+                 <Text style={styles.protoText}>INITIATE PHONETICS TEST</Text>
+              </View>
+              
+              <View style={styles.protoRow}>
+                 <View style={styles.protoCheckSquare} />
+                 <Text style={styles.protoText}>DECODE SCRIPT MODULE</Text>
+              </View>
+              
+              <View style={[styles.protoRow, { borderBottomWidth: 0 }]}>
+                 <View style={[styles.protoCheckSquare, { backgroundColor: '#CCC' }]}><Ionicons name="close" size={18} color={BLACK} style={{marginLeft: -2, marginTop: -2}} /></View>
+                 <Text style={[styles.protoText, { color: '#888', textDecorationLine: 'line-through' }]}>ENGAGE MITHRA AI OVERRIDE</Text>
+              </View>
+
+           </View>
+        </View>
+
         {/* BRUTALIST MARQUEE / FOOTER BLOCK */}
         <View style={styles.footerTape}>
            <Animated.Text style={[styles.tapeText, { transform: [{ translateX: tapeAnim }] }]} numberOfLines={1}>
@@ -327,9 +425,10 @@ const styles = StyleSheet.create({
   brandBadge: { paddingHorizontal: 12, paddingVertical: 6, backgroundColor: BLACK, transform: [{ rotate: '-2deg' }] },
   brandLogo: { color: PAPER_WHITE, fontSize: 18, fontWeight: '900', letterSpacing: 2 },
   
-  avatarWrapper: { position: 'relative' },
+  avatarWrapper: { position: 'relative', zIndex: 10 },
   avatarImg: { width: 48, height: 48, borderRadius: 0, borderWidth: 3, borderColor: BLACK, zIndex: 2, backgroundColor: PAPER_WHITE },
   avatarShadow: { position: 'absolute', top: 4, left: 4, width: 48, height: 48, backgroundColor: HYPER_RED, zIndex: 1 },
+  heroGraphicArrow: { position: 'absolute', top: 40, right: 30, width: 90, height: 90, transform: [{rotate: '110deg'}], zIndex: -1, opacity: 0.8 },
 
   // ULTIMATE UNIQUE HERO FOLDER
   heroFolder: { position: 'relative', marginHorizontal: 24, marginBottom: 40, marginTop: 10 },
@@ -465,5 +564,24 @@ const styles = StyleSheet.create({
   waveformContainer: { flex: 1, height: 48, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', position: 'relative' },
   waveBar: { width: 8, backgroundColor: BLACK, borderRadius: 0 },
   waveScrubber: { position: 'absolute', top: -4, bottom: -4, left: '40%', width: 4, backgroundColor: HYPER_RED },
-});
 
+  // PROTOCOL GRID
+  protoContainer: { marginHorizontal: 24, marginBottom: 50 },
+  protoHeader: { fontSize: 14, fontWeight: '900', color: HYPER_RED, letterSpacing: 2, marginBottom: 16 },
+  protoBox: { backgroundColor: PAPER_WHITE, borderWidth: 3, borderColor: BLACK },
+  protoRow: { flexDirection: 'row', alignItems: 'center', padding: 16, borderBottomWidth: 3, borderColor: BLACK },
+  protoCheckSquare: { width: 24, height: 24, borderWidth: 3, borderColor: BLACK, marginRight: 16, backgroundColor: PAPER_WHITE, justifyContent: 'center', alignItems: 'center' },
+  protoCheckInner: { width: 10, height: 10, backgroundColor: BLACK },
+  protoText: { fontSize: 14, fontWeight: '900', color: BLACK, flex: 1 },
+
+  // LANG ARCHIVE
+  langGridContainer: { marginBottom: 40 },
+  langGridHeader: { paddingHorizontal: 24, fontSize: 16, fontWeight: '900', color: BLACK, letterSpacing: 2, marginBottom: 16 },
+  langScroll: { paddingHorizontal: 24, paddingRight: 40, paddingBottom: 16, gap: 20 },
+  langCardWrap: { position: 'relative', width: 140, height: 180 },
+  langCardShadow: { position: 'absolute', top: 6, left: 6, right: -6, bottom: -6, backgroundColor: BLACK },
+  langCard: { flex: 1, borderWidth: 3, borderColor: BLACK, padding: 16, justifyContent: 'space-between' },
+  langScript: { flex: 1, fontSize: 32, fontWeight: '900', color: BLACK, textAlign: 'center', verticalAlign: 'middle' },
+  langBottom: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', borderTopWidth: 3, borderColor: BLACK, paddingTop: 12, marginHorizontal: -16, paddingHorizontal: 16 },
+  langTitle: { fontSize: 12, fontWeight: '900', color: BLACK, letterSpacing: 1 },
+});

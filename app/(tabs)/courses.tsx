@@ -1,151 +1,139 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Image, Platform } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image, Platform } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
+import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 
-// PLAYFUL NEOBRUTALISM (Image 1 - Middle Screen)
-const BG = '#FFF1E5';
-const BLACK = '#000000';
-const ACCENT_YELLOW = '#FFDE00';
-const ACCENT_GREEN = '#6BDB63';
-const ACCENT_BLUE = '#63AEFF';
-const ACCENT_RED = '#FF4F4F';
+// PREMIUM NEURO-BRUTALISM CONSTANTS
+const BG = '#F4F1E1';
+const BLACK = '#0A0A0A';
+const PAPER_WHITE = '#FFFFFF';
+const HYPER_RED = '#FF3B30';
+const CYBER_YELLOW = '#FFD60A';
+const SKY_BLUE = '#30B0FF';
+const NEON_GREEN = '#39FF14';
 
 export default function CoursesScreen() {
   return (
     <View style={styles.mainContainer}>
       <SafeAreaView edges={['top']} />
       
-      <View style={styles.content}>
-         
-         {/* FLOATING DECORATIONS (Mocking the Middle Screen vector assets) */}
-         
-         {/* Top Left Yellow Grid */}
-         <View style={styles.gridDeco}>
-           <View style={styles.gridLineH} />
-           <View style={[styles.gridLineH, { top: 12 }]} />
-           <View style={[styles.gridLineH, { top: 24 }]} />
-           <View style={styles.gridLineV} />
-           <View style={[styles.gridLineV, { left: 12 }]} />
-           <View style={[styles.gridLineV, { left: 24 }]} />
-         </View>
+      <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
+        
+        {/* HEADER */}
+        <View style={styles.topHeader}>
+           <Text style={styles.headerTitle}>DIRECTIVES //</Text>
+           <View style={styles.radarBox}>
+             <View style={styles.radarInner} />
+             <View style={styles.radarSpin} />
+           </View>
+        </View>
 
-         {/* Top Right Green Square */}
-         <View style={styles.greenSquare}>
-            <View style={[styles.resizeHandle, { top: -4, left: -4 }]} />
-            <View style={[styles.resizeHandle, { top: -4, right: -4 }]} />
-            <View style={[styles.resizeHandle, { bottom: -4, left: -4 }]} />
-            <View style={[styles.resizeHandle, { bottom: -4, right: -4 }]} />
-         </View>
+        {/* HERO SYLLABUS CARD */}
+        <View style={styles.heroSyllabusBox}>
+           <View style={styles.heroShadow} />
+           <View style={styles.heroMain}>
+              <View style={styles.tapeLeft} />
+              <Text style={styles.heroSub}>CLASSIFIED LOG</Text>
+              <Text style={styles.heroTitle}>CURRENT OPERATIONS</Text>
+              <Text style={styles.heroDesc}>
+                 Execute linguistic decryptions across mapped territories.
+              </Text>
+           </View>
+        </View>
 
-         {/* Blue Triangle Left */}
-         <View style={styles.blueTriangleWrapper}>
-           <View style={styles.blueTriangle} />
-         </View>
+        {/* HORIZONTAL DOSSIERS */}
+        <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.dossierScroll}>
+           {/* FILE 1 */}
+           <TouchableOpacity activeOpacity={0.9} style={styles.dossierWrap} onPress={() => router.push('/course/1' as any)}>
+              <View style={[styles.dossierShadow, { backgroundColor: SKY_BLUE }]} />
+              <View style={styles.dossierFolder}>
+                 <View style={styles.dossierTab}><Text style={styles.tabText}>TOP SEC</Text></View>
+                 <View style={styles.dossierBody}>
+                    <Ionicons name="folder-open" size={48} color={BLACK} />
+                    <Text style={styles.dossierCode}>TML-01</Text>
+                    <Text style={styles.dossierName}>CORE PHONETICS</Text>
+                 </View>
+              </View>
+           </TouchableOpacity>
 
-         {/* Red Bar Right */}
-         <View style={styles.redBarWrapper}>
-            <View style={styles.redBarLine} />
-            <View style={styles.redBarBody} />
-         </View>
+           {/* FILE 2 */}
+           <TouchableOpacity activeOpacity={0.9} style={styles.dossierWrap}>
+              <View style={[styles.dossierShadow, { backgroundColor: HYPER_RED }]} />
+              <View style={styles.dossierFolder}>
+                 <View style={styles.dossierTab}><Text style={styles.tabText}>LOCKED</Text></View>
+                 <View style={[styles.dossierBody, { backgroundColor: '#E0E0E0' }]}>
+                    <Ionicons name="lock-closed" size={48} color={BLACK} />
+                    <Text style={styles.dossierCode}>TML-02</Text>
+                    <Text style={styles.dossierName}>GRAMMAR OVERRIDE</Text>
+                 </View>
+              </View>
+           </TouchableOpacity>
+        </ScrollView>
 
-         {/* Pen Tool Line */}
-         <View style={styles.penToolLeft}>
-            <View style={styles.penNode} />
-            <View style={styles.penLine} />
-            <View style={styles.penNode} />
-            {/* mock pen icon body */}
-            <View style={styles.penIconBox} />
-         </View>
-
-         {/* CENTER FOCUS CONTAINER */}
-         <View style={styles.centerFocus}>
-           <View style={styles.avatarWrapper}>
-             <Image 
-                source={{ uri: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=200&q=80' }} 
-                style={styles.avatar} 
-             />
+        {/* LISTING ARCHIVES */}
+        <View style={styles.archiveSection}>
+           <Text style={styles.archiveHeader}>COMPLETED INTEL</Text>
+           
+           <View style={styles.archiveRow}>
+              <View style={styles.archiveIcon}><Ionicons name="checkmark" size={24} color={PAPER_WHITE} /></View>
+              <View style={styles.archiveTextWrap}>
+                 <Text style={styles.archiveTitle}>Basic Greetings</Text>
+                 <Text style={styles.archiveDate}>2 DAYS AGO</Text>
+              </View>
+              <Text style={styles.archiveScore}>100%</Text>
            </View>
 
-           <Text style={styles.heroText}>
-             Priya <Text style={{ color: ACCENT_RED }}>just</Text> finished her Tamil module for today<Text style={{ color: ACCENT_RED }}>!</Text>
-           </Text>
+           <View style={styles.archiveRow}>
+              <View style={styles.archiveIcon}><Ionicons name="checkmark" size={24} color={PAPER_WHITE} /></View>
+              <View style={styles.archiveTextWrap}>
+                 <Text style={styles.archiveTitle}>Numbers 1-10</Text>
+                 <Text style={styles.archiveDate}>4 DAYS AGO</Text>
+              </View>
+              <Text style={styles.archiveScore}>98%</Text>
+           </View>
+        </View>
 
-           <TouchableOpacity activeOpacity={0.9} style={styles.actionBtn} onPress={() => router.push('/course/1' as any)}>
-             <Text style={styles.actionBtnText}>See what she did</Text>
-           </TouchableOpacity>
-         </View>
-
-         {/* Bottom Left Teal Square & Triangle */}
-         <View style={styles.bottomDecoGroup}>
-            <View style={styles.tealRect} />
-            <View style={styles.bottomTriangle} />
-            <View style={styles.redSemicircle} />
-         </View>
-
-      </View>
+        <View style={{ height: 120 }} />
+      </ScrollView>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  mainContainer: { flex: 1, backgroundColor: BG, position: 'relative', overflow: 'hidden' },
-  content: { flex: 1, justifyContent: 'center', alignItems: 'center', paddingHorizontal: 40 },
+  mainContainer: { flex: 1, backgroundColor: BG },
+  scrollContent: { paddingTop: 20 },
   
-  // CENTER FOCUS
-  centerFocus: { alignItems: 'center', zIndex: 10, marginTop: -40 },
-  avatarWrapper: {
-     width: 140, height: 140, borderRadius: 70, borderWidth: 4, borderColor: BLACK,
-     justifyContent: 'center', alignItems: 'center', marginBottom: 32, backgroundColor: '#FFF'
-  },
-  avatar: { width: 120, height: 120, borderRadius: 60 },
-  heroText: { fontSize: 32, fontWeight: '900', color: BLACK, textAlign: 'center', lineHeight: 44, marginBottom: 40 },
-  
-  actionBtn: {
-     backgroundColor: ACCENT_YELLOW, paddingVertical: 18, paddingHorizontal: 32,
-     borderRadius: 12, borderWidth: 3, borderColor: BLACK,
-     shadowColor: BLACK, shadowOffset: { width: 4, height: 4 }, shadowOpacity: 1, shadowRadius: 0,
-     elevation: 8
-  },
-  actionBtnText: { fontSize: 20, fontWeight: '900', color: BLACK },
+  topHeader: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 24, marginBottom: 32 },
+  headerTitle: { fontSize: 24, fontWeight: '900', color: BLACK, letterSpacing: 2 },
+  radarBox: { width: 40, height: 40, borderRadius: 20, borderWidth: 3, borderColor: BLACK, backgroundColor: NEON_GREEN, justifyContent: 'center', alignItems: 'center', position: 'relative' },
+  radarInner: { width: 10, height: 10, borderRadius: 5, backgroundColor: BLACK },
+  radarSpin: { position: 'absolute', top: '50%', left: '50%', width: 20, height: 2, backgroundColor: BLACK, transform: [{translateX: -10}, {translateY: -1}] },
 
-  // DECORATIONS (Mocking the exact vectors from the shot)
-  gridDeco: { position: 'absolute', top: 40, left: 40, width: 80, height: 80 },
-  gridLineH: { position: 'absolute', width: '100%', height: 2, backgroundColor: BLACK },
-  gridLineV: { position: 'absolute', height: '100%', width: 2, backgroundColor: BLACK },
+  heroSyllabusBox: { marginHorizontal: 24, position: 'relative', marginBottom: 40 },
+  heroShadow: { position: 'absolute', top: 8, left: 8, right: -8, bottom: -8, backgroundColor: BLACK },
+  heroMain: { backgroundColor: CYBER_YELLOW, padding: 24, borderWidth: 3, borderColor: BLACK, overflow: 'hidden' },
+  tapeLeft: { position: 'absolute', left: -20, top: -10, width: 60, height: 140, backgroundColor: 'rgba(255,255,255,0.4)', transform: [{rotate: '15deg'}] },
+  heroSub: { fontSize: 12, fontWeight: '900', color: '#555', letterSpacing: 2, marginBottom: 8 },
+  heroTitle: { fontSize: 40, fontWeight: '900', color: BLACK, lineHeight: 40, marginBottom: 16 },
+  heroDesc: { fontSize: 16, fontWeight: '800', color: BLACK, lineHeight: 22 },
 
-  greenSquare: {
-     position: 'absolute', top: 80, right: 60, width: 60, height: 60,
-     backgroundColor: ACCENT_GREEN, borderWidth: 2, borderColor: BLACK
-  },
-  resizeHandle: { position: 'absolute', width: 8, height: 8, backgroundColor: '#FFF', borderWidth: 2, borderColor: BLACK },
+  dossierScroll: { paddingHorizontal: 24, paddingRight: 40, gap: 24, paddingBottom: 20 },
+  dossierWrap: { position: 'relative', width: 220, height: 260 },
+  dossierShadow: { position: 'absolute', top: 8, left: 8, right: -8, bottom: -8, borderWidth: 3, borderColor: BLACK },
+  dossierFolder: { flex: 1, backgroundColor: 'transparent' },
+  dossierTab: { alignSelf: 'flex-start', paddingHorizontal: 16, paddingVertical: 8, backgroundColor: BLACK, borderTopLeftRadius: 10, borderTopRightRadius: 10 },
+  tabText: { color: PAPER_WHITE, fontSize: 12, fontWeight: '900', letterSpacing: 1 },
+  dossierBody: { flex: 1, backgroundColor: PAPER_WHITE, borderWidth: 3, borderColor: BLACK, padding: 20, justifyContent: 'center' },
+  dossierCode: { fontSize: 14, fontWeight: '900', color: HYPER_RED, marginTop: 24, marginBottom: 4 },
+  dossierName: { fontSize: 24, fontWeight: '900', color: BLACK },
 
-  blueTriangleWrapper: { position: 'absolute', top: 160, right: 140, zIndex: 1, transform: [{ rotate: '45deg' }] },
-  blueTriangle: {
-    width: 0, height: 0,
-    borderLeftWidth: 40, borderRightWidth: 40, borderBottomWidth: 60,
-    borderLeftColor: 'transparent', borderRightColor: 'transparent',
-    borderBottomColor: ACCENT_BLUE,
-  },
-
-  redBarWrapper: { position: 'absolute', top: 100, right: 20, width: 40, height: 120 },
-  redBarLine: { position: 'absolute', left: 18, width: 2, height: 160, backgroundColor: BLACK, zIndex: 2 },
-  redBarBody: { position: 'absolute', top: 20, left: 0, right: 0, height: 100, backgroundColor: ACCENT_RED },
-
-  penToolLeft: { position: 'absolute', top: 200, left: 30, flexDirection: 'row', alignItems: 'center' },
-  penNode: { width: 10, height: 10, borderWidth: 2, borderColor: BLACK, backgroundColor: '#FFF' },
-  penLine: { width: 40, height: 2, backgroundColor: BLACK },
-  penIconBox: { width: 30, height: 30, borderWidth: 2, borderColor: BLACK, marginLeft: 10, borderTopLeftRadius: 15, borderTopRightRadius: 15 },
-
-  bottomDecoGroup: { position: 'absolute', bottom: Platform.OS === 'ios' ? 140 : 100, left: 40, width: '100%' },
-  tealRect: { position: 'absolute', left: 0, top: 40, width: 140, height: 60, backgroundColor: '#63DEFF', borderWidth: 2, borderColor: BLACK },
-  redSemicircle: { position: 'absolute', left: 160, top: 50, width: 80, height: 40, backgroundColor: ACCENT_RED, borderBottomLeftRadius: 40, borderBottomRightRadius: 40, transform: [{ rotate: '-90deg' }] },
-  bottomTriangle: {
-    position: 'absolute', left: 140, top: -40,
-    width: 0, height: 0,
-    borderLeftWidth: 50, borderRightWidth: 50, borderBottomWidth: 80,
-    borderLeftColor: 'transparent', borderRightColor: 'transparent',
-    borderBottomColor: '#FFF', // making the inside white as in the pic
-    // Note: border trick cannot have black outer stroke directly in React Native easily without SVG, so leaving it solid White to pop over teal.
-  }
+  archiveSection: { marginHorizontal: 24, marginTop: 40 },
+  archiveHeader: { fontSize: 16, fontWeight: '900', color: BLACK, letterSpacing: 2, marginBottom: 16 },
+  archiveRow: { flexDirection: 'row', alignItems: 'center', backgroundColor: PAPER_WHITE, borderWidth: 3, borderColor: BLACK, padding: 16, marginBottom: 12, shadowColor: BLACK, shadowOffset: { width: 4, height: 4 }, shadowOpacity: 1, shadowRadius: 0 },
+  archiveIcon: { width: 40, height: 40, backgroundColor: BLACK, justifyContent: 'center', alignItems: 'center' },
+  archiveTextWrap: { flex: 1, paddingHorizontal: 16 },
+  archiveTitle: { fontSize: 16, fontWeight: '900', color: BLACK },
+  archiveDate: { fontSize: 10, fontWeight: '900', color: '#666', marginTop: 4 },
+  archiveScore: { fontSize: 20, fontWeight: '900', color: HYPER_RED },
 });

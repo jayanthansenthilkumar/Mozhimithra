@@ -3,11 +3,13 @@ import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image } from 'rea
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 
-const BG = '#FFF1E5';
+const BG = '#F4F1E1';
 const BLACK = '#0A0A0A';
-const ACCENT_YELLOW = '#FFE066';
-const ACCENT_BLUE = '#A2D2FF';
-const ACCENT_PINK = '#FFAFCC';
+const PAPER_WHITE = '#FFFFFF';
+const HYPER_RED = '#FF3B30';
+const CYBER_YELLOW = '#FFD60A';
+const SKY_BLUE = '#30B0FF';
+const NEON_GREEN = '#39FF14';
 
 export default function ProfileScreen() {
   return (
@@ -16,60 +18,75 @@ export default function ProfileScreen() {
       
       <ScrollView contentContainerStyle={styles.scrollContainer} showsVerticalScrollIndicator={false}>
         
-        <View style={styles.header}>
-          <Text style={styles.pageTitle}>Profile</Text>
-          <View style={styles.titleUnderline} />
-        </View>
-
-        <View style={styles.profileSection}>
-          <View style={styles.profileCard}>
-             <View style={[styles.crosshairV, { left: 10 }]} />
-             <View style={[styles.crosshairV, { right: 10 }]} />
-             <View style={[styles.crosshairH, { top: 10 }]} />
-             <View style={[styles.crosshairH, { bottom: 10 }]} />
-
-            <View style={styles.imageBox}>
-               <Image 
-                 source={{ uri: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=300&q=80' }}
-                 style={styles.heroImage}
-               />
-            </View>
-
-            <View style={styles.profileInfo}>
-              <Text style={styles.profileName}>Priya R.</Text>
-              <Text style={styles.profileBio}>Multi-disciplinary language leaner with expertise across vocabulary and grammar.</Text>
+        {/* ID BOARDING PASS FRONT */}
+        <View style={styles.idCardWrap}>
+           <View style={styles.idCardShadow} />
+           <View style={styles.idCardFront}>
               
-              <TouchableOpacity style={styles.neoBtn}>
-                <Text style={styles.neoBtnText}>Edit Profile</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
+              {/* Top Banner */}
+              <View style={styles.idTopBanner}>
+                 <Text style={styles.idTopText}>OPERATIVE SEC-01</Text>
+                 <Ionicons name="barcode" size={32} color={PAPER_WHITE} />
+              </View>
+
+              {/* Photo & Identity Section */}
+              <View style={styles.identityRow}>
+                 <View style={styles.photoContainer}>
+                    <View style={styles.photoTape1} />
+                    <View style={styles.photoTape2} />
+                    <Image 
+                      source={{ uri: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=300&q=80' }}
+                      style={styles.heroImage}
+                    />
+                 </View>
+                 <View style={styles.infoCol}>
+                    <Text style={styles.label}>LEGAL NAME</Text>
+                    <Text style={styles.valName}>PRIYA R.</Text>
+                    
+                    <Text style={[styles.label, { marginTop: 16 }]}>CLASS</Text>
+                    <View style={styles.classBadge}>
+                       <Text style={styles.classBadgeText}>LINGUIST</Text>
+                    </View>
+                 </View>
+              </View>
+
+              {/* Stats Strip */}
+              <View style={styles.statsStrip}>
+                 <View style={styles.statBox}>
+                    <Text style={styles.statVal}>21</Text>
+                    <Text style={styles.statLabel}>DAYS</Text>
+                 </View>
+                 <View style={styles.statDivider} />
+                 <View style={styles.statBox}>
+                    <Text style={styles.statVal}>5%</Text>
+                    <Text style={styles.statLabel}>RANK</Text>
+                 </View>
+                 <View style={styles.statDivider} />
+                 <View style={styles.statBox}>
+                    <Text style={[styles.statVal, { color: HYPER_RED }]}>9.5</Text>
+                    <Text style={styles.statLabel}>SCORE</Text>
+                 </View>
+              </View>
+
+           </View>
         </View>
 
-        <View style={styles.statsGrid}>
-          <Text style={styles.gridHeroText}>My Stats</Text>
-          
-          <View style={styles.gridContainer}>
-            <View style={[styles.gridCrossH, { top: 0, left: -10, right: -10 }]} />
-            <View style={[styles.gridCrossH, { bottom: 0, left: -10, right: -10 }]} />
-            
-            <View style={styles.gridRow}>
-              <View style={[styles.gridCol, { flex: 1, borderRightWidth: 2, borderColor: BLACK, padding: 20 }]}>
-                <View style={[styles.iconCircle, { backgroundColor: ACCENT_YELLOW }]}>
-                  <Ionicons name="flame" size={16} color={BLACK} />
-                </View>
-                <Text style={styles.gridTitle}>21 Days</Text>
-                <Text style={styles.gridDesc}>Current Streak</Text>
-              </View>
-              <View style={[styles.gridCol, { flex: 1, padding: 20 }]}>
-                <View style={[styles.iconCircle, { backgroundColor: ACCENT_PINK }]}>
-                  <Ionicons name="trophy" size={16} color={BLACK} />
-                </View>
-                <Text style={styles.gridTitle}>Top 5%</Text>
-                <Text style={styles.gridDesc}>Leaderboard Rank</Text>
-              </View>
-            </View>
-          </View>
+        {/* QUICK MENU */}
+        <View style={styles.actionGrid}>
+           <TouchableOpacity activeOpacity={0.9} style={[styles.actionBtn, { backgroundColor: CYBER_YELLOW }]}>
+              <Ionicons name="settings" size={24} color={BLACK} />
+              <Text style={styles.actionBtnText}>CONFIGURATIONS</Text>
+           </TouchableOpacity>
+
+           <TouchableOpacity activeOpacity={0.9} style={[styles.actionBtn, { backgroundColor: SKY_BLUE }]}>
+              <Ionicons name="time" size={24} color={BLACK} />
+              <Text style={styles.actionBtnText}>ACCESS LOGS</Text>
+           </TouchableOpacity>
+
+           <TouchableOpacity activeOpacity={0.9} style={[styles.actionBtn, { backgroundColor: PAPER_WHITE }]}>
+              <Ionicons name="log-out" size={24} color={BLACK} />
+              <Text style={styles.actionBtnText}>SYSTEM HALT</Text>
+           </TouchableOpacity>
         </View>
 
         <View style={{ height: 120 }} />
@@ -80,47 +97,34 @@ export default function ProfileScreen() {
 
 const styles = StyleSheet.create({
   mainContainer: { flex: 1, backgroundColor: BG },
-  scrollContainer: { paddingHorizontal: 24, paddingTop: 40 },
-  header: { alignItems: 'center', marginBottom: 40 },
-  pageTitle: { fontSize: 36, fontWeight: '900', color: BLACK },
-  titleUnderline: { height: 4, width: 140, backgroundColor: BLACK, marginTop: 4, transform: [{ rotate: '1deg' }] },
-
-  profileSection: { marginBottom: 60, paddingHorizontal: 20 },
-  profileCard: { position: 'relative' },
-  crosshairV: { position: 'absolute', top: -10, bottom: -10, width: 2, backgroundColor: BLACK, zIndex: 1 },
-  crosshairH: { position: 'absolute', left: -10, right: -10, height: 2, backgroundColor: BLACK, zIndex: 1 },
+  scrollContainer: { paddingHorizontal: 24, paddingTop: 20 },
   
-  imageBox: {
-    width: '100%', aspectRatio: 1, borderWidth: 2, borderColor: BLACK,
-    backgroundColor: '#FFF', padding: 10, position: 'relative', zIndex: 2
-  },
+  idCardWrap: { position: 'relative', marginBottom: 40 },
+  idCardShadow: { position: 'absolute', top: 10, left: 10, right: -10, bottom: -10, backgroundColor: BLACK },
+  idCardFront: { backgroundColor: PAPER_WHITE, borderWidth: 3, borderColor: BLACK },
+  
+  idTopBanner: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', backgroundColor: BLACK, padding: 16 },
+  idTopText: { color: PAPER_WHITE, fontSize: 16, fontWeight: '900', letterSpacing: 4 },
+  
+  identityRow: { flexDirection: 'row', padding: 24, borderBottomWidth: 3, borderColor: BLACK },
+  photoContainer: { position: 'relative', width: 120, height: 140, borderWidth: 3, borderColor: BLACK, backgroundColor: '#CCC', marginRight: 24 },
+  photoTape1: { position: 'absolute', top: -10, left: -10, width: 40, height: 16, backgroundColor: 'rgba(255,59,48,0.5)', transform: [{rotate: '-15deg'}], zIndex: 10, borderWidth: 1, borderColor: BLACK },
+  photoTape2: { position: 'absolute', bottom: -10, right: -10, width: 40, height: 16, backgroundColor: 'rgba(255,255,255,0.7)', transform: [{rotate: '10deg'}], zIndex: 10, borderWidth: 1, borderColor: BLACK },
   heroImage: { width: '100%', height: '100%', resizeMode: 'cover' },
   
-  profileInfo: {
-    backgroundColor: '#FFF', borderWidth: 2, borderColor: BLACK, 
-    borderTopWidth: 0, padding: 24, zIndex: 2
-  },
-  profileName: { fontSize: 28, fontWeight: '900', color: BLACK, marginBottom: 8 },
-  profileBio: { fontSize: 14, fontWeight: '500', color: '#444', lineHeight: 22, marginBottom: 20 },
-  
-  neoBtn: {
-    backgroundColor: ACCENT_BLUE, alignSelf: 'flex-start', paddingHorizontal: 24, paddingVertical: 12,
-    borderWidth: 2, borderColor: BLACK, shadowColor: BLACK, shadowOffset: { width: 4, height: 4 },
-    shadowOpacity: 1, shadowRadius: 0, elevation: 8
-  },
-  neoBtnText: { fontWeight: '800', fontSize: 14, color: BLACK },
+  infoCol: { flex: 1, justifyContent: 'center' },
+  label: { fontSize: 10, fontWeight: '900', color: HYPER_RED, letterSpacing: 2, marginBottom: 4 },
+  valName: { fontSize: 28, fontWeight: '900', color: BLACK, lineHeight: 32 },
+  classBadge: { backgroundColor: NEON_GREEN, alignSelf: 'flex-start', paddingHorizontal: 12, paddingVertical: 4, borderWidth: 2, borderColor: BLACK },
+  classBadgeText: { fontSize: 12, fontWeight: '900', color: BLACK, letterSpacing: 1 },
 
-  /* GRID */
-  statsGrid: { paddingHorizontal: 12 },
-  gridHeroText: { fontSize: 24, fontWeight: '800', color: BLACK, marginBottom: 20 },
-  gridContainer: { position: 'relative' },
-  gridCrossH: { position: 'absolute', height: 2, backgroundColor: BLACK, zIndex: 2 },
-  gridRow: { flexDirection: 'row' },
-  gridCol: { justifyContent: 'center' },
-  iconCircle: {
-    width: 36, height: 36, borderRadius: 18, borderWidth: 2, 
-    borderColor: BLACK, justifyContent: 'center', alignItems: 'center', marginBottom: 16
-  },
-  gridTitle: { fontSize: 22, fontWeight: '900', color: BLACK, marginBottom: 4 },
-  gridDesc: { fontSize: 12, fontWeight: '600', color: '#555' },
+  statsStrip: { flexDirection: 'row', backgroundColor: PAPER_WHITE },
+  statBox: { flex: 1, padding: 20, alignItems: 'center', justifyContent: 'center' },
+  statDivider: { width: 3, backgroundColor: BLACK },
+  statVal: { fontSize: 32, fontWeight: '900', color: BLACK, marginBottom: 4 },
+  statLabel: { fontSize: 10, fontWeight: '900', color: '#666', letterSpacing: 2 },
+
+  actionGrid: { gap: 16 },
+  actionBtn: { flexDirection: 'row', alignItems: 'center', padding: 20, borderWidth: 3, borderColor: BLACK, shadowColor: BLACK, shadowOffset: {width: 4, height: 4}, shadowOpacity: 1, shadowRadius: 0 },
+  actionBtnText: { fontSize: 16, fontWeight: '900', color: BLACK, letterSpacing: 1, marginLeft: 16 },
 });
