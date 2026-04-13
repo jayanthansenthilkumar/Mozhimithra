@@ -65,7 +65,6 @@ export default function HomeScreen() {
                {/* Multiple Mock Tapes */}
                <View style={styles.tapeMock} />
                <View style={[styles.tapeMock, { top: '80%', left: '-5%', width: 60, transform: [{ rotate: '80deg' }], backgroundColor: 'rgba(255,214,10,0.8)' }]} />
-
                <View style={[styles.folderTab, { backgroundColor: HYPER_RED, position: 'absolute', top: -14, left: 10 }]} >
                   <Text style={[styles.folderTabText, { color: HYPER_RED }]}>H</Text>
                </View>
