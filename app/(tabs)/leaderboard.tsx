@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image, TextInput, Platform } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image, Platform } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 
@@ -8,15 +8,15 @@ const BLACK = '#0A0A0A';
 const PAPER_WHITE = '#FFFFFF';
 const HYPER_RED = '#FF3B30';
 const CYBER_YELLOW = '#FFD60A';
-const NEON_GREEN = '#39FF14';
 const SKY_BLUE = '#30B0FF';
+const NEON_GREEN = '#39FF14';
 
-const FRIENDS = [
-  { id: '1', name: 'Mike Kane', rank: '01', stars: 950, img: 'https://images.unsplash.com/photo-1599566150163-29194dcaad36?auto=format&fit=crop&w=100&q=80' },
-  { id: '2', name: 'Sepideh Yazdi', rank: '02', stars: 840, img: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80' },
-  { id: '3', name: 'Sam X', rank: '03', stars: 740, img: 'https://images.unsplash.com/photo-1527980965255-d3b416303d12?auto=format&fit=crop&w=100&q=80' },
-  { id: '4', name: 'Ben', rank: '04', stars: 620, img: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=100&q=80' },
-  { id: '5', name: 'Brenda Benet', rank: '05', stars: 510, img: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=100&q=80' },
+const LEADERBOARD_DATA = [
+  { id: '1', name: 'MIKE KANE', rank: '1', xp: 950, img: 'https://images.unsplash.com/photo-1599566150163-29194dcaad36?auto=format&fit=crop&w=100&q=80', color: CYBER_YELLOW },
+  { id: '2', name: 'SEPIDEH YAZDI', rank: '2', xp: 840, img: 'https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=100&q=80', color: SKY_BLUE },
+  { id: '3', name: 'SAM X', rank: '3', xp: 740, img: 'https://images.unsplash.com/photo-1527980965255-d3b416303d12?auto=format&fit=crop&w=100&q=80', color: NEON_GREEN },
+  { id: '4', name: 'BEN', rank: '4', xp: 620, img: 'https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?auto=format&fit=crop&w=100&q=80', color: PAPER_WHITE },
+  { id: '5', name: 'BRENDA BENET', rank: '5', xp: 510, img: 'https://images.unsplash.com/photo-1580489944761-15a19d654956?auto=format&fit=crop&w=100&q=80', color: PAPER_WHITE },
 ];
 
 export default function LeaderboardScreen() {
@@ -24,59 +24,70 @@ export default function LeaderboardScreen() {
     <View style={styles.mainContainer}>
       <SafeAreaView edges={['top']} />
       
-      {/* GLOBAL COMMAND HEADER */}
-      <View style={styles.headerRow}>
-         <View style={styles.headerLeft}>
-            <Text style={styles.headerLabel}>GLOBAL NETWORK</Text>
-            <Text style={styles.headerTitle}>RANKINGS</Text>
+      {/* MASSIVE BRUTALIST HEADER */}
+      <View style={styles.header}>
+         <View style={styles.headerTitleBox}>
+            <Text style={styles.titleShadow}>LEADERBOARD</Text>
+            <Text style={styles.headerTitle}>LEADERBOARD</Text>
          </View>
-         <View style={styles.headerRight}>
-            <Ionicons name="globe-outline" size={40} color={BLACK} />
-         </View>
+         <Text style={styles.headerSub}>TOP 10% // GLOBAL</Text>
       </View>
 
-      <View style={styles.container}>
-         <View style={styles.listCard}>
-            
-            {/* SEARCH TAPE SECTION */}
-            <View style={styles.searchTapeWrap}>
-               <View style={styles.searchTape} />
-               <View style={styles.searchRow}>
-                  <Ionicons name="search" size={24} color={BLACK} style={{marginRight: 12}} />
-                  <TextInput placeholder="LOCATE OPERATIVE..." placeholderTextColor="#888" style={styles.searchInput} />
+      <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContent}>
+         
+         {/* USER STAT HERO */}
+         <View style={styles.userHeroWrap}>
+            <View style={styles.heroShadow} />
+            <View style={[styles.userHero, { backgroundColor: HYPER_RED }]}>
+               <Text style={styles.userHeroLabel}>YOUR CURRENT RANK</Text>
+               <View style={styles.heroValRow}>
+                  <Text style={styles.heroRankNum}>#24</Text>
+                  <View style={styles.heroXpBox}>
+                     <Text style={styles.heroXpText}>2,450 XP</Text>
+                  </View>
                </View>
             </View>
-
-            {/* SCROLLING ROSTER */}
-            <ScrollView showsVerticalScrollIndicator={false} style={{ flex: 1 }}>
-               {FRIENDS.map((friend, i) => (
-                  <View key={friend.id} style={styles.listItem}>
-                     <View style={styles.rankBox}>
-                        <Text style={styles.rankText}>{friend.rank}</Text>
-                     </View>
-                     <Image source={{ uri: friend.img }} style={styles.listAvatar} />
-                     <View style={styles.listInfo}>
-                        <Text style={styles.listName}>{friend.name.toUpperCase()}</Text>
-                        <Text style={styles.listMsg}>XP // {friend.stars}</Text>
-                     </View>
-                     <TouchableOpacity style={styles.actionBtn}>
-                        <Ionicons name="flash" size={16} color={PAPER_WHITE} />
-                     </TouchableOpacity>
-                  </View>
-               ))}
-               <View style={{ height: 60 }} />
-            </ScrollView>
-
          </View>
-      </View>
 
-      {/* FLOATING ACTION BRUTAL BTN */}
-      <TouchableOpacity style={styles.fabWrap} activeOpacity={0.9}>
-         <View style={styles.fabShadow} />
-         <View style={styles.fabBtn}>
-            <Ionicons name="add" size={32} color={BLACK} />
+         {/* PURE BRUTALIST LIST */}
+         <View style={styles.listContainer}>
+            {LEADERBOARD_DATA.map((user, i) => (
+               <View key={user.id} style={styles.cardWrap}>
+                  <View style={styles.cardShadow} />
+                  <View style={[styles.card, { backgroundColor: user.color }]}>
+                     
+                     <View style={styles.rankBadge}>
+                        <Text style={styles.rankBadgeText}>#{user.rank}</Text>
+                     </View>
+
+                     <Image source={{ uri: user.img }} style={styles.avatarImg} />
+                     
+                     <View style={styles.cardBody}>
+                        <Text style={styles.nameText} numberOfLines={1}>{user.name}</Text>
+                        <Text style={styles.xpText}>{user.xp} XP / 30 DAYS</Text>
+                     </View>
+                     
+                     <TouchableOpacity style={styles.challengeBtn} activeOpacity={0.8}>
+                        <Ionicons name="flame" size={24} color={PAPER_WHITE} />
+                     </TouchableOpacity>
+
+                  </View>
+               </View>
+            ))}
+         </View>
+
+         <View style={{ height: 100 }} />
+      </ScrollView>
+
+      {/* FIXED BRUTAL ADD FRIEND BTN */}
+      <TouchableOpacity activeOpacity={0.9} style={styles.addBtnContainer}>
+         <View style={styles.addBtnShadow} />
+         <View style={styles.addBtnBody}>
+            <Text style={styles.addBtnText}>ADD RIVAL</Text>
+            <Ionicons name="add" size={24} color={BLACK} style={{marginLeft: 8}} />
          </View>
       </TouchableOpacity>
+
     </View>
   );
 }
@@ -84,34 +95,40 @@ export default function LeaderboardScreen() {
 const styles = StyleSheet.create({
   mainContainer: { flex: 1, backgroundColor: BG },
   
-  headerRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', padding: 24, paddingBottom: 32 },
-  headerLeft: { flex: 1 },
-  headerLabel: { fontSize: 12, fontWeight: '900', color: HYPER_RED, letterSpacing: 2, marginBottom: 4 },
-  headerTitle: { fontSize: 40, fontWeight: '900', color: BLACK, letterSpacing: -1 },
-  headerRight: { width: 60, height: 60, backgroundColor: CYBER_YELLOW, borderRadius: 30, borderWidth: 3, borderColor: BLACK, justifyContent: 'center', alignItems: 'center' },
+  header: { padding: 24, paddingTop: 40, paddingBottom: 40, borderBottomWidth: 4, borderColor: BLACK, backgroundColor: PAPER_WHITE, marginBottom: 32 },
+  headerTitleBox: { position: 'relative', marginBottom: 8 },
+  titleShadow: { position: 'absolute', top: 4, left: 4, fontSize: 44, fontWeight: '900', color: CYBER_YELLOW, letterSpacing: -2 },
+  headerTitle: { fontSize: 44, fontWeight: '900', color: BLACK, letterSpacing: -2, zIndex: 2 },
+  headerSub: { fontSize: 14, fontWeight: '900', color: BLACK, letterSpacing: 4 },
 
-  container: { flex: 1, paddingHorizontal: 20, paddingBottom: Platform.OS === 'ios' ? 120 : 100 },
+  scrollContent: { paddingHorizontal: 24 },
+
+  userHeroWrap: { position: 'relative', marginBottom: 48 },
+  heroShadow: { position: 'absolute', top: 8, left: 8, right: -8, bottom: -8, backgroundColor: BLACK },
+  userHero: { borderWidth: 4, borderColor: BLACK, padding: 24 },
+  userHeroLabel: { fontSize: 16, fontWeight: '900', color: BLACK, letterSpacing: 2, marginBottom: 8 },
+  heroValRow: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
+  heroRankNum: { fontSize: 64, fontWeight: '900', color: BLACK, letterSpacing: -4 },
+  heroXpBox: { backgroundColor: BLACK, paddingHorizontal: 16, paddingVertical: 8, transform: [{rotate: '4deg'}] },
+  heroXpText: { fontSize: 20, fontWeight: '900', color: PAPER_WHITE },
+
+  listContainer: { gap: 32 },
+  cardWrap: { position: 'relative', height: 100 },
+  cardShadow: { position: 'absolute', top: 6, left: 6, right: -6, bottom: -6, backgroundColor: BLACK },
+  card: { flex: 1, flexDirection: 'row', alignItems: 'center', borderWidth: 3, borderColor: BLACK, padding: 16 },
   
-  listCard: {
-    flex: 1, backgroundColor: PAPER_WHITE, borderWidth: 3, borderColor: BLACK, position: 'relative',
-    shadowColor: BLACK, shadowOffset: { width: 6, height: 6 }, shadowOpacity: 1, shadowRadius: 0
-  },
-  
-  searchTapeWrap: { position: 'relative', borderBottomWidth: 3, borderColor: BLACK },
-  searchTape: { position: 'absolute', top: -10, left: -20, width: 80, height: 30, backgroundColor: 'rgba(255,59,48,0.5)', transform: [{rotate: '-5deg'}], zIndex: 10, borderWidth: 1, borderColor: BLACK },
-  searchRow: { flexDirection: 'row', padding: 24, backgroundColor: NEON_GREEN, alignItems: 'center' },
-  searchInput: { flex: 1, fontSize: 16, fontWeight: '900', color: BLACK, fontFamily: 'monospace' },
+  rankBadge: { position: 'absolute', top: -14, left: 16, backgroundColor: BLACK, paddingHorizontal: 12, paddingVertical: 4, borderWidth: 2, borderColor: PAPER_WHITE, transform: [{rotate: '-4deg'}], zIndex: 10 },
+  rankBadgeText: { fontSize: 20, fontWeight: '900', color: PAPER_WHITE },
 
-  listItem: { flexDirection: 'row', alignItems: 'center', padding: 20, borderBottomWidth: 3, borderColor: BLACK, backgroundColor: PAPER_WHITE, position: 'relative' },
-  rankBox: { position: 'absolute', left: 10, top: -10, backgroundColor: BLACK, paddingHorizontal: 8, paddingVertical: 4, transform: [{rotate: '-4deg'}], zIndex: 5 },
-  rankText: { color: CYBER_YELLOW, fontSize: 12, fontWeight: '900', fontFamily: 'monospace' },
-  listAvatar: { width: 64, height: 64, borderWidth: 3, borderColor: BLACK, marginRight: 16, backgroundColor: '#CCC' },
-  listInfo: { flex: 1 },
-  listName: { fontSize: 20, fontWeight: '900', color: BLACK, marginBottom: 4 },
-  listMsg: { fontSize: 14, fontWeight: '900', color: HYPER_RED, letterSpacing: 1 },
-  actionBtn: { width: 40, height: 40, backgroundColor: BLACK, justifyContent: 'center', alignItems: 'center', transform: [{rotate: '5deg'}] },
+  avatarImg: { width: 60, height: 60, borderWidth: 3, borderColor: BLACK, backgroundColor: PAPER_WHITE, marginRight: 16 },
+  cardBody: { flex: 1 },
+  nameText: { fontSize: 22, fontWeight: '900', color: BLACK, marginBottom: 4 },
+  xpText: { fontSize: 12, fontWeight: '900', color: BLACK, letterSpacing: 1 },
 
-  fabWrap: { position: 'absolute', bottom: Platform.OS === 'ios' ? 120 : 90, right: 24, width: 70, height: 70 },
-  fabShadow: { position: 'absolute', top: 6, left: 6, right: -6, bottom: -6, backgroundColor: BLACK },
-  fabBtn: { flex: 1, backgroundColor: SKY_BLUE, borderWidth: 3, borderColor: BLACK, justifyContent: 'center', alignItems: 'center' },
+  challengeBtn: { width: 48, height: 48, backgroundColor: BLACK, justifyContent: 'center', alignItems: 'center', borderWidth: 2, borderColor: BLACK },
+
+  addBtnContainer: { position: 'absolute', bottom: Platform.OS === 'ios' ? 100 : 80, alignSelf: 'center', height: 64, width: 200 },
+  addBtnShadow: { position: 'absolute', top: 6, left: 6, right: -6, bottom: -6, backgroundColor: BLACK },
+  addBtnBody: { flex: 1, backgroundColor: CYBER_YELLOW, borderWidth: 3, borderColor: BLACK, flexDirection: 'row', justifyContent: 'center', alignItems: 'center' },
+  addBtnText: { fontSize: 18, fontWeight: '900', color: BLACK, letterSpacing: 2 },
 });

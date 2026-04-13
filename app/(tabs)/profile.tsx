@@ -71,6 +71,21 @@ export default function ProfileScreen() {
            </View>
         </View>
 
+        {/* QR CODE CONNECTION BLOCK */}
+        <View style={styles.qrBlockWrap}>
+           <Text style={styles.qrHeader}>SYNC CONNECTION</Text>
+           <View style={styles.qrInner}>
+              <View style={styles.qrLeft}>
+                 <Text style={styles.qrCodeText}>SCAN FOR DIRECT PEER SYNC OVERRIDE.</Text>
+                 <View style={styles.qrDecoBox}><View style={styles.qrDecoInner}/></View>
+              </View>
+              <View style={styles.qrVisualWrap}>
+                 {/* USING QrServer API for dynamically generated mock code */}
+                 <Image source={{uri: 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=PRIYA_R_SEC01_MITHRA'}} style={styles.qrVisual} />
+              </View>
+           </View>
+        </View>
+
         {/* QUICK MENU */}
         <View style={styles.actionGrid}>
            <TouchableOpacity activeOpacity={0.9} style={[styles.actionBtn, { backgroundColor: CYBER_YELLOW }]}>
@@ -127,4 +142,14 @@ const styles = StyleSheet.create({
   actionGrid: { gap: 16 },
   actionBtn: { flexDirection: 'row', alignItems: 'center', padding: 20, borderWidth: 3, borderColor: BLACK, shadowColor: BLACK, shadowOffset: {width: 4, height: 4}, shadowOpacity: 1, shadowRadius: 0 },
   actionBtnText: { fontSize: 16, fontWeight: '900', color: BLACK, letterSpacing: 1, marginLeft: 16 },
+
+  qrBlockWrap: { marginBottom: 40 },
+  qrHeader: { fontSize: 16, fontWeight: '900', color: HYPER_RED, letterSpacing: 2, marginBottom: 16 },
+  qrInner: { flexDirection: 'row', backgroundColor: PAPER_WHITE, borderWidth: 3, borderColor: BLACK, padding: 16, shadowColor: BLACK, shadowOffset: {width: 4, height: 4}, shadowOpacity: 1, shadowRadius: 0 },
+  qrLeft: { flex: 1, paddingRight: 16, justifyContent: 'space-between' },
+  qrCodeText: { fontSize: 14, fontWeight: '900', color: BLACK, lineHeight: 20 },
+  qrDecoBox: { width: 40, height: 40, borderWidth: 3, borderColor: BLACK, justifyContent: 'center', alignItems: 'center' },
+  qrDecoInner: { width: 16, height: 16, backgroundColor: BLACK },
+  qrVisualWrap: { width: 100, height: 100, borderWidth: 3, borderColor: BLACK, backgroundColor: PAPER_WHITE, padding: 4 },
+  qrVisual: { width: '100%', height: '100%', resizeMode: 'contain' },
 });

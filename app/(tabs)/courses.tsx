@@ -94,6 +94,20 @@ export default function CoursesScreen() {
            </View>
         </View>
 
+        {/* DAILY BOUNTY COMPONENT */}
+        <View style={styles.bountyWrap}>
+           <View style={styles.bountyCard}>
+              <View style={styles.bountyDecoTap}>
+                 <Text style={styles.bountyDecoText}>URGENT</Text>
+              </View>
+              <Text style={styles.bountyTitle}>DAILY BOUNTY</Text>
+              <Text style={styles.bountyDesc}>Complete 3 speaking modules back-to-back with zero translation assistance to earn 500 XP.</Text>
+              <TouchableOpacity activeOpacity={0.9} style={styles.bountyBtn}>
+                 <Text style={styles.bountyBtnText}>ACCEPT MISSION</Text>
+              </TouchableOpacity>
+           </View>
+        </View>
+
         <View style={{ height: 120 }} />
       </ScrollView>
     </View>
@@ -136,4 +150,13 @@ const styles = StyleSheet.create({
   archiveTitle: { fontSize: 16, fontWeight: '900', color: BLACK },
   archiveDate: { fontSize: 10, fontWeight: '900', color: '#666', marginTop: 4 },
   archiveScore: { fontSize: 20, fontWeight: '900', color: HYPER_RED },
+
+  bountyWrap: { marginHorizontal: 24, marginTop: 40 },
+  bountyCard: { backgroundColor: CYBER_YELLOW, borderWidth: 3, borderColor: BLACK, padding: 24, shadowColor: BLACK, shadowOffset: {width: 6, height: 6}, shadowOpacity: 1, shadowRadius: 0, position: 'relative' },
+  bountyDecoTap: { position: 'absolute', top: -12, right: 20, backgroundColor: HYPER_RED, borderWidth: 2, borderColor: BLACK, paddingHorizontal: 12, paddingVertical: 4, transform: [{rotate: '6deg'}] },
+  bountyDecoText: { fontSize: 10, fontWeight: '900', color: PAPER_WHITE, letterSpacing: 2 },
+  bountyTitle: { fontSize: 24, fontWeight: '900', color: BLACK, marginBottom: 12 },
+  bountyDesc: { fontSize: 14, fontWeight: '800', color: BLACK, lineHeight: 22, paddingBottom: 24, borderBottomWidth: 3, borderColor: BLACK, marginBottom: 20 },
+  bountyBtn: { backgroundColor: BLACK, paddingVertical: 16, alignItems: 'center' },
+  bountyBtnText: { fontSize: 16, fontWeight: '900', color: NEON_GREEN, letterSpacing: 2 },
 });

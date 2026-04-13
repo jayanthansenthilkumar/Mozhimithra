@@ -23,11 +23,13 @@ export default function TabLayout() {
         tabBarStyle: {
           backgroundColor: '#FFF1E5',
           borderTopWidth: 2,
-          borderTopColor: BLACK,
-          height: Platform.OS === 'ios' ? 90 : 70,
-          paddingBottom: Platform.OS === 'ios' ? 28 : 10,
+          borderBottomWidth: 2,
+          borderColor: BLACK,
+          height: 70,
+          paddingBottom: 10,
           paddingTop: 10,
           elevation: 0,
+          marginBottom: Platform.OS === 'ios' ? 28 : 16,
         },
       }}>
       <Tabs.Screen
@@ -86,6 +88,18 @@ export default function TabLayout() {
             <View style={styles.iconContainer}>
               {focused && <View style={styles.activeBlob} />}
               <Ionicons name="bar-chart" size={24} color={color} style={{ zIndex: 2 }} />
+            </View>
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="store"
+        options={{
+          title: 'Store',
+          tabBarIcon: ({ color, focused }: { color: string; focused: boolean }) => (
+            <View style={styles.iconContainer}>
+              {focused && <View style={styles.activeBlob} />}
+              <Ionicons name="cart" size={24} color={color} style={{ zIndex: 2 }} />
             </View>
           ),
         }}
