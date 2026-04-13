@@ -18,7 +18,7 @@ export default function ProfileScreen() {
       
       {/* MASSIVE BACKGROUND NAME WATERMARK */}
       <View style={styles.bgNameWrap} pointerEvents="none">
-         <Text style={styles.bgNameText} numberOfLines={1}>JUNNIYA L.</Text>
+         <Text style={styles.bgNameText} adjustsFontSizeToFit={true} minimumFontScale={0.2} numberOfLines={1}>JUNNIYA L.</Text>
       </View>
 
       <ScrollView contentContainerStyle={styles.scrollContainer} showsVerticalScrollIndicator={false}>
@@ -152,16 +152,16 @@ const styles = StyleSheet.create({
   
   bgNameWrap: { position: 'absolute', top: 0, bottom: 0, left: -40, width: 220, justifyContent: 'center', alignItems: 'center', zIndex: 0 },
   bgNameText: { 
-    fontSize: 220, 
+    fontSize: 240, 
     fontWeight: '900', 
     color: '#D8D4C0', 
     textShadowColor: '#BDB9A6', 
     textShadowOffset: { width: 12, height: 12 }, 
     textShadowRadius: 0, 
     transform: [{rotate: '-90deg'}], 
-    width: 1600, 
+    width: 900, 
     textAlign: 'center', 
-    letterSpacing: -6 
+    letterSpacing: -2 
   },
 
   scrollContainer: { paddingHorizontal: 20, paddingTop: 20 },
