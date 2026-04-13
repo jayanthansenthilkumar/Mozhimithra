@@ -543,8 +543,8 @@ const styles = StyleSheet.create({
   ticketHazard: { position: 'absolute', top: 14, right: -44, width: 140, height: 35, backgroundColor: CYBER_YELLOW, transform: [{rotate: '45deg'}], flexDirection: 'row', zIndex: 10, borderWidth: 4, borderColor: BLACK },
   ticketHazardStripe: { width: 12, height: 45, backgroundColor: BLACK, transform: [{rotate: '20deg'}], marginLeft: 15, marginTop: -5 },
   
-  authStamp: { position: 'absolute', top: 100, right: 10, width: 180, height: 70, borderWidth: 8, borderColor: HYPER_RED, justifyContent: 'center', alignItems: 'center', zIndex: 5, opacity: 0.9, backgroundColor: 'rgba(255,255,255,0.4)' },
-  authStampText: { color: HYPER_RED, fontSize: 24, fontWeight: '900', letterSpacing: 8 },
+  authStamp: { position: 'absolute', top: 60, right: 0, width: 210, height: 70, borderWidth: 6, borderColor: HYPER_RED, justifyContent: 'center', alignItems: 'center', zIndex: 5, opacity: 0.9, backgroundColor: 'rgba(255,255,255,0.4)' },
+  authStampText: { color: HYPER_RED, fontSize: 24, fontWeight: '900', letterSpacing: 8, width: '100%', textAlign: 'center' },
   secondaryStamp: { position: 'absolute', top: 180, right: 30, zIndex: 1 },
 
   ticketHeaderZone: { padding: 30, paddingBottom: 24, backgroundColor: '#F8F6F0', position: 'relative', overflow: 'hidden' },
