@@ -8,7 +8,7 @@ import { router } from 'expo-router';
 const BG = '#F4F1E1'; // Architectural Off-White
 const BLACK = '#0A0A0A'; // Pitch Black
 const PAPER_WHITE = '#FFFFFF';
-const HYPER_RED = '#FF3B30';
+const ICE_GRAY = '#E2E8F0'; // Clean Premium Gray
 const CYBER_YELLOW = '#FFD60A';
 const SKY_BLUE = '#30B0FF';
 const NEON_GREEN = '#39FF14';
@@ -60,52 +60,87 @@ export default function HomeScreen() {
                </View>
             </View>
 
-            {/* ULTIMATE UNIQUE HERO: THE "TAPE REVELATION" & 3D FOLDER */}
-            <View style={styles.heroFolder}>
-               {/* Multiple Mock Tapes */}
-               <View style={styles.tapeMock} />
-               <View style={[styles.tapeMock, { top: '80%', left: '-5%', width: 60, transform: [{ rotate: '80deg' }], backgroundColor: 'rgba(255,214,10,0.8)' }]} />
-               <View style={[styles.folderTab, { backgroundColor: HYPER_RED, position: 'absolute', top: -14, left: 10 }]} >
-                  <Text style={[styles.folderTabText, { color: HYPER_RED }]}>H</Text>
-               </View>
-               <View style={styles.folderTab}>
-                  <Text style={styles.folderTabText}>USER_LINK // J-99A</Text>
+            {/* CLEAN SWISS-BRUTALIST PREMIUM HERO */}
+            <View style={{ marginHorizontal: 24, marginTop: 30, marginBottom: 50 }}>
+               
+               {/* Minimalist Structured Tags */}
+               <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 16 }}>
+                  <View style={{ backgroundColor: BLACK, paddingHorizontal: 12, paddingVertical: 6 }}>
+                     <Text style={{ color: PAPER_WHITE, fontSize: 10, fontWeight: '900', letterSpacing: 3, fontFamily: 'monospace' }}>USER // 4099-X</Text>
+                  </View>
+                  <View style={{ backgroundColor: ICE_GRAY, borderWidth: 2, borderColor: BLACK, paddingHorizontal: 12, paddingVertical: 4, marginLeft: 8 }}>
+                     <Text style={{ color: BLACK, fontSize: 10, fontWeight: '900', letterSpacing: 2 }}>TAMIL L1 MODULE</Text>
+                  </View>
                </View>
 
-               <View style={styles.folderBody}>
-                  {/* Ultra Layered Shadows */}
-                  <View style={[styles.folderShadow, { backgroundColor: HYPER_RED, top: 16, left: 16 }]} />
-                  <View style={[styles.folderShadow, { backgroundColor: BLACK, top: 8, left: 8 }]} />
+               {/* Primary Hero Card */}
+               <View style={{ backgroundColor: PAPER_WHITE, borderWidth: 4, borderColor: BLACK, shadowColor: BLACK, shadowOffset: { width: 12, height: 12 }, shadowOpacity: 1, shadowRadius: 0, position: 'relative', overflow: 'hidden' }}>
                   
-                  <View style={styles.folderFront}>
-                     {/* Brutalist Grid Background overlay */}
-                     <View style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, overflow: 'hidden', opacity: 0.05 }} pointerEvents="none">
-                        {[...Array(6)].map((_, i) => <View key={i} style={{ width: '100%', height: 20, borderBottomWidth: 2, borderColor: BLACK, marginBottom: 20 }} />)}
+                  {/* Subtle Tech Grid Background */}
+                  <View style={{ position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, opacity: 0.1 }} pointerEvents="none">
+                     <View style={{ width: '100%', height: '100%', borderColor: BLACK, borderWidth: 2, borderStyle: 'dashed' }} />
+                  </View>
+
+                  {/* Top Architecture Stripe */}
+                  <View style={{ flexDirection: 'row', borderBottomWidth: 4, borderColor: BLACK }}>
+                      <View style={{ flex: 1, backgroundColor: ICE_GRAY, borderRightWidth: 4, borderColor: BLACK, padding: 12 }}>
+                          <Text style={{ fontSize: 9, fontWeight: '900', color: '#888', letterSpacing: 4 }}>BIOMETRIC ID MATCHED</Text>
+                      </View>
+                      <View style={{ padding: 12, backgroundColor: BLACK, flexDirection: 'row', alignItems: 'center' }}>
+                         <View style={{ width: 8, height: 8, backgroundColor: NEON_GREEN, borderRadius: 4, marginRight: 8 }} />
+                         <Text style={{ fontSize: 9, fontWeight: '900', color: NEON_GREEN, letterSpacing: 2 }}>SECURE</Text>
+                      </View>
+                  </View>
+
+                  {/* Header Strip inside Card */}
+                  <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', borderBottomWidth: 4, borderColor: BLACK, padding: 24, paddingBottom: 28, position: 'relative' }}>
+                     <View style={{ zIndex: 2 }}>
+                        <Text style={{ fontSize: 52, fontWeight: '900', color: BLACK, letterSpacing: -3, lineHeight: 54 }}>VANAKKAM,</Text>
+                        <Text style={{ fontSize: 52, fontWeight: '900', color: ICE_GRAY, textShadowColor: BLACK, textShadowOffset: { width: 2, height: 2 }, textShadowRadius: 0, letterSpacing: -3, lineHeight: 54, marginTop: -6 }}>JUNNIYA.</Text>
                      </View>
 
-                     {/* Translation sub-text */}
-                     <View style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: CYBER_YELLOW, paddingHorizontal: 8, paddingVertical: 4, alignSelf: 'flex-start', borderWidth: 2, borderColor: BLACK, marginBottom: 12, transform: [{ rotate: '-2deg' }] }}>
-                        <Ionicons name="language" size={14} color={BLACK} />
-                        <Text style={{ fontSize: 10, fontWeight: '900', color: BLACK, letterSpacing: 1, marginLeft: 6 }}>AUTO-DETECT: EN</Text>
-                     </View>
-
-                     <Text style={styles.massiveText}>VANAKKAM,</Text>
-                     <Text style={[styles.massiveText, { color: HYPER_RED, marginTop: -10 }]}>JUNNIYA.</Text>
-                     <View style={styles.scribbleUnderline} />
-                     
-                     {/* Added Metrics Block */}
-                     <View style={{ flexDirection: 'row', marginTop: 24, padding: 12, backgroundColor: BG, borderWidth: 3, borderColor: BLACK, alignItems: 'center' }}>
-                        <View style={{ width: 12, height: 12, backgroundColor: NEON_GREEN, borderRadius: 0, marginRight: 12, borderWidth: 2, borderColor: BLACK }} />
-                        <View>
-                           <Text style={{ fontSize: 10, fontWeight: '900', color: '#666', letterSpacing: 1 }}>GLOBAL FLUENCY RANK</Text>
-                           <Text style={{ fontSize: 18, fontWeight: '900', color: BLACK, letterSpacing: -0.5 }}>TOP 4.2%</Text>
+                     {/* Premium 3D Coin Badge */}
+                     <View style={{ position: 'absolute', right: 24, top: 24, zIndex: 1 }}>
+                        <View style={{ position: 'absolute', top: 4, left: 4, width: 64, height: 64, borderRadius: 32, backgroundColor: BLACK }} />
+                        <View style={{ width: 64, height: 64, backgroundColor: CYBER_YELLOW, borderWidth: 3, borderColor: BLACK, justifyContent: 'center', alignItems: 'center', borderRadius: 32 }}>
+                           <Ionicons name="language" size={32} color={BLACK} />
                         </View>
-                        <MaterialCommunityIcons name="arrow-top-right-thick" size={24} color={BLACK} style={{ marginLeft: 'auto' }} />
                      </View>
+                  </View>
 
-                     <View style={styles.floatingStarDeco}>
-                        <MaterialCommunityIcons name="star-four-points" size={60} color={BLACK} />
+                  {/* Data & Metrics Strip - 3 Column Tabular Premium Layout */}
+                  <View style={{ flexDirection: 'row', backgroundColor: PAPER_WHITE, borderBottomWidth: 4, borderColor: BLACK }}>
+                     <View style={{ flex: 1.5, padding: 20, borderRightWidth: 4, borderColor: BLACK, backgroundColor: ICE_GRAY }}>
+                        <Text style={{ fontSize: 10, fontWeight: '900', color: '#666', letterSpacing: 1.5, marginBottom: 6 }}>STANDINGS</Text>
+                        <Text style={{ fontSize: 26, fontWeight: '900', color: BLACK, letterSpacing: -1.5 }}>TOP 4.2%</Text>
                      </View>
+                     <View style={{ flex: 1, padding: 20, borderRightWidth: 4, borderColor: BLACK, justifyContent: 'center' }}>
+                        <Text style={{ fontSize: 10, fontWeight: '900', color: '#666', letterSpacing: 1.5, marginBottom: 6 }}>LEXICON</Text>
+                        <Text style={{ fontSize: 26, fontWeight: '900', color: BLACK, letterSpacing: -1.5 }}>14.2K</Text>
+                     </View>
+                     
+                     {/* Mini Visualizer / Waveform */}
+                     <View style={{ flex: 1, padding: 12, justifyContent: 'flex-end', flexDirection: 'row', alignItems: 'flex-end', gap: 4 }}>
+                        {[40, 70, 30, 90, 60].map((h, i) => (
+                           <View key={i} style={{ width: 8, height: `${h}%`, backgroundColor: BLACK }} />
+                        ))}
+                     </View>
+                  </View>
+
+                  {/* Action Footer */}
+                  <View style={{ padding: 24, flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-end', backgroundColor: PAPER_WHITE }}>
+                     <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                        <MaterialCommunityIcons name="barcode-scan" size={54} color={BLACK} />
+                        <View style={{ marginLeft: 16 }}>
+                           <Text style={{ fontSize: 10, fontWeight: '900', color: '#888', letterSpacing: 2 }}>AUTHORIZATION CODE</Text>
+                           <Text style={{ fontSize: 16, fontWeight: '900', color: BLACK, letterSpacing: 4, fontFamily: 'monospace' }}>M-V/99.01</Text>
+                        </View>
+                     </View>
+                     
+                     <TouchableOpacity activeOpacity={0.8} style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: BLACK, paddingHorizontal: 24, paddingVertical: 16, shadowColor: CYBER_YELLOW, shadowOffset: { width: 6, height: 6 }, shadowOpacity: 1, shadowRadius: 0 }}>
+                        <Text style={{ color: PAPER_WHITE, fontSize: 14, fontWeight: '900', letterSpacing: 2, marginRight: 12 }}>RESUME</Text>
+                        <MaterialCommunityIcons name="chevron-double-right" size={24} color={CYBER_YELLOW} />
+                     </TouchableOpacity>
                   </View>
                </View>
             </View>
@@ -119,7 +154,7 @@ export default function HomeScreen() {
                </View>
 
                {/* INSANE STAIR-STEP 3D SHADOW */}
-               <View style={[styles.newTicketShadow, { backgroundColor: HYPER_RED, top: 24, left: 24 }]} />
+               <View style={[styles.newTicketShadow, { backgroundColor: ICE_GRAY, top: 24, left: 24 }]} />
                <View style={[styles.newTicketShadow, { backgroundColor: SKY_BLUE, top: 16, left: 16 }]} />
                <View style={[styles.newTicketShadow, { backgroundColor: BLACK, top: 8, left: 8 }]} />
 
@@ -189,7 +224,7 @@ export default function HomeScreen() {
                         <View style={styles.tBoxLblWrap}><Text style={styles.tBoxLbl}>EST. DURATION</Text></View>
                      </View>
                      <View style={[styles.tBox, { backgroundColor: BLACK, transform: [{ rotate: '2deg' }], marginLeft: -8, marginTop: 16 }]}>
-                        <View style={[styles.tBoxPin, { backgroundColor: HYPER_RED }]} />
+                        <View style={[styles.tBoxPin, { backgroundColor: ICE_GRAY }]} />
                         <Ionicons name="star" size={28} color={NEON_GREEN} style={{ marginBottom: 8 }} />
                         <Text style={[styles.tBoxVal, { color: NEON_GREEN }]}>+80 XP</Text>
                         <View style={[styles.tBoxLblWrap, { backgroundColor: '#333' }]}><Text style={[styles.tBoxLbl, { color: PAPER_WHITE }]}>NET YIELD</Text></View>
@@ -320,7 +355,7 @@ export default function HomeScreen() {
                   {/* MALAYALAM */}
                   <TouchableOpacity activeOpacity={0.9} style={styles.langCardWrap}>
                      <View style={styles.langCardShadow} />
-                     <View style={[styles.langCard, { backgroundColor: HYPER_RED }]}>
+                     <View style={[styles.langCard, { backgroundColor: ICE_GRAY }]}>
                         <Text style={[styles.langScript, { color: PAPER_WHITE }]}>മലയാളം</Text>
                         <View style={[styles.langBottom, { borderColor: PAPER_WHITE }]}>
                            <Text style={[styles.langTitle, { color: PAPER_WHITE }]}>MALAYALAM</Text>
@@ -355,7 +390,7 @@ export default function HomeScreen() {
 
                   <TouchableOpacity activeOpacity={0.8} style={styles.qaPillWrap} onPress={() => router.push('/mithra' as any)}>
                      <View style={styles.qaPillShadow} />
-                     <View style={[styles.qaPill, { backgroundColor: HYPER_RED }]}>
+                     <View style={[styles.qaPill, { backgroundColor: ICE_GRAY }]}>
                         <Ionicons name="planet" size={24} color={PAPER_WHITE} />
                         <Text style={[styles.qaPillText, { color: PAPER_WHITE }]}>MITHRA AI</Text>
                      </View>
@@ -532,7 +567,7 @@ const styles = StyleSheet.create({
 
    avatarWrapper: { position: 'relative', zIndex: 10 },
    avatarImg: { width: 48, height: 48, borderRadius: 0, borderWidth: 3, borderColor: BLACK, zIndex: 2, backgroundColor: PAPER_WHITE },
-   avatarShadow: { position: 'absolute', top: 4, left: 4, width: 48, height: 48, backgroundColor: HYPER_RED, zIndex: 1 },
+   avatarShadow: { position: 'absolute', top: 4, left: 4, width: 48, height: 48, backgroundColor: ICE_GRAY, zIndex: 1 },
    heroGraphicArrow: { position: 'absolute', top: 40, right: 30, width: 90, height: 90, transform: [{ rotate: '110deg' }], zIndex: -1, opacity: 0.8 },
 
    // ULTIMATE UNIQUE HERO FOLDER
@@ -570,8 +605,8 @@ const styles = StyleSheet.create({
    ticketHazard: { position: 'absolute', top: 14, right: -44, width: 140, height: 35, backgroundColor: CYBER_YELLOW, transform: [{ rotate: '45deg' }], flexDirection: 'row', zIndex: 10, borderWidth: 4, borderColor: BLACK },
    ticketHazardStripe: { width: 12, height: 45, backgroundColor: BLACK, transform: [{ rotate: '20deg' }], marginLeft: 15, marginTop: -5 },
 
-   authStamp: { position: 'absolute', top: 60, right: 0, width: 210, height: 70, borderWidth: 6, borderColor: HYPER_RED, justifyContent: 'center', alignItems: 'center', zIndex: 5, opacity: 0.9, backgroundColor: 'rgba(255,255,255,0.4)' },
-   authStampText: { color: HYPER_RED, fontSize: 24, fontWeight: '900', letterSpacing: 8, width: '100%', textAlign: 'center' },
+   authStamp: { position: 'absolute', top: 60, right: 0, width: 210, height: 70, borderWidth: 6, borderColor: ICE_GRAY, justifyContent: 'center', alignItems: 'center', zIndex: 5, opacity: 0.9, backgroundColor: 'rgba(255,255,255,0.4)' },
+   authStampText: { color: ICE_GRAY, fontSize: 24, fontWeight: '900', letterSpacing: 8, width: '100%', textAlign: 'center' },
    secondaryStamp: { position: 'absolute', top: 180, right: 30, zIndex: 1 },
 
    ticketHeaderZone: { padding: 30, paddingBottom: 24, backgroundColor: '#F8F6F0', position: 'relative', overflow: 'hidden' },
@@ -584,11 +619,11 @@ const styles = StyleSheet.create({
    moduleBadge: { backgroundColor: BLACK, paddingHorizontal: 12, paddingVertical: 6, borderWidth: 2, borderColor: BLACK, transform: [{ rotate: '-2deg' }] },
    moduleBadgeText: { fontSize: 14, fontWeight: '900', color: PAPER_WHITE, letterSpacing: 3, fontFamily: 'monospace' },
    liveIndicator: { flexDirection: 'row', alignItems: 'center', backgroundColor: PAPER_WHITE, borderWidth: 2, borderColor: BLACK, paddingHorizontal: 8, paddingVertical: 4 },
-   liveIndicatorDot: { width: 8, height: 8, backgroundColor: HYPER_RED, borderRadius: 4, marginRight: 6 },
+   liveIndicatorDot: { width: 8, height: 8, backgroundColor: ICE_GRAY, borderRadius: 4, marginRight: 6 },
    liveIndicatorText: { fontSize: 10, fontWeight: '900', color: BLACK, letterSpacing: 2 },
 
    ticketMainTitle: { fontSize: 54, fontWeight: '900', color: BLACK, letterSpacing: -3, lineHeight: 50, zIndex: 2 },
-   ticketHeaderBottomDeco: { marginTop: 20, zIndex: 2, borderLeftWidth: 4, borderColor: HYPER_RED, paddingLeft: 12 },
+   ticketHeaderBottomDeco: { marginTop: 20, zIndex: 2, borderLeftWidth: 4, borderColor: ICE_GRAY, paddingLeft: 12 },
    ticketDecoLine: { height: 4, width: '100%', backgroundColor: BLACK, marginBottom: 8 },
    ticketSubTitle: { fontSize: 9, fontWeight: '900', color: BLACK, letterSpacing: 2, fontFamily: 'monospace', lineHeight: 14, opacity: 0.6 },
 
@@ -607,10 +642,10 @@ const styles = StyleSheet.create({
    physicalBarcodeSticker: { backgroundColor: PAPER_WHITE, padding: 12, borderWidth: 2, borderColor: '#CCC', transform: [{ rotate: '-2deg' }], shadowColor: BLACK, shadowOffset: { width: 4, height: 4 }, shadowOpacity: 0.15, shadowRadius: 0 },
    barcodeSubWrap: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', marginTop: 4 },
    barcodeSubText: { fontSize: 11, fontWeight: '900', color: BLACK, fontFamily: 'monospace', letterSpacing: 2 },
-   barcodeSubSep: { width: 4, height: 4, backgroundColor: HYPER_RED, marginHorizontal: 6 },
+   barcodeSubSep: { width: 4, height: 4, backgroundColor: ICE_GRAY, marginHorizontal: 6 },
 
    commenceBtnWrap: { position: 'absolute', right: -30, bottom: -30, width: 160, height: 80, zIndex: 20, transform: [{ rotate: '-6deg' }] },
-   commenceBtnShadowLayer2: { position: 'absolute', top: 12, left: 12, right: -12, bottom: -12, backgroundColor: HYPER_RED, borderWidth: 4, borderColor: BLACK },
+   commenceBtnShadowLayer2: { position: 'absolute', top: 12, left: 12, right: -12, bottom: -12, backgroundColor: ICE_GRAY, borderWidth: 4, borderColor: BLACK },
    commenceBtnShadow: { position: 'absolute', top: 6, left: 6, right: -6, bottom: -6, backgroundColor: NEON_GREEN, borderWidth: 4, borderColor: BLACK },
    commenceBtn: { flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', backgroundColor: CYBER_YELLOW, borderWidth: 5, borderColor: BLACK },
    commenceBtnText: { color: BLACK, fontSize: 20, fontWeight: '900', letterSpacing: 3, marginRight: 12 },
@@ -620,15 +655,15 @@ const styles = StyleSheet.create({
    polaroidBack: { position: 'absolute', right: 10, top: 20, width: 220, height: 240, backgroundColor: PAPER_WHITE, borderWidth: 3, borderColor: BLACK, padding: 12, transform: [{ rotate: '12deg' }], zIndex: 1 },
    polaroidFront: { position: 'absolute', left: 10, top: 0, width: 220, height: 260, backgroundColor: PAPER_WHITE, borderWidth: 3, borderColor: BLACK, padding: 12, transform: [{ rotate: '-4deg' }], zIndex: 2, shadowColor: BLACK, shadowOffset: { width: 4, height: 4 }, shadowOpacity: 1, shadowRadius: 0 },
    poloImage: { width: '100%', height: 160, borderWidth: 3, borderColor: BLACK, backgroundColor: '#CCC' },
-   poloTape: { position: 'absolute', top: -12, left: '40%', width: 60, height: 24, backgroundColor: 'rgba(255,100,100,0.5)', borderWidth: 1, borderColor: BLACK, transform: [{ rotate: '-10deg' }], zIndex: 10 },
+   poloTape: { position: 'absolute', top: -12, left: '40%', width: 60, height: 24, backgroundColor: 'rgba(225,198,255,0.5)', borderWidth: 1, borderColor: BLACK, transform: [{ rotate: '-10deg' }], zIndex: 10 },
    poloCapBox: { paddingVertical: 12, alignItems: 'center' },
    poloCapText: { fontSize: 18, fontWeight: '900', color: BLACK, letterSpacing: 1 },
-   poloSubText: { fontSize: 10, fontWeight: '900', color: HYPER_RED, letterSpacing: 1 },
+   poloSubText: { fontSize: 10, fontWeight: '900', color: ICE_GRAY, letterSpacing: 1 },
 
    // BRUTAL BUTTON
    brutalBtn: { position: 'relative', height: 64, alignSelf: 'stretch' },
    btnShadow: { position: 'absolute', top: 6, left: 6, right: -6, bottom: -6, backgroundColor: BLACK },
-   btnFront: { flex: 1, backgroundColor: HYPER_RED, borderWidth: 3, borderColor: BLACK, justifyContent: 'center', alignItems: 'center' },
+   btnFront: { flex: 1, backgroundColor: ICE_GRAY, borderWidth: 3, borderColor: BLACK, justifyContent: 'center', alignItems: 'center' },
    btnText: { color: PAPER_WHITE, fontSize: 18, fontWeight: '900', letterSpacing: 2 },
 
    // CHAOS GRID
@@ -642,10 +677,10 @@ const styles = StyleSheet.create({
 
    // DICTIONARY
    dictionaryBlock: { marginHorizontal: 24, padding: 24, backgroundColor: PAPER_WHITE, borderWidth: 3, borderColor: BLACK, marginBottom: 40, position: 'relative' },
-   dictTape: { position: 'absolute', top: -12, right: 30, width: 60, height: 24, backgroundColor: 'rgba(255,100,100,0.5)', borderWidth: 1, borderColor: BLACK, transform: [{ rotate: '8deg' }], zIndex: 10 },
+   dictTape: { position: 'absolute', top: -12, right: 30, width: 60, height: 24, backgroundColor: 'rgba(225,198,255,0.5)', borderWidth: 1, borderColor: BLACK, transform: [{ rotate: '8deg' }], zIndex: 10 },
    dictHeader: { fontSize: 10, fontWeight: '900', color: '#666', letterSpacing: 2, marginBottom: 16 },
    dictWord: { fontSize: 48, fontWeight: '900', color: BLACK, marginBottom: 4 },
-   dictPronounce: { fontSize: 18, fontWeight: '700', color: HYPER_RED, marginBottom: 20, fontFamily: 'serif' },
+   dictPronounce: { fontSize: 18, fontWeight: '700', color: ICE_GRAY, marginBottom: 20, fontFamily: 'serif' },
    dictDef: { fontSize: 16, fontWeight: '800', color: BLACK, lineHeight: 24, marginBottom: 32 },
    audioBrutalBtn: { position: 'absolute', bottom: -20, right: -10, width: 60, height: 60, backgroundColor: BLACK, borderWidth: 3, borderColor: CYBER_YELLOW, justifyContent: 'center', alignItems: 'center', transform: [{ rotate: '-5deg' }], shadowColor: BLACK, shadowOffset: { width: 4, height: 4 }, shadowOpacity: 1, shadowRadius: 0 },
 
@@ -658,7 +693,7 @@ const styles = StyleSheet.create({
    achContent: { flex: 1 },
    achTitle: { fontSize: 16, fontWeight: '900', color: BLACK },
    achCode: { fontSize: 10, fontWeight: '800', color: '#666', letterSpacing: 1 },
-   achScore: { fontSize: 16, fontWeight: '900', color: HYPER_RED },
+   achScore: { fontSize: 16, fontWeight: '900', color: ICE_GRAY },
    barcodeBox: { flexDirection: 'row', height: 40, backgroundColor: PAPER_WHITE, borderWidth: 3, borderColor: BLACK, padding: 4, justifyContent: 'space-between' },
    barcodeLine: { height: '100%', backgroundColor: BLACK },
 
@@ -685,7 +720,7 @@ const styles = StyleSheet.create({
    floppyShadow: { position: 'absolute', top: 8, left: 8, right: -8, bottom: -8, backgroundColor: BLACK },
    floppyDisk: { backgroundColor: SKY_BLUE, borderWidth: 3, borderColor: BLACK, padding: 20, paddingBottom: 40, height: 260 },
    floppyLabel: { backgroundColor: PAPER_WHITE, borderWidth: 3, borderColor: BLACK, padding: 16, height: 120, zIndex: 2 },
-   floppyLabelHeader: { color: HYPER_RED, fontSize: 12, fontWeight: '900', letterSpacing: 1, marginBottom: 16 },
+   floppyLabelHeader: { color: ICE_GRAY, fontSize: 12, fontWeight: '900', letterSpacing: 1, marginBottom: 16 },
    floppyLabelText: { fontSize: 20, fontWeight: '900', color: BLACK, lineHeight: 28 },
    floppyMetal: { position: 'absolute', top: -3, right: 24, width: 80, height: 60, backgroundColor: '#CCC', borderWidth: 3, borderColor: BLACK, zIndex: 1 },
    floppyMetalSlide: { position: 'absolute', top: 10, left: 10, width: 20, height: 30, backgroundColor: BG, borderWidth: 2, borderColor: BLACK },
@@ -699,11 +734,11 @@ const styles = StyleSheet.create({
    audioPlayBtn: { width: 64, height: 64, borderRadius: 32, backgroundColor: BLACK, justifyContent: 'center', alignItems: 'center', marginRight: 16 },
    waveformContainer: { flex: 1, height: 48, flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', position: 'relative' },
    waveBar: { width: 8, backgroundColor: BLACK, borderRadius: 0 },
-   waveScrubber: { position: 'absolute', top: -4, bottom: -4, left: '40%', width: 4, backgroundColor: HYPER_RED },
+   waveScrubber: { position: 'absolute', top: -4, bottom: -4, left: '40%', width: 4, backgroundColor: ICE_GRAY },
 
    // PROTOCOL GRID
    protoContainer: { marginHorizontal: 24, marginBottom: 50 },
-   protoHeader: { fontSize: 14, fontWeight: '900', color: HYPER_RED, letterSpacing: 2, marginBottom: 16 },
+   protoHeader: { fontSize: 14, fontWeight: '900', color: ICE_GRAY, letterSpacing: 2, marginBottom: 16 },
    protoBox: { backgroundColor: PAPER_WHITE, borderWidth: 3, borderColor: BLACK },
    protoRow: { flexDirection: 'row', alignItems: 'center', padding: 16, borderBottomWidth: 3, borderColor: BLACK },
    protoCheckSquare: { width: 24, height: 24, borderWidth: 3, borderColor: BLACK, marginRight: 16, backgroundColor: PAPER_WHITE, justifyContent: 'center', alignItems: 'center' },
