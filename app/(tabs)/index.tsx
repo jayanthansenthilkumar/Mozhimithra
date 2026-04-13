@@ -66,10 +66,10 @@ export default function HomeScreen() {
                {/* Minimalist Structured Tags */}
                <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 16 }}>
                   <View style={{ backgroundColor: BLACK, paddingHorizontal: 12, paddingVertical: 6 }}>
-                     <Text style={{ color: PAPER_WHITE, fontSize: 10, fontWeight: '900', letterSpacing: 3, fontFamily: 'monospace' }}>USER // 4099-X</Text>
+                     <Text style={{ color: PAPER_WHITE, fontSize: 10, fontWeight: '900', letterSpacing: 3, fontFamily: 'monospace' }}>LINGUIST // L1 NATIVE</Text>
                   </View>
                   <View style={{ backgroundColor: ICE_GRAY, borderWidth: 2, borderColor: BLACK, paddingHorizontal: 12, paddingVertical: 4, marginLeft: 8 }}>
-                     <Text style={{ color: BLACK, fontSize: 10, fontWeight: '900', letterSpacing: 2 }}>TAMIL L1 MODULE</Text>
+                     <Text style={{ color: BLACK, fontSize: 10, fontWeight: '900', letterSpacing: 2 }}>TAMIL MODULE</Text>
                   </View>
                </View>
 
@@ -84,11 +84,11 @@ export default function HomeScreen() {
                   {/* Top Architecture Stripe */}
                   <View style={{ flexDirection: 'row', borderBottomWidth: 4, borderColor: BLACK }}>
                       <View style={{ flex: 1, backgroundColor: ICE_GRAY, borderRightWidth: 4, borderColor: BLACK, padding: 12 }}>
-                          <Text style={{ fontSize: 9, fontWeight: '900', color: '#888', letterSpacing: 4 }}>BIOMETRIC ID MATCHED</Text>
+                          <Text style={{ fontSize: 9, fontWeight: '900', color: '#888', letterSpacing: 4 }}>BILINGUAL COGNITION ACTIVE</Text>
                       </View>
                       <View style={{ padding: 12, backgroundColor: BLACK, flexDirection: 'row', alignItems: 'center' }}>
                          <View style={{ width: 8, height: 8, backgroundColor: NEON_GREEN, borderRadius: 4, marginRight: 8 }} />
-                         <Text style={{ fontSize: 9, fontWeight: '900', color: NEON_GREEN, letterSpacing: 2 }}>SECURE</Text>
+                         <Text style={{ fontSize: 9, fontWeight: '900', color: NEON_GREEN, letterSpacing: 2 }}>FLUENT</Text>
                       </View>
                   </View>
 
@@ -99,7 +99,7 @@ export default function HomeScreen() {
                      <View style={{ position: 'absolute', top: 0, left: 24, bottom: 0, width: 2, backgroundColor: '#E2E8F0', opacity: 0.5 }} pointerEvents="none" />
 
                      <View style={{ zIndex: 2, marginLeft: 12 }}>
-                        <Text style={{ fontSize: 11, fontWeight: '900', color: '#888', letterSpacing: 4, marginBottom: 8 }}>MITHRA PROTOCOL ENGAGED</Text>
+                        <Text style={{ fontSize: 11, fontWeight: '900', color: '#888', letterSpacing: 4, marginBottom: 8 }}>PRIMARY NATIVE DIALECT</Text>
                         <Text style={{ fontSize: 56, fontWeight: '900', color: BLACK, letterSpacing: -3, lineHeight: 58 }}>VANAKKAM,</Text>
                         
                         {/* Pure Lavender Name Block */}
@@ -114,7 +114,7 @@ export default function HomeScreen() {
                         <View style={{ position: 'absolute', top: 5, left: 5, width: 68, height: 68, borderRadius: 34, backgroundColor: BLACK }} />
                         <View style={{ width: 68, height: 68, backgroundColor: PAPER_WHITE, borderWidth: 4, borderColor: BLACK, justifyContent: 'center', alignItems: 'center', borderRadius: 34 }}>
                            <View style={{ position: 'absolute', width: '100%', height: '100%', borderRadius: 34, borderWidth: 2, borderColor: '#B57EDC', opacity: 0.5 }} />
-                           <Ionicons name="finger-print" size={32} color={BLACK} />
+                           <MaterialCommunityIcons name="translate" size={32} color={BLACK} />
                         </View>
                      </View>
                   </View>
@@ -143,13 +143,13 @@ export default function HomeScreen() {
                      <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                         <MaterialCommunityIcons name="barcode-scan" size={54} color={BLACK} />
                         <View style={{ marginLeft: 16 }}>
-                           <Text style={{ fontSize: 10, fontWeight: '900', color: '#888', letterSpacing: 2 }}>AUTHORIZATION CODE</Text>
-                           <Text style={{ fontSize: 16, fontWeight: '900', color: BLACK, letterSpacing: 4, fontFamily: 'monospace' }}>M-V/99.01</Text>
+                           <Text style={{ fontSize: 10, fontWeight: '900', color: '#888', letterSpacing: 2 }}>PHONETIC SIGNATURE</Text>
+                           <Text style={{ fontSize: 16, fontWeight: '900', color: BLACK, letterSpacing: 4, fontFamily: 'monospace' }}>TN-TML/99</Text>
                         </View>
                      </View>
                      
                      <TouchableOpacity activeOpacity={0.8} style={{ flexDirection: 'row', alignItems: 'center', backgroundColor: BLACK, paddingHorizontal: 24, paddingVertical: 16, shadowColor: CYBER_YELLOW, shadowOffset: { width: 6, height: 6 }, shadowOpacity: 1, shadowRadius: 0 }}>
-                        <Text style={{ color: PAPER_WHITE, fontSize: 14, fontWeight: '900', letterSpacing: 2, marginRight: 12 }}>RESUME</Text>
+                        <Text style={{ color: PAPER_WHITE, fontSize: 14, fontWeight: '900', letterSpacing: 2, marginRight: 12 }}>STUDY</Text>
                         <MaterialCommunityIcons name="chevron-double-right" size={24} color={CYBER_YELLOW} />
                      </TouchableOpacity>
                   </View>
