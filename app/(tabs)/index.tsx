@@ -93,17 +93,28 @@ export default function HomeScreen() {
                   </View>
 
                   {/* Header Strip inside Card */}
-                  <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', borderBottomWidth: 4, borderColor: BLACK, padding: 24, paddingBottom: 28, position: 'relative' }}>
-                     <View style={{ zIndex: 2 }}>
-                        <Text style={{ fontSize: 52, fontWeight: '900', color: BLACK, letterSpacing: -3, lineHeight: 54 }}>VANAKKAM,</Text>
-                        <Text style={{ fontSize: 52, fontWeight: '900', color: ICE_GRAY, textShadowColor: BLACK, textShadowOffset: { width: 2, height: 2 }, textShadowRadius: 0, letterSpacing: -3, lineHeight: 54, marginTop: -6 }}>JUNNIYA.</Text>
+                  <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'flex-start', borderBottomWidth: 4, borderColor: BLACK, padding: 24, paddingBottom: 32, position: 'relative', overflow: 'hidden' }}>
+                     
+                     {/* Premium Background Accent Line */}
+                     <View style={{ position: 'absolute', top: 0, left: 24, bottom: 0, width: 2, backgroundColor: '#E2E8F0', opacity: 0.5 }} pointerEvents="none" />
+
+                     <View style={{ zIndex: 2, marginLeft: 12 }}>
+                        <Text style={{ fontSize: 11, fontWeight: '900', color: '#888', letterSpacing: 4, marginBottom: 8 }}>MITHRA PROTOCOL ENGAGED</Text>
+                        <Text style={{ fontSize: 56, fontWeight: '900', color: BLACK, letterSpacing: -3, lineHeight: 58 }}>VANAKKAM,</Text>
+                        
+                        {/* Pure Lavender Name Block */}
+                        <View style={{ position: 'relative', marginTop: -4 }}>
+                           <Text style={{ position: 'absolute', top: 3, left: 3, fontSize: 62, fontWeight: '900', color: BLACK, letterSpacing: -3, lineHeight: 64 }}>JUNNIYA.</Text>
+                           <Text style={{ fontSize: 62, fontWeight: '900', color: '#B57EDC', letterSpacing: -3, lineHeight: 64 }}>JUNNIYA.</Text>
+                        </View>
                      </View>
 
                      {/* Premium 3D Coin Badge */}
                      <View style={{ position: 'absolute', right: 24, top: 24, zIndex: 1 }}>
-                        <View style={{ position: 'absolute', top: 4, left: 4, width: 64, height: 64, borderRadius: 32, backgroundColor: BLACK }} />
-                        <View style={{ width: 64, height: 64, backgroundColor: CYBER_YELLOW, borderWidth: 3, borderColor: BLACK, justifyContent: 'center', alignItems: 'center', borderRadius: 32 }}>
-                           <Ionicons name="language" size={32} color={BLACK} />
+                        <View style={{ position: 'absolute', top: 5, left: 5, width: 68, height: 68, borderRadius: 34, backgroundColor: BLACK }} />
+                        <View style={{ width: 68, height: 68, backgroundColor: PAPER_WHITE, borderWidth: 4, borderColor: BLACK, justifyContent: 'center', alignItems: 'center', borderRadius: 34 }}>
+                           <View style={{ position: 'absolute', width: '100%', height: '100%', borderRadius: 34, borderWidth: 2, borderColor: '#B57EDC', opacity: 0.5 }} />
+                           <Ionicons name="finger-print" size={32} color={BLACK} />
                         </View>
                      </View>
                   </View>
