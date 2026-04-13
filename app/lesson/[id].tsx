@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Platform, Dimensions } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, Platform } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useLocalSearchParams, router } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
-import { BlurView } from 'expo-blur';
-import { LinearGradient } from 'expo-linear-gradient';
 
-const { width } = Dimensions.get('window');
+const BG = '#FFF1E5';
+const BLACK = '#0A0A0A';
+const ACCENT_YELLOW = '#FFE066';
+const ACCENT_PINK = '#FFAFCC';
+const ACCENT_BLUE = '#A2D2FF';
 
 const OPTIONS = [
   { id: '1', text: 'Vanakkam', correct: true },
@@ -30,90 +32,71 @@ export default function LessonScreen() {
 
   return (
     <View style={styles.mainContainer}>
-
-      {/* GLOWS */}
-      <View style={[styles.glowOrb, { top: -200, left: -150, backgroundColor: isChecked ? (isCorrect ? '#4ECDC4' : '#FF6B6B') : '#8A2BE2', opacity: 0.15 }]} />
-      <View style={[styles.glowOrb, { bottom: 100, right: -150, backgroundColor: '#8A2BE2', opacity: 0.1 }]} />
-
       <SafeAreaView edges={['top']} />
       
       <View style={styles.header}>
         <TouchableOpacity style={styles.closeBtn} onPress={() => router.back()}>
-          <Ionicons name="close" size={28} color="#FFF" />
+          <Ionicons name="close" size={24} color={BLACK} />
         </TouchableOpacity>
         
         <View style={styles.progressBarBg}>
-          <LinearGradient
-            colors={['#8A2BE2', '#4ECDC4']}
-            start={{ x: 0, y: 0 }}
-            end={{ x: 1, y: 0 }}
-            style={[styles.progressBarFill, { width: '40%' }]} 
-          />
+          <View style={[styles.progressBarFill, { width: '40%' }]} />
         </View>
         
-        <BlurView intensity={20} tint="dark" style={styles.heartContainer}>
-          <Ionicons name="heart" size={20} color="#FF6B6B" />
+        <View style={styles.heartContainer}>
+          <Ionicons name="heart" size={20} color={ACCENT_PINK} />
           <Text style={styles.heartText}>5</Text>
-        </BlurView>
+        </View>
       </View>
 
       <View style={styles.content}>
-        <Text style={styles.questionType}>NEW PHRASE</Text>
-        <Text style={styles.questionText}>Translate this phrase</Text>
+        <Text style={styles.questionType}>NEW PHRASE // Translate</Text>
         
-        <View style={styles.avatarContainer}>
-          <BlurView intensity={40} tint="light" style={styles.speechBubble}>
-            <Text style={styles.targetPhrase}>"Hello"</Text>
-            <TouchableOpacity style={styles.audioBtn}>
-               <Ionicons name="volume-medium" size={24} color="#8A2BE2" />
-            </TouchableOpacity>
-          </BlurView>
+        <View style={styles.speechBubble}>
+          {/* Overhanging Borders */}
+          <View style={[styles.crosshairV, { left: 10 }]} />
+          <View style={[styles.crosshairV, { right: 10 }]} />
+          <View style={[styles.crosshairH, { top: 10 }]} />
+          <View style={[styles.crosshairH, { bottom: 10 }]} />
+          
+          <Text style={styles.targetPhrase}>"Hello"</Text>
+          <TouchableOpacity style={styles.audioBtn}>
+             <Ionicons name="volume-medium" size={24} color={BLACK} />
+          </TouchableOpacity>
         </View>
 
         <View style={styles.optionsContainer}>
-          {OPTIONS.map((opt) => (
-            <TouchableOpacity 
-              key={opt.id}
-              activeOpacity={0.8}
-              onPress={() => !isChecked && setSelectedOpt(opt.id)}
-            >
-              <BlurView 
-                intensity={isChecked && selectedOpt === opt.id ? 40 : 20} 
-                tint={isChecked && selectedOpt === opt.id && isCorrect ? "light" : "dark"}
+          {OPTIONS.map((opt) => {
+            const isSelected = selectedOpt === opt.id;
+            const styleChecked = isChecked && isSelected;
+            const itemBg = styleChecked ? (isCorrect ? ACCENT_BLUE : ACCENT_PINK) : (isSelected ? ACCENT_YELLOW : '#FFF');
+            
+            return (
+              <TouchableOpacity 
+                key={opt.id}
+                activeOpacity={0.9}
                 style={[
-                  styles.optionCard,
-                  selectedOpt === opt.id && { borderColor: isChecked ? (isCorrect ? '#4ECDC4' : '#FF6B6B') : '#8A2BE2', borderWidth: 2 },
-                  isChecked && selectedOpt === opt.id && { backgroundColor: isCorrect ? 'rgba(78,205,196,0.2)' : 'rgba(255,107,107,0.2)' }
+                  styles.optionCard, 
+                  { backgroundColor: itemBg },
+                  isSelected && styles.optionSelected
                 ]}
+                onPress={() => !isChecked && setSelectedOpt(opt.id)}
               >
-                <Text style={[
-                  styles.optionText, 
-                  selectedOpt === opt.id && { color: isChecked ? (isCorrect ? '#4ECDC4' : '#FF6B6B') : '#8A2BE2' },
-                  isChecked && selectedOpt === opt.id && isCorrect && { color: '#0A0A0A', fontWeight: '800' }
-                ]}>{opt.text}</Text>
-              </BlurView>
-            </TouchableOpacity>
-          ))}
+                <Text style={styles.optionText}>{opt.text}</Text>
+              </TouchableOpacity>
+            );
+          })}
         </View>
       </View>
 
-      <BlurView 
-        intensity={80} 
-        tint={isChecked ? (isCorrect ? "light" : "dark") : "dark"}
-        style={[
-          styles.footer, 
-          isChecked && { backgroundColor: isCorrect ? 'rgba(78,205,196,0.3)' : 'rgba(255,107,107,0.2)' }
-        ]}
-      >
+      <View style={[styles.footer, isChecked && { backgroundColor: isCorrect ? ACCENT_BLUE : ACCENT_PINK }]}>
         {isChecked && (
           <View style={styles.feedbackContainer}>
-            <View style={styles.feedbackIconCircle}>
-              <Ionicons name={isCorrect ? "checkmark" : "close"} size={32} color={isCorrect ? "#0A0A0A" : "#FF6B6B"} />
+            <View style={[styles.feedbackIconCircle, { backgroundColor: '#FFF' }]}>
+              <Ionicons name={isCorrect ? "checkmark" : "close"} size={32} color={BLACK} />
             </View>
             <View>
-              <Text style={[styles.feedbackTitle, { color: isCorrect ? '#0A0A0A' : '#FF6B6B' }]}>
-                {isCorrect ? 'Excellent!' : 'Incorrect.'}
-              </Text>
+              <Text style={styles.feedbackTitle}>{isCorrect ? 'Excellent!' : 'Incorrect.'}</Text>
               {!isCorrect && <Text style={styles.feedbackSub}>The correct answer is Vanakkam.</Text>}
             </View>
           </View>
@@ -122,180 +105,64 @@ export default function LessonScreen() {
         <TouchableOpacity 
           activeOpacity={0.9}
           disabled={!selectedOpt}
+          style={[styles.actionBtn, !selectedOpt && styles.actionBtnDisabled]}
           onPress={handleCheck}
         >
-          <LinearGradient
-            colors={!selectedOpt ? ['rgba(255,255,255,0.1)', 'rgba(255,255,255,0.05)'] : isChecked ? (isCorrect ? ['#FFF', '#F0F0F0'] : ['#FF6B6B', '#D64545']) : ['#8A2BE2', '#B19CD9']}
-            style={styles.actionBtn}
-          >
-            <Text style={[
-              styles.actionBtnText, 
-              { color: !selectedOpt ? 'rgba(255,255,255,0.3)' : isChecked && isCorrect ? '#0A0A0A' : '#FFF' }
-            ]}>
-              {isChecked ? 'CONTINUE' : 'CHECK ANSWER'}
-            </Text>
-          </LinearGradient>
+          <Text style={[styles.actionBtnText, !selectedOpt && { color: '#888' }]}>
+            {isChecked ? 'CONTINUE' : 'CHECK ANSWER'}
+          </Text>
         </TouchableOpacity>
-      </BlurView>
+      </View>
 
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  mainContainer: {
-    flex: 1,
-    backgroundColor: '#05030A',
-  },
-  glowOrb: {
-    position: 'absolute',
-    width: 400,
-    height: 400,
-    borderRadius: 200,
-  },
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: 16,
-    paddingTop: 12,
-    paddingBottom: 20,
-  },
-  closeBtn: {
-    padding: 8,
-  },
-  progressBarBg: {
-    flex: 1,
-    height: 12,
-    backgroundColor: 'rgba(255,255,255,0.1)',
-    borderRadius: 6,
-    marginHorizontal: 16,
-    overflow: 'hidden',
-  },
-  progressBarFill: {
-    height: '100%',
-    borderRadius: 6,
-  },
-  heartContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: 12,
-    paddingVertical: 6,
-    borderRadius: 16,
-    borderWidth: 1,
-    borderColor: 'rgba(255,255,255,0.15)',
-    overflow: 'hidden',
-  },
-  heartText: {
-    color: '#FFF',
-    fontSize: 14,
-    fontWeight: '800',
-    marginLeft: 6,
-  },
-  content: {
-    flex: 1,
-    paddingHorizontal: 24,
-    paddingTop: 20,
-  },
-  questionType: {
-    color: '#8A2BE2',
-    fontSize: 14,
-    fontWeight: '800',
-    letterSpacing: 2,
-    marginBottom: 8,
-  },
-  questionText: {
-    color: '#FFF',
-    fontSize: 32,
-    fontWeight: '800',
-    marginBottom: 40,
-    lineHeight: 40,
-  },
-  avatarContainer: {
-    alignItems: 'center',
-    marginBottom: 48,
-  },
+  mainContainer: { flex: 1, backgroundColor: BG },
+  header: { flexDirection: 'row', alignItems: 'center', paddingHorizontal: 16, paddingVertical: 12, borderBottomWidth: 4, borderColor: BLACK },
+  closeBtn: { padding: 8, borderWidth: 2, borderColor: BLACK, backgroundColor: '#FFF', borderRadius: 8 },
+  progressBarBg: { flex: 1, height: 16, backgroundColor: '#FFF', borderWidth: 2, borderColor: BLACK, marginHorizontal: 16 },
+  progressBarFill: { height: '100%', backgroundColor: ACCENT_YELLOW, borderRightWidth: 2, borderColor: BLACK },
+  heartContainer: { flexDirection: 'row', alignItems: 'center', paddingHorizontal: 12, paddingVertical: 8, borderWidth: 2, borderColor: BLACK, backgroundColor: '#FFF' },
+  heartText: { color: BLACK, fontSize: 16, fontWeight: '900', marginLeft: 6 },
+  
+  content: { flex: 1, paddingHorizontal: 24, paddingTop: 32 },
+  questionType: { color: BLACK, fontSize: 16, fontWeight: '900', letterSpacing: 1, marginBottom: 24 },
+  
   speechBubble: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    padding: 24,
-    borderRadius: 32,
-    borderWidth: 1,
-    borderColor: 'rgba(255,255,255,0.4)',
-    overflow: 'hidden',
+    flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between',
+    padding: 32, backgroundColor: '#FFF', borderWidth: 2, borderColor: BLACK, marginBottom: 48,
+    shadowColor: BLACK, shadowOffset: { width: 6, height: 6 }, shadowOpacity: 1, shadowRadius: 0
   },
-  targetPhrase: {
-    color: '#0A0A0A',
-    fontSize: 24,
-    fontWeight: '800',
-    marginRight: 16,
-  },
-  audioBtn: {
-    width: 48,
-    height: 48,
-    borderRadius: 24,
-    backgroundColor: '#FFF',
-    justifyContent: 'center',
-    alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 4 },
-    shadowOpacity: 0.1,
-    shadowRadius: 8,
-  },
-  optionsContainer: {
-    gap: 16,
-  },
+  crosshairV: { position: 'absolute', top: -10, bottom: -10, width: 2, backgroundColor: BLACK, zIndex: 1 },
+  crosshairH: { position: 'absolute', left: -10, right: -10, height: 2, backgroundColor: BLACK, zIndex: 1 },
+  
+  targetPhrase: { color: BLACK, fontSize: 32, fontWeight: '900', zIndex: 2 },
+  audioBtn: { width: 56, height: 56, borderRadius: 28, backgroundColor: ACCENT_YELLOW, borderWidth: 2, borderColor: BLACK, justifyContent: 'center', alignItems: 'center', zIndex: 2 },
+  
+  optionsContainer: { gap: 20 },
   optionCard: {
-    padding: 24,
-    borderRadius: 24,
-    borderWidth: 1,
-    borderColor: 'rgba(255,255,255,0.1)',
-    alignItems: 'center',
-    overflow: 'hidden',
+    padding: 24, borderWidth: 2, borderColor: BLACK,
+    shadowColor: BLACK, shadowOffset: { width: 4, height: 4 }, shadowOpacity: 1, shadowRadius: 0
   },
-  optionText: {
-    color: '#FFF',
-    fontSize: 20,
-    fontWeight: '700',
-  },
+  optionSelected: { shadowOffset: { width: 0, height: 0 }, transform: [{ translateY: 4 }, { translateX: 4 }] },
+  optionText: { color: BLACK, fontSize: 20, fontWeight: '800', textAlign: 'center' },
+  
   footer: {
-    paddingHorizontal: 24,
-    paddingTop: 24,
-    paddingBottom: Platform.OS === 'ios' ? 40 : 24,
-    borderTopWidth: 1,
-    borderTopColor: 'rgba(255,255,255,0.1)',
+    position: 'absolute', bottom: 0, left: 0, right: 0,
+    paddingHorizontal: 24, paddingTop: 24, paddingBottom: Platform.OS === 'ios' ? 40 : 24,
+    borderTopWidth: 4, borderColor: BLACK, backgroundColor: '#FFF'
   },
-  feedbackContainer: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginBottom: 24,
-  },
-  feedbackIconCircle: {
-    width: 48,
-    height: 48,
-    borderRadius: 24,
-    backgroundColor: 'rgba(255,255,255,0.2)',
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginRight: 16,
-  },
-  feedbackTitle: {
-    fontSize: 24,
-    fontWeight: '800',
-    marginBottom: 4,
-  },
-  feedbackSub: {
-    color: 'rgba(255,107,107,0.8)',
-    fontSize: 16,
-    fontWeight: '600',
-  },
+  feedbackContainer: { flexDirection: 'row', alignItems: 'center', marginBottom: 24 },
+  feedbackIconCircle: { width: 56, height: 56, borderWidth: 2, borderColor: BLACK, justifyContent: 'center', alignItems: 'center', marginRight: 16 },
+  feedbackTitle: { fontSize: 24, fontWeight: '900', marginBottom: 4, color: BLACK },
+  feedbackSub: { fontSize: 16, fontWeight: '700', color: '#444' },
+  
   actionBtn: {
-    paddingVertical: 20,
-    borderRadius: 32,
-    alignItems: 'center',
+    paddingVertical: 20, backgroundColor: ACCENT_YELLOW, borderWidth: 2, borderColor: BLACK,
+    shadowColor: BLACK, shadowOffset: { width: 4, height: 4 }, shadowOpacity: 1, shadowRadius: 0, alignItems: 'center'
   },
-  actionBtnText: {
-    fontSize: 16,
-    fontWeight: '800',
-    letterSpacing: 2,
-  },
+  actionBtnDisabled: { backgroundColor: '#E0E0E0', shadowOpacity: 0 },
+  actionBtnText: { color: BLACK, fontSize: 18, fontWeight: '900', letterSpacing: 1 },
 });
