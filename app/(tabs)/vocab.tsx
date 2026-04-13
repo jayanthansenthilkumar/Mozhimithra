@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Dimensions } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
+import { useAppTheme } from '@/hooks/ThemeContext';
 import { BlurView } from 'expo-blur';
 import { LinearGradient } from 'expo-linear-gradient';
 
@@ -14,9 +15,10 @@ const CATEGORIES = [
 
 export default function VocabScreen() {
   const [activeTab, setActiveTab] = useState('Learning');
+  const { appBgColor } = useAppTheme();
 
   return (
-    <View style={styles.mainContainer}>
+    <View style={[styles.mainContainer, { backgroundColor: appBgColor }]}>
 
       <View style={[styles.glowOrb, { top: -100, right: -100, backgroundColor: '#4ECDC4', opacity: 0.15 }]} />
       <View style={[styles.glowOrb, { bottom: -100, left: -50, backgroundColor: '#FF7F50', opacity: 0.1 }]} />

@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image, Platform }
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
+import { useAppTheme } from '@/hooks/ThemeContext';
 
 // PREMIUM NEURO-BRUTALISM CONSTANTS
 const BG = '#F4F1E1';
@@ -14,8 +15,9 @@ const SKY_BLUE = '#30B0FF';
 const NEON_GREEN = '#39FF14';
 
 export default function CoursesScreen() {
+  const { appBgColor } = useAppTheme();
   return (
-    <View style={styles.mainContainer}>
+    <View style={[styles.mainContainer, { backgroundColor: appBgColor }]}>
       <SafeAreaView edges={['top']} />
       
       {/* MASSIVE BACKGROUND NAME WATERMARK */}

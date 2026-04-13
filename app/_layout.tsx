@@ -8,6 +8,8 @@ import 'react-native-reanimated';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 import { StatusBar } from 'expo-status-bar';
 
+import { AppThemeProvider } from '@/hooks/ThemeContext';
+
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
@@ -17,14 +19,16 @@ export default function RootLayout() {
   }, []);
 
   return (
-    <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-      <Stack screenOptions={{ headerShown: false, animation: 'fade' }}>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="course/[id]" options={{ headerShown: false, animation: 'slide_from_right' }} />
-        <Stack.Screen name="lesson/[id]" options={{ headerShown: false, animation: 'slide_from_bottom' }} />
-        <Stack.Screen name="settings" options={{ headerShown: false, animation: 'slide_from_right' }} />
-      </Stack>
-      <StatusBar style="auto" />
-    </ThemeProvider>
+    <AppThemeProvider>
+      <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
+        <Stack screenOptions={{ headerShown: false, animation: 'fade' }}>
+          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+          <Stack.Screen name="course/[id]" options={{ headerShown: false, animation: 'slide_from_right' }} />
+          <Stack.Screen name="lesson/[id]" options={{ headerShown: false, animation: 'slide_from_bottom' }} />
+          <Stack.Screen name="settings" options={{ headerShown: false, animation: 'slide_from_right' }} />
+        </Stack>
+        <StatusBar style="auto" />
+      </ThemeProvider>
+    </AppThemeProvider>
   );
 }

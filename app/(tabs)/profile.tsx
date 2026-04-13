@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
+import { useAppTheme, APP_THEMES } from '@/hooks/ThemeContext';
 
 const BG = '#F4F1E1';
 const BLACK = '#0A0A0A';
@@ -12,13 +13,75 @@ const SKY_BLUE = '#30B0FF';
 const NEON_GREEN = '#39FF14';
 
 export default function ProfileScreen() {
+  const { appBgColor, accentColor, setTheme } = useAppTheme();
+  const [isThemeOpen, setIsThemeOpen] = useState(false);
   return (
-    <View style={styles.mainContainer}>
+    <View style={[styles.mainContainer, { backgroundColor: appBgColor }]}>
       <SafeAreaView edges={['top']} />
       
       {/* MASSIVE BACKGROUND NAME WATERMARK */}
       <View style={styles.bgNameWrap} pointerEvents="none">
          <Text style={styles.bgNameText} adjustsFontSizeToFit={true} minimumFontScale={0.2} numberOfLines={1}>JUNNIYA L.</Text>
+      </View>
+
+      {/* FLOATING THEME DROPDOWN */}
+      <View style={{ position: 'absolute', top: 60, right: 24, zIndex: 100 }}>
+         {/* Main Toggle Button */}
+         <TouchableOpacity 
+            activeOpacity={0.9} 
+            onPress={() => setIsThemeOpen(!isThemeOpen)}
+            style={{ 
+               backgroundColor: BLACK, 
+               paddingHorizontal: 16, 
+               paddingVertical: 12, 
+               borderWidth: 3, 
+               borderColor: accentColor,
+               shadowColor: BLACK,
+               shadowOffset: {width: 4, height: 4},
+               shadowOpacity: 1,
+               shadowRadius: 0
+            }}
+         >
+            <Text style={{ color: PAPER_WHITE, fontWeight: '900', letterSpacing: 2 }}>[ SYNC THEME ]</Text>
+         </TouchableOpacity>
+         
+         {/* Expanding Dropdown Menu */}
+         {isThemeOpen && (
+            <View style={{ 
+               position: 'absolute', 
+               top: 54, 
+               right: 0, 
+               backgroundColor: PAPER_WHITE, 
+               borderWidth: 4, 
+               borderColor: BLACK, 
+               padding: 12, 
+               width: 160,
+               shadowColor: BLACK,
+               shadowOffset: {width: 6, height: 6},
+               shadowOpacity: 1,
+               shadowRadius: 0
+            }}>
+               {APP_THEMES.map((theme, idx) => (
+                  <TouchableOpacity
+                     key={theme.accent}
+                     activeOpacity={0.8}
+                     onPress={() => { setTheme(theme.accent); setIsThemeOpen(false); }}
+                     style={{ 
+                        flexDirection: 'row', 
+                        alignItems: 'center', 
+                        marginBottom: idx === APP_THEMES.length - 1 ? 0 : 12,
+                        padding: 4,
+                        backgroundColor: accentColor === theme.accent ? '#E2E8F0' : 'transparent',
+                        borderWidth: 2,
+                        borderColor: accentColor === theme.accent ? BLACK : 'transparent'
+                     }}
+                  >
+                     <View style={{ width: 24, height: 24, backgroundColor: theme.accent, borderWidth: 2, borderColor: BLACK, marginRight: 12 }} />
+                     <Text style={{ fontWeight: '900', color: BLACK, fontSize: 10, letterSpacing: 1 }}>SELECT</Text>
+                  </TouchableOpacity>
+               ))}
+            </View>
+         )}
       </View>
 
       <ScrollView contentContainerStyle={styles.scrollContainer} showsVerticalScrollIndicator={false}>

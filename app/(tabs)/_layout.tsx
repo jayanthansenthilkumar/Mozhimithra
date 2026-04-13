@@ -2,11 +2,12 @@ import { Tabs } from 'expo-router';
 import { StyleSheet, View, Text, Platform } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import React from 'react';
+import { useAppTheme } from '@/hooks/ThemeContext';
 
-const ACCENT_YELLOW = '#FFDE00';
 const BLACK = '#000000';
 
 export default function TabLayout() {
+  const { appBgColor, accentColor } = useAppTheme();
   return (
     <Tabs
       screenOptions={{
@@ -21,7 +22,7 @@ export default function TabLayout() {
           marginTop: 4,
         },
         tabBarStyle: {
-          backgroundColor: '#FFF1E5',
+          backgroundColor: appBgColor,
           borderTopWidth: 2,
           borderBottomWidth: 2,
           borderColor: BLACK,
@@ -38,7 +39,7 @@ export default function TabLayout() {
           title: 'Challenges',
           tabBarIcon: ({ color, focused }: { color: string; focused: boolean }) => (
             <View style={styles.iconContainer}>
-              {focused && <View style={styles.activeBlob} />}
+              {focused && <View style={[styles.activeBlob, { backgroundColor: accentColor }]} />}
               <Ionicons name="home" size={24} color={color} style={{ zIndex: 2 }} />
             </View>
           ),
@@ -50,7 +51,7 @@ export default function TabLayout() {
           title: 'Courses',
           tabBarIcon: ({ color, focused }: { color: string; focused: boolean }) => (
             <View style={styles.iconContainer}>
-              {focused && <View style={styles.activeBlob} />}
+              {focused && <View style={[styles.activeBlob, { backgroundColor: accentColor }]} />}
               <Ionicons name="book" size={24} color={color} style={{ zIndex: 2 }} />
             </View>
           ),
@@ -62,7 +63,7 @@ export default function TabLayout() {
           title: 'Mithra',
           tabBarIcon: ({ color, focused }: { color: string; focused: boolean }) => (
             <View style={styles.iconContainer}>
-              {focused && <View style={styles.activeBlob} />}
+              {focused && <View style={[styles.activeBlob, { backgroundColor: accentColor }]} />}
               <Ionicons name="planet" size={24} color={color} style={{ zIndex: 2 }} />
             </View>
           ),
@@ -74,7 +75,7 @@ export default function TabLayout() {
           title: 'Friends',
           tabBarIcon: ({ color, focused }: { color: string; focused: boolean }) => (
             <View style={styles.iconContainer}>
-              {focused && <View style={styles.activeBlob} />}
+              {focused && <View style={[styles.activeBlob, { backgroundColor: accentColor }]} />}
               <Ionicons name="people" size={24} color={color} style={{ zIndex: 2 }} />
             </View>
           ),
@@ -86,7 +87,7 @@ export default function TabLayout() {
           title: 'Stats',
           tabBarIcon: ({ color, focused }: { color: string; focused: boolean }) => (
             <View style={styles.iconContainer}>
-              {focused && <View style={styles.activeBlob} />}
+              {focused && <View style={[styles.activeBlob, { backgroundColor: accentColor }]} />}
               <Ionicons name="bar-chart" size={24} color={color} style={{ zIndex: 2 }} />
             </View>
           ),
@@ -98,7 +99,7 @@ export default function TabLayout() {
           title: 'Store',
           tabBarIcon: ({ color, focused }: { color: string; focused: boolean }) => (
             <View style={styles.iconContainer}>
-              {focused && <View style={styles.activeBlob} />}
+              {focused && <View style={[styles.activeBlob, { backgroundColor: accentColor }]} />}
               <Ionicons name="cart" size={24} color={color} style={{ zIndex: 2 }} />
             </View>
           ),
@@ -126,9 +127,8 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width: 48,
     height: 32,
-    backgroundColor: ACCENT_YELLOW,
     borderRadius: 16,
     zIndex: 1,
-    transform: [{ rotate: '-4deg' }] // Gives it the sloppy highlight look!
+    transform: [{ rotate: '-4deg' }]
   }
 });

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, TextInput, KeyboardAvoidingView, Platform } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
+import { useAppTheme } from '@/hooks/ThemeContext';
 
 // PREMIUM NEURO-BRUTALISM CONSTANTS
 const BG = '#F4F1E1';
@@ -20,9 +21,10 @@ const MOCK_CHAT = [
 
 export default function MithraScreen() {
   const [inputText, setInputText] = useState('');
+  const { appBgColor } = useAppTheme();
 
   return (
-    <KeyboardAvoidingView style={styles.mainContainer} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
+    <KeyboardAvoidingView style={[styles.mainContainer, { backgroundColor: appBgColor }]} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
       <SafeAreaView edges={['top']} />
       
       {/* MASSIVE BACKGROUND NAME WATERMARK */}

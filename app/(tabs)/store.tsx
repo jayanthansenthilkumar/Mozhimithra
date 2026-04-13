@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
+import { useAppTheme } from '@/hooks/ThemeContext';
 
 const BG = '#F4F1E1';
 const BLACK = '#0A0A0A';
@@ -47,8 +48,9 @@ const STORE_ITEMS = [
 ];
 
 export default function StoreScreen() {
+  const { appBgColor } = useAppTheme();
   return (
-    <View style={styles.mainContainer}>
+    <View style={[styles.mainContainer, { backgroundColor: appBgColor }]}>
       <SafeAreaView edges={['top']} />
       
       {/* MASSIVE BACKGROUND NAME WATERMARK */}

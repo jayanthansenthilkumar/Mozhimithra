@@ -3,7 +3,7 @@ import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image, Platform, 
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { router } from 'expo-router';
-
+import { useAppTheme } from '@/hooks/ThemeContext';
 // PREMIUM NEURO-BRUTALISM CONSTANTS
 const BG = '#F4F1E1'; // Architectural Off-White
 const BLACK = '#0A0A0A'; // Pitch Black
@@ -15,6 +15,7 @@ const NEON_GREEN = '#39FF14';
 
 export default function HomeScreen() {
    const tapeAnim = useRef(new Animated.Value(0)).current;
+   const { accentColor, appBgColor, setTheme } = useAppTheme();
 
    useEffect(() => {
       Animated.loop(
@@ -28,7 +29,7 @@ export default function HomeScreen() {
    }, []);
 
    return (
-      <View style={styles.mainContainer}>
+      <View style={[styles.mainContainer, { backgroundColor: appBgColor }]}>
          <SafeAreaView edges={['top']} />
 
          {/* MASSIVE BACKGROUND NAME WATERMARK */}
@@ -59,6 +60,8 @@ export default function HomeScreen() {
                   />
                </View>
             </View>
+
+
 
             {/* CLEAN SWISS-BRUTALIST PREMIUM HERO */}
             <View style={{ marginHorizontal: 24, marginTop: 30, marginBottom: 50 }}>
@@ -105,7 +108,7 @@ export default function HomeScreen() {
                         {/* Pure Lavender Name Block */}
                         <View style={{ position: 'relative', marginTop: -4 }}>
                            <Text style={{ position: 'absolute', top: 3, left: 3, fontSize: 62, fontWeight: '900', color: BLACK, letterSpacing: -3, lineHeight: 64 }}>JUNNIYA.</Text>
-                           <Text style={{ fontSize: 62, fontWeight: '900', color: '#B57EDC', letterSpacing: -3, lineHeight: 64 }}>JUNNIYA.</Text>
+                           <Text style={{ fontSize: 62, fontWeight: '900', color: accentColor, letterSpacing: -3, lineHeight: 64 }}>JUNNIYA.</Text>
                         </View>
                      </View>
 
@@ -113,7 +116,7 @@ export default function HomeScreen() {
                      <View style={{ position: 'absolute', right: 24, top: 24, zIndex: 1 }}>
                         <View style={{ position: 'absolute', top: 5, left: 5, width: 68, height: 68, borderRadius: 34, backgroundColor: BLACK }} />
                         <View style={{ width: 68, height: 68, backgroundColor: PAPER_WHITE, borderWidth: 4, borderColor: BLACK, justifyContent: 'center', alignItems: 'center', borderRadius: 34 }}>
-                           <View style={{ position: 'absolute', width: '100%', height: '100%', borderRadius: 34, borderWidth: 2, borderColor: '#B57EDC', opacity: 0.5 }} />
+                           <View style={{ position: 'absolute', width: '100%', height: '100%', borderRadius: 34, borderWidth: 2, borderColor: accentColor, opacity: 0.5 }} />
                            <MaterialCommunityIcons name="translate" size={32} color={BLACK} />
                         </View>
                      </View>
