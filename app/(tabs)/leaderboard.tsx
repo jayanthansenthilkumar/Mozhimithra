@@ -24,6 +24,11 @@ export default function LeaderboardScreen() {
     <View style={styles.mainContainer}>
       <SafeAreaView edges={['top']} />
       
+      {/* MASSIVE BACKGROUND NAME WATERMARK */}
+      <View style={styles.bgNameWrap} pointerEvents="none">
+         <Text style={styles.bgNameText} adjustsFontSizeToFit={true} minimumFontScale={0.2} numberOfLines={1}>RANKING</Text>
+      </View>
+
       {/* MASSIVE BRUTALIST HEADER */}
       <View style={styles.header}>
          <View style={styles.headerTitleBox}>
@@ -93,7 +98,21 @@ export default function LeaderboardScreen() {
 }
 
 const styles = StyleSheet.create({
-  mainContainer: { flex: 1, backgroundColor: BG },
+  mainContainer: { flex: 1, backgroundColor: BG, position: 'relative' },
+
+  bgNameWrap: { position: 'absolute', top: 0, bottom: 0, left: -40, width: 220, justifyContent: 'center', alignItems: 'center', zIndex: 0 },
+  bgNameText: { 
+    fontSize: 240, 
+    fontWeight: '900', 
+    color: '#D8D4C0', 
+    textShadowColor: '#BDB9A6', 
+    textShadowOffset: { width: 12, height: 12 }, 
+    textShadowRadius: 0, 
+    transform: [{rotate: '-90deg'}], 
+    width: 900, 
+    textAlign: 'center', 
+    letterSpacing: -2 
+  },
   
   header: { padding: 24, paddingTop: 40, paddingBottom: 40, borderBottomWidth: 4, borderColor: BLACK, backgroundColor: PAPER_WHITE, marginBottom: 32 },
   headerTitleBox: { position: 'relative', marginBottom: 8 },

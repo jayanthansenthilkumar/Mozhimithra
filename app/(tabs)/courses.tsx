@@ -18,6 +18,11 @@ export default function CoursesScreen() {
     <View style={styles.mainContainer}>
       <SafeAreaView edges={['top']} />
       
+      {/* MASSIVE BACKGROUND NAME WATERMARK */}
+      <View style={styles.bgNameWrap} pointerEvents="none">
+         <Text style={styles.bgNameText} adjustsFontSizeToFit={true} minimumFontScale={0.2} numberOfLines={1}>COURSES</Text>
+      </View>
+
       <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
         
         {/* HEADER */}
@@ -115,8 +120,22 @@ export default function CoursesScreen() {
 }
 
 const styles = StyleSheet.create({
-  mainContainer: { flex: 1, backgroundColor: BG },
+  mainContainer: { flex: 1, backgroundColor: BG, position: 'relative' },
   scrollContent: { paddingTop: 20 },
+
+  bgNameWrap: { position: 'absolute', top: 0, bottom: 0, left: -40, width: 220, justifyContent: 'center', alignItems: 'center', zIndex: 0 },
+  bgNameText: { 
+    fontSize: 240, 
+    fontWeight: '900', 
+    color: '#D8D4C0', 
+    textShadowColor: '#BDB9A6', 
+    textShadowOffset: { width: 12, height: 12 }, 
+    textShadowRadius: 0, 
+    transform: [{rotate: '-90deg'}], 
+    width: 900, 
+    textAlign: 'center', 
+    letterSpacing: -2 
+  },
   
   topHeader: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 24, marginBottom: 32 },
   headerTitle: { fontSize: 24, fontWeight: '900', color: BLACK, letterSpacing: 2 },

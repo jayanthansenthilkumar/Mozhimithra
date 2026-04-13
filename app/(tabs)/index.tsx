@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image, Platform, Animated, Easing } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { Ionicons } from '@expo/vector-icons';
+import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 
 // PREMIUM NEURO-BRUTALISM CONSTANTS
@@ -31,6 +31,11 @@ export default function HomeScreen() {
     <View style={styles.mainContainer}>
       <SafeAreaView edges={['top']} />
       
+      {/* MASSIVE BACKGROUND NAME WATERMARK */}
+      <View style={styles.bgNameWrap} pointerEvents="none">
+         <Text style={styles.bgNameText} adjustsFontSizeToFit={true} minimumFontScale={0.2} numberOfLines={1}>DASHBOARD</Text>
+      </View>
+
       <ScrollView contentContainerStyle={styles.scrollContent} showsVerticalScrollIndicator={false}>
         
         {/* RAW BRUTALIST BRANDING & HEADER */}
@@ -78,56 +83,72 @@ export default function HomeScreen() {
           </View>
         </View>
 
-        {/* THE "BOARDING PASS" TICKET COMPONENT */}
-        <View style={styles.ticketWrapper}>
-          <View style={styles.ticketShadow} />
-          
-          <View style={styles.ticketMain}>
-            
-            {/* Ticket Header */}
-            <View style={styles.ticketTopRow}>
-              <View style={styles.zebraStripes}>
-                {[...Array(12)].map((_, i) => <View key={i} style={styles.zebraLine} />)}
+        {/* PREMIUM BRUTALIST TICKET DESIGN */}
+        <View style={styles.newTicketWrap}>
+           
+           {/* Triple Layer Shadow */}
+           <View style={[styles.newTicketShadow, { backgroundColor: SKY_BLUE, top: 16, left: 16 }]} />
+           <View style={[styles.newTicketShadow, { backgroundColor: BLACK, top: 8, left: 8 }]} />
+           
+           <View style={styles.newTicketBody}>
+              
+              {/* TORN PERFORATION TOP */}
+              <View style={styles.ticketTearRow}>
+                 {[...Array(22)].map((_, i) => <View key={i} style={styles.tearDot} />)}
               </View>
-              <View style={styles.ticketRouteMain}>
-                 <Text style={styles.ticketLabel}>MISSION</Text>
-                 <Text style={styles.ticketRoute}>TM // BGN</Text>
-              </View>
-              <View style={styles.circleStamp}>
-                 <Text style={styles.stampText}>10X</Text>
-              </View>
-            </View>
 
-            {/* Perforated Fold Line */}
-            <View style={styles.perforationRow}>
-              <View style={styles.holeCutoutLeft} />
-              <View style={styles.dashLine} />
-              <View style={styles.holeCutoutRight} />
-            </View>
+              {/* HAZARD TAPE TOP RIGHT */}
+              <View style={styles.ticketHazard}>
+                 {[...Array(4)].map((_, i) => <View key={i} style={styles.ticketHazardStripe} />)}
+              </View>
 
-            {/* Ticket Body */}
-            <View style={styles.ticketBody}>
-               <View style={styles.metaGrid}>
-                 <View style={styles.metaCell}>
-                    <Text style={styles.cellLabel}>MODULE NO.</Text>
-                    <Text style={styles.cellValue}>04</Text>
+              {/* MASSIVE FAKE STAMP OVERLAY */}
+              <View style={styles.authStamp}>
+                 <Text style={styles.authStampText}>CLEARED</Text>
+              </View>
+
+              <View style={styles.ticketHeaderZone}>
+                 <View style={styles.moduleBadge}>
+                    <Text style={styles.moduleBadgeText}>[ SEC // 04 ]</Text>
                  </View>
-                 <View style={[styles.metaCell, styles.cellBorderLeft]}>
-                    <Text style={styles.cellLabel}>SECTOR</Text>
-                    <Text style={styles.cellValue}>Speaking</Text>
+                 <Text style={styles.ticketMainTitle}>FOOD{'\n'}& DINING{'\n'}RATIONS.</Text>
+                 <Text style={styles.ticketSubTitle}>MANDATORY INSTRUCTION PROTOCOL</Text>
+              </View>
+
+              {/* ANGLED CABLE */}
+              <View style={styles.ticketAngledCable} />
+
+              <View style={styles.ticketGridZone}>
+                 <View style={[styles.tBox, { backgroundColor: CYBER_YELLOW, transform: [{rotate: '-2deg'}] }]}>
+                    <Ionicons name="timer" size={24} color={BLACK} style={{marginBottom: 4}} />
+                    <Text style={styles.tBoxVal}>24.5 M</Text>
+                    <Text style={styles.tBoxLbl}>DURATION</Text>
                  </View>
-               </View>
+                 <View style={[styles.tBox, { backgroundColor: BLACK, transform: [{rotate: '1deg'}], marginLeft: 8 }]}>
+                    <Ionicons name="star" size={24} color={NEON_GREEN} style={{marginBottom: 4}} />
+                    <Text style={[styles.tBoxVal, { color: NEON_GREEN }]}>+80</Text>
+                    <Text style={[styles.tBoxLbl, { color: PAPER_WHITE }]}>XP YIELD</Text>
+                 </View>
+              </View>
 
-               <Text style={styles.challengeSubject}>"Food & Dining Interactions"</Text>
+              {/* BARCODE & START ZONE */}
+              <View style={styles.ticketFooterZone}>
+                 <View style={{flexDirection: 'column', flex: 1}}>
+                    <MaterialCommunityIcons name="barcode" size={50} color={BLACK} />
+                    <Text style={styles.barcodeSubText}>4029-XX-90A</Text>
+                 </View>
+                 
+                 {/* FLOATING ACTION BUTTON CAUSING CHAOS */}
+                 <TouchableOpacity activeOpacity={0.9} style={styles.commenceBtnWrap} onPress={() => router.push('/course/1' as any)}>
+                    <View style={styles.commenceBtnShadow} />
+                    <View style={styles.commenceBtn}>
+                       <Text style={styles.commenceBtnText}>ENGAGE</Text>
+                       <Ionicons name="flash" size={20} color={PAPER_WHITE} />
+                    </View>
+                 </TouchableOpacity>
+              </View>
 
-               <TouchableOpacity activeOpacity={0.9} style={styles.brutalBtn} onPress={() => router.push('/course/1' as any)}>
-                  <View style={styles.btnShadow} />
-                  <View style={styles.btnFront}>
-                     <Text style={styles.btnText}>INITIATE LESSON</Text>
-                  </View>
-               </TouchableOpacity>
-            </View>
-          </View>
+           </View>
         </View>
 
         {/* DIAGONAL OVERLAPPING STAT CARDS */}
@@ -417,8 +438,22 @@ export default function HomeScreen() {
 }
 
 const styles = StyleSheet.create({
-  mainContainer: { flex: 1, backgroundColor: BG },
+  mainContainer: { flex: 1, backgroundColor: BG, position: 'relative' },
   scrollContent: { paddingTop: 20 },
+
+  bgNameWrap: { position: 'absolute', top: 0, bottom: 0, left: -40, width: 220, justifyContent: 'center', alignItems: 'center', zIndex: 0 },
+  bgNameText: { 
+    fontSize: 240, 
+    fontWeight: '900', 
+    color: '#D8D4C0', 
+    textShadowColor: '#BDB9A6', 
+    textShadowOffset: { width: 12, height: 12 }, 
+    textShadowRadius: 0, 
+    transform: [{rotate: '-90deg'}], 
+    width: 900, 
+    textAlign: 'center', 
+    letterSpacing: -2 
+  },
   
   // HEADER
   topHeader: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', paddingHorizontal: 24, marginBottom: 24 },
@@ -451,33 +486,40 @@ const styles = StyleSheet.create({
   qaPill: { flexDirection: 'row', alignItems: 'center', height: '100%', paddingHorizontal: 20, borderWidth: 3, borderColor: BLACK, borderRadius: 32, gap: 8 },
   qaPillText: { fontSize: 16, fontWeight: '900', color: BLACK },
 
-  // BOARDING PASS TICKET
-  ticketWrapper: { position: 'relative', marginHorizontal: 20, marginBottom: 40 },
-  ticketShadow: { position: 'absolute', top: 8, left: 8, right: -8, bottom: -8, backgroundColor: BLACK, borderRadius: 0 },
-  ticketMain: { backgroundColor: PAPER_WHITE, borderWidth: 3, borderColor: BLACK, borderRadius: 0 },
+  // PREMIUM TICKET DESIGN
+  newTicketWrap: { position: 'relative', marginHorizontal: 20, marginBottom: 60, marginTop: 30 },
+  newTicketShadow: { position: 'absolute', right: -16, bottom: -16, left: 16, top: 16, backgroundColor: BLACK, borderWidth: 4, borderColor: BLACK },
+  newTicketBody: { backgroundColor: PAPER_WHITE, borderWidth: 4, borderColor: BLACK, overflow: 'visible', position: 'relative' },
   
-  ticketTopRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', backgroundColor: CYBER_YELLOW, position: 'relative', overflow: 'hidden' },
-  zebraStripes: { position: 'absolute', top: 0, bottom: 0, left: 0, width: 40, flexDirection: 'column', justifyContent: 'space-around', backgroundColor: HYPER_RED, borderRightWidth: 3, borderColor: BLACK },
-  zebraLine: { height: 4, width: '100%', backgroundColor: BLACK, transform: [{rotate: '15deg'}] },
-  ticketRouteMain: { padding: 24, paddingLeft: 60, flex: 1 },
-  ticketLabel: { fontSize: 11, fontWeight: '900', color: BLACK, letterSpacing: 1.5, marginBottom: 4 },
-  ticketRoute: { fontSize: 40, fontWeight: '900', color: BLACK, letterSpacing: -1 },
-  circleStamp: { width: 70, height: 70, borderRadius: 35, borderWidth: 4, borderColor: HYPER_RED, justifyContent: 'center', alignItems: 'center', marginRight: 24, transform: [{rotate: '15deg'}] },
-  stampText: { color: HYPER_RED, fontSize: 24, fontWeight: '900', letterSpacing: -1 },
+  ticketTearRow: { flexDirection: 'row', justifyContent: 'space-between', backgroundColor: BG, borderBottomWidth: 4, borderColor: BLACK, paddingBottom: 6, paddingTop: 6, marginHorizontal: -4, marginTop: -4 },
+  tearDot: { width: 10, height: 10, borderRadius: 5, backgroundColor: BLACK, marginLeft: 4 },
   
-  perforationRow: { height: 32, flexDirection: 'row', alignItems: 'center', backgroundColor: PAPER_WHITE, position: 'relative' },
-  holeCutoutLeft: { position: 'absolute', left: -16, width: 32, height: 32, borderRadius: 16, backgroundColor: BG, borderWidth: 3, borderColor: BLACK },
-  holeCutoutRight: { position: 'absolute', right: -16, width: 32, height: 32, borderRadius: 16, backgroundColor: BG, borderWidth: 3, borderColor: BLACK },
-  dashLine: { flex: 1, marginHorizontal: 24, height: 0, borderBottomWidth: 3, borderBottomColor: BLACK, borderStyle: 'dashed' },
+  ticketHazard: { position: 'absolute', top: 10, right: -40, width: 120, height: 30, backgroundColor: CYBER_YELLOW, transform: [{rotate: '45deg'}], flexDirection: 'row', zIndex: 10, borderWidth: 3, borderColor: BLACK },
+  ticketHazardStripe: { width: 10, height: 40, backgroundColor: BLACK, transform: [{rotate: '20deg'}], marginLeft: 15, marginTop: -5 },
+  
+  authStamp: { position: 'absolute', top: 100, right: 10, width: 140, height: 60, borderWidth: 6, borderColor: HYPER_RED, justifyContent: 'center', alignItems: 'center', transform: [{rotate: '-15deg'}], zIndex: 5, borderRadius: 8, opacity: 0.8 },
+  authStampText: { color: HYPER_RED, fontSize: 26, fontWeight: '900', letterSpacing: 6 },
 
-  ticketBody: { padding: 24, backgroundColor: PAPER_WHITE },
-  metaGrid: { flexDirection: 'row', marginBottom: 24, borderTopWidth: 3, borderBottomWidth: 3, borderColor: BLACK },
-  metaCell: { flex: 1, paddingVertical: 16 },
-  cellBorderLeft: { borderLeftWidth: 3, borderColor: BLACK, paddingLeft: 16 },
-  cellLabel: { fontSize: 12, fontWeight: '900', color: '#666', marginBottom: 4 },
-  cellValue: { fontSize: 20, fontWeight: '900', color: BLACK },
+  ticketHeaderZone: { padding: 24, paddingBottom: 20, backgroundColor: '#F8F6F0' },
+  moduleBadge: { alignSelf: 'flex-start', backgroundColor: BLACK, paddingHorizontal: 12, paddingVertical: 4, marginBottom: 12 },
+  moduleBadgeText: { fontSize: 14, fontWeight: '900', color: PAPER_WHITE, letterSpacing: 2, fontFamily: 'monospace' },
+  ticketMainTitle: { fontSize: 44, fontWeight: '900', color: BLACK, letterSpacing: -2, lineHeight: 44, textShadowColor: '#CCC', textShadowOffset: {width: 2, height: 2}, textShadowRadius: 0 },
+  ticketSubTitle: { fontSize: 10, fontWeight: '900', color: HYPER_RED, letterSpacing: 2, marginTop: 12, fontFamily: 'monospace' },
   
-  challengeSubject: { fontSize: 24, fontWeight: '900', color: BLACK, marginBottom: 32, lineHeight: 32 },
+  ticketAngledCable: { height: 16, backgroundColor: BLACK, transform: [{rotate: '1.5deg'}], marginHorizontal: -10, marginVertical: 8, borderTopWidth: 2, borderBottomWidth: 2, borderColor: PAPER_WHITE },
+  
+  ticketGridZone: { flexDirection: 'row', padding: 24, gap: 12, paddingTop: 16 },
+  tBox: { flex: 1, padding: 16, borderWidth: 4, borderColor: BLACK, alignItems: 'center', justifyContent: 'center', shadowColor: BLACK, shadowOffset: {width: 4, height: 4}, shadowOpacity: 1, shadowRadius: 0 },
+  tBoxVal: { fontSize: 24, fontWeight: '900', color: BLACK, marginBottom: 0 },
+  tBoxLbl: { fontSize: 10, fontWeight: '900', color: '#555', letterSpacing: 1, marginTop: 4 },
+
+  ticketFooterZone: { flexDirection: 'row', alignItems: 'center', backgroundColor: '#E4DFCA', borderTopWidth: 4, borderColor: BLACK, padding: 16, paddingRight: 40, height: 100 },
+  barcodeSubText: { fontSize: 10, fontWeight: '900', color: BLACK, fontFamily: 'monospace', letterSpacing: 2, marginLeft: 6 },
+  
+  commenceBtnWrap: { position: 'absolute', right: -20, bottom: -20, width: 140, height: 70, zIndex: 20, transform: [{rotate: '-4deg'}] },
+  commenceBtnShadow: { position: 'absolute', top: 6, left: 6, right: -6, bottom: -6, backgroundColor: BLACK },
+  commenceBtn: { flex: 1, flexDirection: 'row', alignItems: 'center', justifyContent: 'center', backgroundColor: HYPER_RED, borderWidth: 4, borderColor: BLACK },
+  commenceBtnText: { color: PAPER_WHITE, fontSize: 18, fontWeight: '900', letterSpacing: 2, marginRight: 8 },
 
   // GRAPHIC POLAROID
   polaroidContainer: { marginHorizontal: 24, height: 300, position: 'relative', marginBottom: 40 },

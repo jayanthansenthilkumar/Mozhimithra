@@ -24,6 +24,11 @@ export default function MithraScreen() {
   return (
     <KeyboardAvoidingView style={styles.mainContainer} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
       <SafeAreaView edges={['top']} />
+      
+      {/* MASSIVE BACKGROUND NAME WATERMARK */}
+      <View style={styles.bgNameWrap} pointerEvents="none">
+         <Text style={styles.bgNameText} adjustsFontSizeToFit={true} minimumFontScale={0.2} numberOfLines={1}>MITHRA</Text>
+      </View>
 
       {/* MASSIVE HEADER BLOCK */}
       <View style={styles.header}>
@@ -136,7 +141,21 @@ export default function MithraScreen() {
 }
 
 const styles = StyleSheet.create({
-  mainContainer: { flex: 1, backgroundColor: BG },
+  mainContainer: { flex: 1, backgroundColor: BG, position: 'relative' },
+
+  bgNameWrap: { position: 'absolute', top: 0, bottom: 0, left: -40, width: 220, justifyContent: 'center', alignItems: 'center', zIndex: 0 },
+  bgNameText: { 
+    fontSize: 240, 
+    fontWeight: '900', 
+    color: '#D8D4C0', 
+    textShadowColor: '#BDB9A6', 
+    textShadowOffset: { width: 12, height: 12 }, 
+    textShadowRadius: 0, 
+    transform: [{rotate: '-90deg'}], 
+    width: 900, 
+    textAlign: 'center', 
+    letterSpacing: -2 
+  },
   
   header: { 
     position: 'relative', overflow: 'hidden', padding: 24, paddingTop: 32, paddingBottom: 40, 
