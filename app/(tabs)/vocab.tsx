@@ -1,21 +1,37 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Dimensions } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Dimensions, ActivityIndicator } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { useAppTheme } from '@/hooks/ThemeContext';
 import { BlurView } from 'expo-blur';
 import { LinearGradient } from 'expo-linear-gradient';
-
-const CATEGORIES = [
-  { id: '1', name: 'Greetings', count: 15, mastered: 15, color: '#4ECDC4' },
-  { id: '2', name: 'Food & Drinks', count: 120, mastered: 45, color: '#FF7F50' },
-  { id: '3', name: 'Travel', count: 85, mastered: 10, color: '#9b7ede' },
-  { id: '4', name: 'Animals', count: 40, mastered: 38, color: '#FFD700' },
-];
+import { fetchVocabulary } from '@/services/api.service';
 
 export default function VocabScreen() {
   const [activeTab, setActiveTab] = useState('Learning');
-  const { appBgColor } = useAppTheme();
+  const { appBgColor, accentColor } = useAppTheme();
+  const [vocabData, setVocabData] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadData = async () => {
+      const data = await fetchVocabulary();
+      setVocabData(data);
+      setLoading(false);
+    };
+    loadData();
+  }, []);
+
+  if (loading) {
+    return (
+      <View style={[styles.mainContainer, { backgroundColor: appBgColor, justifyContent: 'center', alignItems: 'center' }]}>
+        <ActivityIndicator size="large" color={accentColor} />
+      </View>
+    );
+  }
+
+  const CATEGORIES = vocabData?.categories || [];
+  const stats = vocabData?.stats || { learned: 0, mastered: 0 };
 
   return (
     <View style={[styles.mainContainer, { backgroundColor: appBgColor }]}>
@@ -43,12 +59,12 @@ export default function VocabScreen() {
             style={styles.statsCard}
           >
             <View style={styles.statItem}>
-              <Text style={[styles.statValue, { color: '#8A2BE2' }]}>260</Text>
+              <Text style={[styles.statValue, { color: '#8A2BE2' }]}>{stats.learned}</Text>
               <Text style={styles.statLabel}>Words Learned</Text>
             </View>
             <View style={styles.divider} />
             <View style={styles.statItem}>
-              <Text style={[styles.statValue, { color: '#4ECDC4' }]}>108</Text>
+              <Text style={[styles.statValue, { color: '#4ECDC4' }]}>{stats.mastered}</Text>
               <Text style={styles.statLabel}>Mastered</Text>
             </View>
           </LinearGradient>

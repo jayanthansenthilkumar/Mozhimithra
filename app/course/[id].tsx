@@ -1,30 +1,49 @@
-import React from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Platform } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Platform, ActivityIndicator } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useLocalSearchParams, router } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
+import { fetchCourseById } from '@/services/api.service';
 
 const BG = '#FFF1E5';
 const BLACK = '#0A0A0A';
 const ACCENT_YELLOW = '#FFE066';
 const ACCENT_BLUE = '#A2D2FF';
 
-const COURSE_DATA = {
-  title: 'Tamil for Beginners',
-  description: 'Master the basics of Tamil. Learn to introduce yourself, order food, and navigate daily conversations in South India with confidence.',
-  level: 'A1 Beginner',
-  students: '42.1k',
-  chapters: [
-    { id: 'c1', title: 'Vanakkam & Greetings', lessons: 4, completed: 4 },
-    { id: 'c2', title: 'Numbers & Time', lessons: 5, completed: 5 },
-    { id: 'c3', title: 'Food & Dining (Saapad)', lessons: 6, completed: 2 },
-    { id: 'c4', title: 'Travel & Directions', lessons: 5, completed: 0 },
-    { id: 'c5', title: 'Family & Friends', lessons: 4, completed: 0 },
-  ]
-};
-
 export default function CourseScreen() {
   const { id } = useLocalSearchParams();
+  const [course, setCourse] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadCourse = async () => {
+      if (typeof id === 'string') {
+        const data = await fetchCourseById(id);
+        setCourse(data);
+      }
+      setLoading(false);
+    };
+    loadCourse();
+  }, [id]);
+
+  if (loading) {
+    return (
+      <View style={[styles.mainContainer, { justifyContent: 'center', alignItems: 'center' }]}>
+        <ActivityIndicator size="large" color={BLACK} />
+      </View>
+    );
+  }
+
+  if (!course) {
+    return (
+      <View style={[styles.mainContainer, { justifyContent: 'center', alignItems: 'center' }]}>
+        <Text style={styles.headerTitle}>Course Not Found</Text>
+        <TouchableOpacity style={[styles.backBtn, { marginTop: 20 }]} onPress={() => router.back()}>
+          <Text style={styles.metaText}>GO BACK</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
 
   return (
     <View style={styles.mainContainer}>
@@ -41,29 +60,33 @@ export default function CourseScreen() {
       <ScrollView contentContainerStyle={styles.container} showsVerticalScrollIndicator={false}>
         
         <View style={styles.courseHeader}>
-          <Text style={styles.title}>{COURSE_DATA.title}</Text>
-          <Text style={styles.description}>{COURSE_DATA.description}</Text>
+          <Text style={styles.title}>{course.title}</Text>
+          <Text style={styles.description}>{course.description}</Text>
           
           <View style={styles.metaContainer}>
             <View style={styles.metaBadge}>
-              <Text style={styles.metaText}>{COURSE_DATA.level}</Text>
+              <Text style={styles.metaText}>{course.level}</Text>
             </View>
             <View style={[styles.metaBadge, { backgroundColor: ACCENT_YELLOW }]}>
-              <Text style={styles.metaText}>{COURSE_DATA.students} students</Text>
+              <Text style={styles.metaText}>{course.students} students</Text>
             </View>
           </View>
         </View>
 
         <View style={styles.chaptersSection}>
-          {COURSE_DATA.chapters.map((chapter, index) => {
-            const isCompleted = chapter.completed === chapter.lessons;
-            const inProgress = chapter.completed > 0 && chapter.completed < chapter.lessons;
+          {course.chapters.map((chapter: any, index: number) => {
+            const totalLessons = Array.isArray(chapter.lessons) ? chapter.lessons.length : (chapter.lessons || 0);
+            const isCompleted = chapter.completed === totalLessons && totalLessons > 0;
+            const inProgress = chapter.completed > 0 && chapter.completed < totalLessons;
             
             return (
               <TouchableOpacity 
                 key={chapter.id} 
                 style={styles.chapterCardWrapper}
-                onPress={() => router.push(`/lesson/1` as any)}
+                onPress={() => {
+                  const firstLessonId = chapter.lessons?.[0]?.id || 'l1';
+                  router.push(`/lesson/${firstLessonId}` as any);
+                }}
                 activeOpacity={0.9}
               >
                 <View style={[
@@ -78,7 +101,7 @@ export default function CourseScreen() {
                   <View style={styles.chapterInfo}>
                     <Text style={styles.chapterTitle}>{chapter.title}</Text>
                     <Text style={styles.chapterMeta}>
-                      {chapter.completed} / {chapter.lessons} Lessons
+                      {chapter.completed} / {totalLessons} Lessons
                     </Text>
                   </View>
                   

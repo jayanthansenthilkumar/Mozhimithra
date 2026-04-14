@@ -1,8 +1,9 @@
-import React from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image, Platform } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image, Platform, ActivityIndicator } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { useAppTheme } from '@/hooks/ThemeContext';
+import { fetchLeaderboard, fetchUser } from '@/services/api.service';
 
 const BG = '#F4F1E1';
 const BLACK = '#0A0A0A';
@@ -21,7 +22,34 @@ const LEADERBOARD_DATA = [
 ];
 
 export default function LeaderboardScreen() {
-  const { appBgColor } = useAppTheme();
+  const { appBgColor, accentColor } = useAppTheme();
+  const [leaderboard, setLeaderboard] = useState<any[]>([]);
+  const [user, setUser] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadData = async () => {
+      const [lbData, userData] = await Promise.all([
+        fetchLeaderboard(),
+        fetchUser()
+      ]);
+      setLeaderboard(lbData);
+      setUser(userData);
+      setLoading(false);
+    };
+    loadData();
+  }, []);
+
+  if (loading) {
+    return (
+      <View style={[styles.mainContainer, { backgroundColor: appBgColor, justifyContent: 'center', alignItems: 'center' }]}>
+        <ActivityIndicator size="large" color={accentColor} />
+      </View>
+    );
+  }
+
+  const myRank = leaderboard.findIndex(u => u.isMe) + 1;
+
   return (
     <View style={[styles.mainContainer, { backgroundColor: appBgColor }]}>
       
@@ -37,7 +65,7 @@ export default function LeaderboardScreen() {
             <Text style={styles.titleShadow}>LEADERBOARD</Text>
             <Text style={styles.headerTitle}>LEADERBOARD</Text>
          </View>
-         <Text style={styles.headerSub}>TOP 10% // GLOBAL</Text>
+         <Text style={styles.headerSub}>{user?.rank.toUpperCase()} // GLOBAL</Text>
       </View>
 
       <ScrollView showsVerticalScrollIndicator={false} contentContainerStyle={styles.scrollContent}>
@@ -47,10 +75,10 @@ export default function LeaderboardScreen() {
             <View style={styles.heroShadow} />
             <View style={[styles.userHero, { backgroundColor: HYPER_RED }]}>
                <Text style={styles.userHeroLabel}>YOUR CURRENT RANK</Text>
-               <View style={styles.heroValRow}>
-                  <Text style={styles.heroRankNum}>#24</Text>
+            <View style={styles.heroValRow}>
+                  <Text style={styles.heroRankNum}>#{myRank || '??'}</Text>
                   <View style={styles.heroXpBox}>
-                     <Text style={styles.heroXpText}>2,450 XP</Text>
+                     <Text style={styles.heroXpText}>{user?.xp.toLocaleString()} XP</Text>
                   </View>
                </View>
             </View>
@@ -58,20 +86,20 @@ export default function LeaderboardScreen() {
 
          {/* PURE BRUTALIST LIST */}
          <View style={styles.listContainer}>
-            {LEADERBOARD_DATA.map((user, i) => (
-               <View key={user.id} style={styles.cardWrap}>
+            {leaderboard.map((u, i) => (
+               <View key={u.id} style={styles.cardWrap}>
                   <View style={styles.cardShadow} />
-                  <View style={[styles.card, { backgroundColor: user.color }]}>
+                  <View style={[styles.card, { backgroundColor: u.isMe ? NEON_GREEN : i === 0 ? CYBER_YELLOW : i === 1 ? SKY_BLUE : PAPER_WHITE }]}>
                      
                      <View style={styles.rankBadge}>
-                        <Text style={styles.rankBadgeText}>#{user.rank}</Text>
+                        <Text style={styles.rankBadgeText}>#{i + 1}</Text>
                      </View>
 
-                     <Image source={{ uri: user.img }} style={styles.avatarImg} />
+                     <Image source={{ uri: u.avatar }} style={styles.avatarImg} />
                      
                      <View style={styles.cardBody}>
-                        <Text style={styles.nameText} numberOfLines={1}>{user.name}</Text>
-                        <Text style={styles.xpText}>{user.xp} XP / 30 DAYS</Text>
+                        <Text style={styles.nameText} numberOfLines={1}>{u.name.toUpperCase()}</Text>
+                        <Text style={styles.xpText}>{u.xp.toLocaleString()} XP / 30 DAYS</Text>
                      </View>
                      
                      <TouchableOpacity style={styles.challengeBtn} activeOpacity={0.8}>

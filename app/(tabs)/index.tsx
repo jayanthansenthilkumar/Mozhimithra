@@ -1,9 +1,10 @@
-import React, { useEffect, useRef } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image, Platform, Animated, Easing } from 'react-native';
+import React, { useEffect, useRef, useState } from 'react';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image, Platform, Animated, Easing, ActivityIndicator } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import { useAppTheme } from '@/hooks/ThemeContext';
+import { fetchUser } from '@/services/api.service';
 // PREMIUM NEURO-BRUTALISM CONSTANTS
 const BG = '#F4F1E1'; // Architectural Off-White
 const BLACK = '#0A0A0A'; // Pitch Black
@@ -16,8 +17,17 @@ const NEON_GREEN = '#39FF14';
 export default function HomeScreen() {
    const tapeAnim = useRef(new Animated.Value(0)).current;
    const { accentColor, appBgColor, setTheme } = useAppTheme();
+   const [user, setUser] = useState<any>(null);
+   const [loading, setLoading] = useState(true);
 
    useEffect(() => {
+      const loadUser = async () => {
+         const data = await fetchUser();
+         if (data) setUser(data);
+         setLoading(false);
+      };
+      loadUser();
+
       Animated.loop(
          Animated.timing(tapeAnim, {
             toValue: -1500,
@@ -27,6 +37,14 @@ export default function HomeScreen() {
          })
       ).start();
    }, []);
+
+   if (loading) {
+      return (
+         <View style={[styles.mainContainer, { backgroundColor: appBgColor, justifyContent: 'center', alignItems: 'center' }]}>
+            <ActivityIndicator size="large" color={accentColor} />
+         </View>
+      );
+   }
 
    return (
       <View style={[styles.mainContainer, { backgroundColor: appBgColor }]}>
@@ -107,8 +125,8 @@ export default function HomeScreen() {
                         
                         {/* Pure Lavender Name Block */}
                         <View style={{ position: 'relative', marginTop: -4 }}>
-                           <Text style={{ position: 'absolute', top: 3, left: 3, fontSize: 62, fontWeight: '900', color: BLACK, letterSpacing: -3, lineHeight: 64 }}>JUNNIYA.</Text>
-                           <Text style={{ fontSize: 62, fontWeight: '900', color: accentColor, letterSpacing: -3, lineHeight: 64 }}>JUNNIYA.</Text>
+                           <Text style={{ position: 'absolute', top: 3, left: 3, fontSize: 62, fontWeight: '900', color: BLACK, letterSpacing: -3, lineHeight: 64 }}>{user?.name?.toUpperCase()}.</Text>
+                           <Text style={{ fontSize: 62, fontWeight: '900', color: accentColor, letterSpacing: -3, lineHeight: 64 }}>{user?.name?.toUpperCase()}.</Text>
                         </View>
                      </View>
 
@@ -126,11 +144,11 @@ export default function HomeScreen() {
                   <View style={{ flexDirection: 'row', backgroundColor: PAPER_WHITE, borderBottomWidth: 4, borderColor: BLACK }}>
                      <View style={{ flex: 1.5, padding: 20, borderRightWidth: 4, borderColor: BLACK, backgroundColor: ICE_GRAY }}>
                         <Text style={{ fontSize: 10, fontWeight: '900', color: '#666', letterSpacing: 1.5, marginBottom: 6 }}>STANDINGS</Text>
-                        <Text style={{ fontSize: 26, fontWeight: '900', color: BLACK, letterSpacing: -1.5 }}>TOP 4.2%</Text>
+                        <Text style={{ fontSize: 26, fontWeight: '900', color: BLACK, letterSpacing: -1.5 }}>{user?.rank}</Text>
                      </View>
                      <View style={{ flex: 1, padding: 20, borderRightWidth: 4, borderColor: BLACK, justifyContent: 'center' }}>
                         <Text style={{ fontSize: 10, fontWeight: '900', color: '#666', letterSpacing: 1.5, marginBottom: 6 }}>LEXICON</Text>
-                        <Text style={{ fontSize: 26, fontWeight: '900', color: BLACK, letterSpacing: -1.5 }}>14.2K</Text>
+                        <Text style={{ fontSize: 26, fontWeight: '900', color: BLACK, letterSpacing: -1.5 }}>{user?.lexicon}</Text>
                      </View>
                      
                      {/* Mini Visualizer / Waveform */}
@@ -147,7 +165,7 @@ export default function HomeScreen() {
                         <MaterialCommunityIcons name="barcode-scan" size={54} color={BLACK} />
                         <View style={{ marginLeft: 16 }}>
                            <Text style={{ fontSize: 10, fontWeight: '900', color: '#888', letterSpacing: 2 }}>PHONETIC SIGNATURE</Text>
-                           <Text style={{ fontSize: 16, fontWeight: '900', color: BLACK, letterSpacing: 4, fontFamily: 'monospace' }}>TN-TML/99</Text>
+                           <Text style={{ fontSize: 16, fontWeight: '900', color: BLACK, letterSpacing: 4, fontFamily: 'monospace' }}>{user?.phoneticSignature}</Text>
                         </View>
                      </View>
                      
@@ -277,7 +295,7 @@ export default function HomeScreen() {
                   <View style={styles.chaosPin}>
                      <Ionicons name="flame" size={24} color={BLACK} />
                   </View>
-                  <Text style={styles.chaosTitle}>21</Text>
+                  <Text style={styles.chaosTitle}>{user?.streak}</Text>
                   <Text style={styles.chaosSub}>DAY STREAK</Text>
                </View>
 
@@ -427,9 +445,9 @@ export default function HomeScreen() {
                <View style={styles.batteryBody}>
                   <View style={styles.batteryTerminal} />
                   <View style={styles.batteryOuter}>
-                     <View style={[styles.batteryInner, { width: '74%', backgroundColor: NEON_GREEN }]} />
+                     <View style={[styles.batteryInner, { width: `${user?.fluency}%`, backgroundColor: NEON_GREEN }]} />
                   </View>
-                  <Text style={styles.batteryLevelTxt}>74%</Text>
+                  <Text style={styles.batteryLevelTxt}>{user?.fluency}%</Text>
                </View>
             </View>
 

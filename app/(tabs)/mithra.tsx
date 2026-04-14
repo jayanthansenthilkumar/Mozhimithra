@@ -21,7 +21,35 @@ const MOCK_CHAT = [
 
 export default function MithraScreen() {
   const [inputText, setInputText] = useState('');
+  const [chatHistory, setChatHistory] = useState(MOCK_CHAT);
   const { appBgColor } = useAppTheme();
+
+  const handleSend = () => {
+    if (!inputText.trim()) return;
+
+    const userMsg = {
+      id: Date.now().toString(),
+      role: 'user',
+      text: inputText.toUpperCase(),
+      timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' }),
+      ref: `USR_${Math.floor(Math.random() * 100)}`
+    };
+
+    setChatHistory(prev => [...prev, userMsg]);
+    setInputText('');
+
+    // Simulate AI Response
+    setTimeout(() => {
+      const aiMsg = {
+        id: (Date.now() + 1).toString(),
+        role: 'ai',
+        text: "PROCESSING DIRECTIVE... DATA PACKET RECEIVED. HOW ELSE CAN I ASSIST YOUR LINGUISTIC EVOLUTION?",
+        timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' }),
+        ref: `SYS_${Math.floor(Math.random() * 100)}`
+      };
+      setChatHistory(prev => [...prev, aiMsg]);
+    }, 1000);
+  };
 
   return (
     <KeyboardAvoidingView style={[styles.mainContainer, { backgroundColor: appBgColor }]} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
@@ -67,7 +95,7 @@ export default function MithraScreen() {
            <Text style={styles.barcodeText}>ECRYPT REF: 0x9F4B</Text>
         </View>
 
-        {MOCK_CHAT.map((msg) => (
+        {chatHistory.map((msg) => (
           <View key={msg.id} style={[styles.chatBubbleWrapper, msg.role === 'user' ? styles.bubbleRight : styles.bubbleLeft]}>
             
             {msg.role === 'ai' && (
@@ -126,7 +154,7 @@ export default function MithraScreen() {
             />
           </View>
 
-          <TouchableOpacity style={styles.sendBtn} activeOpacity={0.9}>
+          <TouchableOpacity style={styles.sendBtn} activeOpacity={0.9} onPress={handleSend}>
             <View style={styles.sendShadow} />
             <View style={styles.sendFront}>
               <Ionicons name="flash" size={24} color={BLACK} />

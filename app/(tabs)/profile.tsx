@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image } from 'react-native';
+import React, { useState, useEffect } from 'react';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image, ActivityIndicator } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons, MaterialCommunityIcons } from '@expo/vector-icons';
 import { useAppTheme, APP_THEMES } from '@/hooks/ThemeContext';
+import { fetchUser } from '@/services/api.service';
 
 const BG = '#F4F1E1';
 const BLACK = '#0A0A0A';
@@ -15,13 +16,33 @@ const NEON_GREEN = '#39FF14';
 export default function ProfileScreen() {
   const { appBgColor, accentColor, setTheme } = useAppTheme();
   const [isThemeOpen, setIsThemeOpen] = useState(false);
+  const [user, setUser] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadUser = async () => {
+      const data = await fetchUser();
+      setUser(data);
+      setLoading(false);
+    };
+    loadUser();
+  }, []);
+
+  if (loading) {
+    return (
+      <View style={[styles.mainContainer, { backgroundColor: appBgColor, justifyContent: 'center', alignItems: 'center' }]}>
+        <ActivityIndicator size="large" color={accentColor} />
+      </View>
+    );
+  }
+
   return (
     <View style={[styles.mainContainer, { backgroundColor: appBgColor }]}>
       
       
       {/* MASSIVE BACKGROUND NAME WATERMARK */}
       <View style={styles.bgNameWrap} pointerEvents="none">
-         <Text style={styles.bgNameText} adjustsFontSizeToFit={true} minimumFontScale={0.2} numberOfLines={1}>JUNNIYA L.</Text>
+         <Text style={styles.bgNameText} adjustsFontSizeToFit={true} minimumFontScale={0.2} numberOfLines={1}>{user?.name?.toUpperCase()} L.</Text>
       </View>
 
       {/* FLOATING THEME DROPDOWN */}
@@ -118,14 +139,14 @@ export default function ProfileScreen() {
 
               <View style={styles.idDetails}>
                  <Text style={styles.idLabel}>LEGAL ALIAS</Text>
-                 <Text style={styles.idName}>JUNNIYA L.</Text>
+                 <Text style={styles.idName}>{user?.name?.toUpperCase()} L.</Text>
                  
                  <View style={styles.badgeRow}>
                     <View style={styles.classBadge}>
                        <Text style={styles.classBadgeText}>LINGUIST</Text>
                     </View>
                     <View style={styles.levelBadge}>
-                       <Text style={styles.levelBadgeText}>LVL 42</Text>
+                       <Text style={styles.levelBadgeText}>LVL {Math.floor(user?.xp / 100)}</Text>
                     </View>
                  </View>
               </View>
@@ -136,16 +157,16 @@ export default function ProfileScreen() {
         {/* OFFSET STATS CLUSTER */}
         <View style={styles.statsCluster}>
            <View style={[styles.statBox, styles.statBox1]}>
-              <Text style={styles.statVal}>21</Text>
+              <Text style={styles.statVal}>{user?.streak}</Text>
               <Text style={styles.statLabel}>STREAK</Text>
            </View>
            <View style={[styles.statBox, styles.statBox2]}>
-              <Text style={styles.statVal}>TOP 5%</Text>
+              <Text style={styles.statVal}>{user?.rank}</Text>
               <Text style={styles.statLabel}>GLOBAL</Text>
            </View>
            <View style={[styles.statBox, styles.statBox3]}>
-              <Text style={styles.statVal}>9.5</Text>
-              <Text style={styles.statLabel}>K/D RATIO</Text>
+              <Text style={styles.statVal}>{(user?.xp / 1000).toFixed(1)}K</Text>
+              <Text style={styles.statLabel}>XP TOTAL</Text>
            </View>
         </View>
 

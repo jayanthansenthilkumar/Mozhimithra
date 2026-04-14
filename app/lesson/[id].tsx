@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Platform } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, StyleSheet, TouchableOpacity, Platform, ActivityIndicator } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useLocalSearchParams, router } from 'expo-router';
 import { Ionicons } from '@expo/vector-icons';
+import { fetchLessonById } from '@/services/api.service';
 
 const BG = '#FFF1E5';
 const BLACK = '#0A0A0A';
@@ -10,25 +11,51 @@ const ACCENT_YELLOW = '#FFE066';
 const ACCENT_PINK = '#FFAFCC';
 const ACCENT_BLUE = '#A2D2FF';
 
-const OPTIONS = [
-  { id: '1', text: 'Vanakkam', correct: true },
-  { id: '2', text: 'Poyi Varam', correct: false },
-  { id: '3', text: 'Nandri', correct: false },
-  { id: '4', text: 'Saaptacha?', correct: false },
-];
-
 export default function LessonScreen() {
   const { id } = useLocalSearchParams();
   
+  const [lesson, setLesson] = useState<any>(null);
+  const [loading, setLoading] = useState(true);
   const [selectedOpt, setSelectedOpt] = useState<string | null>(null);
   const [isChecked, setIsChecked] = useState(false);
+
+  useEffect(() => {
+    const loadLesson = async () => {
+      if (typeof id === 'string') {
+        const data = await fetchLessonById(id);
+        setLesson(data);
+      }
+      setLoading(false);
+    };
+    loadLesson();
+  }, [id]);
+
+  if (loading) {
+    return (
+      <View style={[styles.mainContainer, { justifyContent: 'center', alignItems: 'center' }]}>
+        <ActivityIndicator size="large" color={BLACK} />
+      </View>
+    );
+  }
+
+  if (!lesson) {
+    return (
+      <View style={[styles.mainContainer, { justifyContent: 'center', alignItems: 'center' }]}>
+        <Text style={styles.questionType}>Lesson Not Found</Text>
+        <TouchableOpacity style={[styles.actionBtn, { marginTop: 20, paddingHorizontal: 40 }]} onPress={() => router.back()}>
+          <Text style={styles.actionBtnText}>GO BACK</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
 
   const handleCheck = () => {
     if (!isChecked) setIsChecked(true);
     else router.back();
   };
 
-  const isCorrect = selectedOpt === '1';
+  const selectedOption = lesson.options.find((o: any) => o.id === selectedOpt);
+  const isCorrect = selectedOption?.correct;
 
   return (
     <View style={styles.mainContainer}>
@@ -50,7 +77,7 @@ export default function LessonScreen() {
       </View>
 
       <View style={styles.content}>
-        <Text style={styles.questionType}>NEW PHRASE // Translate</Text>
+        <Text style={styles.questionType}>NEW PHRASE // {lesson.title.toUpperCase()}</Text>
         
         <View style={styles.speechBubble}>
           {/* Overhanging Borders */}
@@ -59,14 +86,14 @@ export default function LessonScreen() {
           <View style={[styles.crosshairH, { top: 10 }]} />
           <View style={[styles.crosshairH, { bottom: 10 }]} />
           
-          <Text style={styles.targetPhrase}>"Hello"</Text>
+          <Text style={styles.targetPhrase}>"{lesson.target}"</Text>
           <TouchableOpacity style={styles.audioBtn}>
              <Ionicons name="volume-medium" size={24} color={BLACK} />
           </TouchableOpacity>
         </View>
 
         <View style={styles.optionsContainer}>
-          {OPTIONS.map((opt) => {
+          {lesson.options.map((opt: any) => {
             const isSelected = selectedOpt === opt.id;
             const styleChecked = isChecked && isSelected;
             const itemBg = styleChecked ? (isCorrect ? ACCENT_BLUE : ACCENT_PINK) : (isSelected ? ACCENT_YELLOW : '#FFF');
@@ -97,7 +124,7 @@ export default function LessonScreen() {
             </View>
             <View>
               <Text style={styles.feedbackTitle}>{isCorrect ? 'Excellent!' : 'Incorrect.'}</Text>
-              {!isCorrect && <Text style={styles.feedbackSub}>The correct answer is Vanakkam.</Text>}
+              {!isCorrect && <Text style={styles.feedbackSub}>The correct answer is {lesson.options.find((o: any) => o.correct).text}.</Text>}
             </View>
           </View>
         )}

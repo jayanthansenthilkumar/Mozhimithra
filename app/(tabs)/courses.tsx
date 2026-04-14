@@ -1,9 +1,10 @@
-import React from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image, Platform } from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Image, Platform, ActivityIndicator } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import { router } from 'expo-router';
 import { useAppTheme } from '@/hooks/ThemeContext';
+import { fetchCourses } from '@/services/api.service';
 
 // PREMIUM NEURO-BRUTALISM CONSTANTS
 const BG = '#F4F1E1';
@@ -15,7 +16,27 @@ const SKY_BLUE = '#30B0FF';
 const NEON_GREEN = '#39FF14';
 
 export default function CoursesScreen() {
-  const { appBgColor } = useAppTheme();
+  const { appBgColor, accentColor } = useAppTheme();
+  const [courses, setCourses] = useState<any[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadCourses = async () => {
+      const data = await fetchCourses();
+      setCourses(data);
+      setLoading(false);
+    };
+    loadCourses();
+  }, []);
+
+  if (loading) {
+    return (
+      <View style={[styles.mainContainer, { backgroundColor: appBgColor, justifyContent: 'center', alignItems: 'center' }]}>
+        <ActivityIndicator size="large" color={accentColor} />
+      </View>
+    );
+  }
+
   return (
     <View style={[styles.mainContainer, { backgroundColor: appBgColor }]}>
       
@@ -62,34 +83,36 @@ export default function CoursesScreen() {
         </View>
 
         {/* HORIZONTAL DOSSIERS */}
-        {/* HORIZONTAL DOSSIERS */}
         <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.dossierScroll}>
-           {/* FILE 1 */}
-           <TouchableOpacity activeOpacity={0.9} style={styles.dossierWrap} onPress={() => router.push('/course/1' as any)}>
-              <View style={[styles.dossierShadow, { backgroundColor: SKY_BLUE }]} />
-              <View style={styles.dossierFolder}>
-                 <View style={styles.dossierTab}><Text style={styles.tabText}>MISSION 01</Text></View>
-                 <View style={styles.dossierBody}>
-                    <View style={styles.fileTape} />
-                    <Ionicons name="folder-open" size={48} color={BLACK} />
-                    <Text style={styles.dossierCode}>TML-01 // ACTIVE</Text>
-                    <Text style={styles.dossierName}>CORE{'\n'}PHONETICS</Text>
-                 </View>
-              </View>
-           </TouchableOpacity>
-
-           {/* FILE 2 */}
-           <TouchableOpacity activeOpacity={0.9} style={styles.dossierWrap}>
-              <View style={[styles.dossierShadow, { backgroundColor: HYPER_RED }]} />
-              <View style={styles.dossierFolder}>
-                 <View style={styles.dossierTab}><Text style={styles.tabText}>MISSION 02</Text></View>
-                 <View style={[styles.dossierBody, { backgroundColor: BLACK }]}>
-                    <Ionicons name="lock-closed" size={48} color={HYPER_RED} />
-                    <Text style={[styles.dossierCode, {color: '#888'}]}>TML-02 // LOCKED</Text>
-                    <Text style={[styles.dossierName, {color: PAPER_WHITE}]}>GRAMMAR{'\n'}OVERRIDE</Text>
-                 </View>
-              </View>
-           </TouchableOpacity>
+           {courses.map((course, index) => (
+              <TouchableOpacity
+                key={course.id}
+                activeOpacity={0.9}
+                style={styles.dossierWrap}
+                onPress={() => router.push(`/course/${course.id}` as any)}
+              >
+                <View style={[styles.dossierShadow, { backgroundColor: index % 2 === 0 ? SKY_BLUE : HYPER_RED }]} />
+                <View style={styles.dossierFolder}>
+                   <View style={styles.dossierTab}><Text style={styles.tabText}>MISSION 0{index + 1}</Text></View>
+                   <View style={[styles.dossierBody, course.chapters.length === 0 && { backgroundColor: BLACK }]}>
+                      {course.chapters.length > 0 ? (
+                         <>
+                            <View style={styles.fileTape} />
+                            <Ionicons name="folder-open" size={48} color={BLACK} />
+                            <Text style={styles.dossierCode}>{course.slug.toUpperCase()} // ACTIVE</Text>
+                            <Text style={styles.dossierName}>{course.title.split(' ').join('\n').toUpperCase()}</Text>
+                         </>
+                      ) : (
+                         <>
+                            <Ionicons name="lock-closed" size={48} color={HYPER_RED} />
+                            <Text style={[styles.dossierCode, {color: '#888'}]}>{course.slug.toUpperCase()} // LOCKED</Text>
+                            <Text style={[styles.dossierName, {color: PAPER_WHITE}]}>{course.title.split(' ').join('\n').toUpperCase()}</Text>
+                         </>
+                      )}
+                   </View>
+                </View>
+              </TouchableOpacity>
+           ))}
         </ScrollView>
 
         {/* LISTING ARCHIVES - DARK TERMINAL READOUT */}
