@@ -93,7 +93,7 @@ export default function VocabScreen() {
         <Text style={styles.sectionTitle}>Word Collections</Text>
 
         <View style={styles.gridContainer}>
-          {CATEGORIES.map(cat => {
+          {CATEGORIES.map((cat: any) => {
             const progress = (cat.mastered / cat.count) * 100;
             return (
               <TouchableOpacity key={cat.id} style={styles.categoryCardWrapper}>
