@@ -16,7 +16,7 @@ export default function SettingsScreen() {
       {/* GLOWS */}
       <View style={[styles.glowOrb, { top: -100, right: -100, backgroundColor: '#8A2BE2', opacity: 0.15 }]} />
       
-      <SafeAreaView edges={['top']} />
+      
 
       <View style={styles.header}>
         <TouchableOpacity style={styles.backBtn} onPress={() => router.back()}>

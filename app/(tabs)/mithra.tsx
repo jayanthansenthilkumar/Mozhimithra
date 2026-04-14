@@ -25,7 +25,7 @@ export default function MithraScreen() {
 
   return (
     <KeyboardAvoidingView style={[styles.mainContainer, { backgroundColor: appBgColor }]} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
-      <SafeAreaView edges={['top']} />
+      
       
       {/* MASSIVE BACKGROUND NAME WATERMARK */}
       <View style={styles.bgNameWrap} pointerEvents="none">

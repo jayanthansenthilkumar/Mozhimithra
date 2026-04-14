@@ -30,7 +30,7 @@ export default function HomeScreen() {
 
    return (
       <View style={[styles.mainContainer, { backgroundColor: appBgColor }]}>
-         <SafeAreaView edges={['top']} />
+         
 
          {/* MASSIVE BACKGROUND NAME WATERMARK */}
          <View style={styles.bgNameWrap} pointerEvents="none">

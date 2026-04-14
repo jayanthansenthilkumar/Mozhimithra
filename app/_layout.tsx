@@ -12,6 +12,8 @@ import { AppThemeProvider } from '@/hooks/ThemeContext';
 
 SplashScreen.preventAutoHideAsync();
 
+import { SafeAreaView } from 'react-native-safe-area-context';
+
 export default function RootLayout() {
   const colorScheme = useColorScheme();
   useEffect(() => {
@@ -21,12 +23,14 @@ export default function RootLayout() {
   return (
     <AppThemeProvider>
       <ThemeProvider value={colorScheme === 'dark' ? DarkTheme : DefaultTheme}>
-        <Stack screenOptions={{ headerShown: false, animation: 'fade' }}>
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen name="course/[id]" options={{ headerShown: false, animation: 'slide_from_right' }} />
-          <Stack.Screen name="lesson/[id]" options={{ headerShown: false, animation: 'slide_from_bottom' }} />
-          <Stack.Screen name="settings" options={{ headerShown: false, animation: 'slide_from_right' }} />
-        </Stack>
+        <SafeAreaView style={{ flex: 1 }} edges={['top', 'bottom', 'right', 'left']}>
+          <Stack screenOptions={{ headerShown: false, animation: 'fade' }}>
+            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+            <Stack.Screen name="course/[id]" options={{ headerShown: false, animation: 'slide_from_right' }} />
+            <Stack.Screen name="lesson/[id]" options={{ headerShown: false, animation: 'slide_from_bottom' }} />
+            <Stack.Screen name="settings" options={{ headerShown: false, animation: 'slide_from_right' }} />
+          </Stack>
+        </SafeAreaView>
         <StatusBar style="auto" />
       </ThemeProvider>
     </AppThemeProvider>

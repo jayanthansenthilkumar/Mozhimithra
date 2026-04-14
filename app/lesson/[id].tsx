@@ -32,7 +32,7 @@ export default function LessonScreen() {
 
   return (
     <View style={styles.mainContainer}>
-      <SafeAreaView edges={['top']} />
+      
       
       <View style={styles.header}>
         <TouchableOpacity style={styles.closeBtn} onPress={() => router.back()}>

@@ -29,7 +29,7 @@ export default function ForgotPasswordScreen() {
 
   return (
     <KeyboardAvoidingView style={styles.mainContainer} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
-      <SafeAreaView edges={['top']} />
+      
       
       {/* WARNING TOP TAPE */}
       <View style={styles.hazardTape}>

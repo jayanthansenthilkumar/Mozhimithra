@@ -23,7 +23,7 @@ export default function VocabScreen() {
       <View style={[styles.glowOrb, { top: -100, right: -100, backgroundColor: '#4ECDC4', opacity: 0.15 }]} />
       <View style={[styles.glowOrb, { bottom: -100, left: -50, backgroundColor: '#FF7F50', opacity: 0.1 }]} />
 
-      <SafeAreaView edges={['top']} />
+      
 
       <View style={styles.header}>
         <Text style={styles.title}>Vocabulary</Text>

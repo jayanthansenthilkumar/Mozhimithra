@@ -18,7 +18,7 @@ export default function CoursesScreen() {
   const { appBgColor } = useAppTheme();
   return (
     <View style={[styles.mainContainer, { backgroundColor: appBgColor }]}>
-      <SafeAreaView edges={['top']} />
+      
       
       {/* MASSIVE BACKGROUND NAME WATERMARK */}
       <View style={styles.bgNameWrap} pointerEvents="none">

@@ -1,36 +1,46 @@
 {
   "expo": {
-    "name": "E-Learning Language App",
-    "slug": "sowberry-language-app",
+    "name": "MozhiMithra",
+    "slug": "mozhimithra",
     "version": "1.0.0",
+    "extra": {
+      "eas": {
+        "projectId": "368660f0-5f84-4b59-b1a9-67541d8fb689"
+      }
+    },
     "orientation": "portrait",
-    "icon": "./assets/images/icon.png",
-    "scheme": "sowberry",
+    "icon": "./assets/images/Mozhimithra.png",
+    "scheme": "mozhimithra",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.mozhimithra.languageapp"
     },
     "android": {
+      "package": "com.mozhimithra.languageapp",
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
-        "foregroundImage": "./assets/images/android-icon-foreground.png",
+        "foregroundImage": "./assets/images/Mozhimithra.png",
         "backgroundImage": "./assets/images/android-icon-background.png",
         "monochromeImage": "./assets/images/android-icon-monochrome.png"
       },
-      "edgeToEdgeEnabled": true,
+      "edgeToEdgeEnabled": false,
       "predictiveBackGestureEnabled": false
+    },
+    "androidStatusBar": {
+      "translucent": false
     },
     "web": {
       "output": "static",
-      "favicon": "./assets/images/favicon.png"
+      "favicon": "./assets/images/Mozhimithra.png"
     },
     "plugins": [
       "expo-router",
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/splash-icon.png",
+          "image": "./assets/images/Mozhimithra.png",
           "imageWidth": 200,
           "resizeMode": "contain",
           "backgroundColor": "#ffffff",

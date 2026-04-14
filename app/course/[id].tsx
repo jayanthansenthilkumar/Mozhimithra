@@ -28,7 +28,7 @@ export default function CourseScreen() {
 
   return (
     <View style={styles.mainContainer}>
-      <SafeAreaView edges={['top']} />
+      
 
       <View style={styles.header}>
         <TouchableOpacity style={styles.backBtn} onPress={() => router.back()}>

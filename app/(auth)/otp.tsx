@@ -38,7 +38,7 @@ export default function OtpScreen() {
 
   return (
     <KeyboardAvoidingView style={styles.mainContainer} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
-      <SafeAreaView edges={['top']} />
+      
       
       {/* GLOBAL BACKGROUND NOISE/WATERMARK */}
       <View style={styles.bgWatermarkWrap} pointerEvents="none">
