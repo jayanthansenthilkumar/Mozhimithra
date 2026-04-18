@@ -7,11 +7,25 @@ import { TaskFetch } from "./endpoints/taskFetch";
 import { TaskList } from "./endpoints/taskList";
 import { mockRouter } from "./mockDataEndpoints";
 
+// The API key the mobile app sends via X-API-Key.
+// Change this value — then update EXPO_PUBLIC_API_KEY in the app's .env.
+const API_KEY = "mozhimithra-dev-key";
+
 // Start a Hono app
 const app = new Hono<{ Bindings: Env }>();
 
 // Setup CORS so UI applications can interact freely
 app.use("/api/*", cors());
+
+// API key guard — runs after CORS so pre-flight OPTIONS requests pass through
+app.use("/api/*", async (c, next) => {
+	if (c.req.method === "OPTIONS") return next();
+	const key = c.req.header("X-API-Key");
+	if (key !== API_KEY) {
+		return c.json({ error: "Unauthorized" }, 401);
+	}
+	return next();
+});
 
 // Setup OpenAPI registry
 const openapi = fromHono(app, {
